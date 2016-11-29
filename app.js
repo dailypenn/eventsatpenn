@@ -11,12 +11,16 @@ nunjucks.configure('views', {
     express: app
 });
 
+var user = {
+  name: "hello",
+  email: "email"
+}
 
 app.get('/', function(req, res) {
-      res.render('index.html', {foo: 'world'});
+      res.render('index.html', {foo: user});
 });
 
 
-app.listen(4000);
+app.listen(process.env.PORT || 4000);
 console.log('server is running');
 
