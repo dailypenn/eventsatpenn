@@ -17,10 +17,9 @@ var user = {
 }
 
 app.get('/', function(req, res) {
-      res.render('index.html', {foo: user});
+      res.render('index.jinja', {foo: user});
 });
 
 
-app.listen(process.env.PORT || 4000);
+app.listen(process.env.PORT || 8000);
 console.log('server is running');
-
