@@ -1,6 +1,57 @@
 {% extends "base.jinja" %}
 
 {% block content %}
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '257770147972284',
+      xfbml      : true,
+      version    : 'v2.8'
+    });
+  };
+
+  var loginSuccessful = function () {
+    FB.api('/me', function(response) {
+      $('.fb-connect-info').text("Welcome " + response.name + " to Events@Penn!");
+    });
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+
+  function statusChangeCallback(response) {
+    console.log('statusChangeCallback');
+    console.log(response);
+    if (response.status === 'connected') {
+      // Logged into Events@Penn
+     loginSuccessful();
+    } else if (response.status === 'not_authorized') {
+      // Person is logged into FB but has not authorized Events@Penn
+      
+    } else {
+      // Person not logged into FB
+      
+    }
+  }
+
+  // This function is called when someone finishes with the Login
+  // Button.  See the onlogin handler attached to it in the sample
+  // code below.
+  function checkLoginState() {
+    FB.getLoginStatus(function(response) {
+      statusChangeCallback(response);
+    });
+  }
+</script>
+
 <div class="row">
   <div class="col-md-6">
     <div class="card">
@@ -16,6 +67,16 @@
       <h3 class="card-header">Add Events</h3>
       <div class="card-block">
         <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <div class="card">
+      <h3 class="card-header">Connect your Facebook</h3>
+      <div class="card-block">
+        <p class="card-text fb-connect-info">In order to automatically add events, we need for you to login with Facebook. So login fam</p>
+        <fb:login-button scope="public_profile,email" onlogin="checkLoginState();"></fb:login-button>
       </div>
     </div>
   </div>
