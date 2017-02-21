@@ -3,10 +3,10 @@ var app = express();
 var path = require('path');
 var nunjucks = require('nunjucks');
 
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, './apps/views'));
 app.use(express.static('public'));
 
-nunjucks.configure('views', {
+nunjucks.configure('app/views', {
     autoescape: true,
     express: app
 });

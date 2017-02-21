@@ -5,6 +5,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
 <script>
+var RESPONSE;
   window.fbAsyncInit = function() {
     FB.init({
       appId      : '257770147972284',
@@ -14,8 +15,10 @@
   };
 
   var loginSuccessful = function () {
-    FB.api('/me', function(response) {
-      $('.fb-connect-info').text("Welcome " + response.name + " to Events@Penn!");
+    FB.api('/me', { locale: 'en_US', fields: 'name, email' },
+    function(response) {
+      console.log(response);
+      $('.fb-connect-info').text("Welcome " + response.name + " to Events@Penn! (User ID: " + response.id + ", email: " + response.email + ")");
     });
   };
 
@@ -30,15 +33,16 @@
   function statusChangeCallback(response) {
     console.log('statusChangeCallback');
     console.log(response);
+    console.log(response.authResponse);
+    RESPONSE = response;
     if (response.status === 'connected') {
       // Logged into Events@Penn
      loginSuccessful();
     } else if (response.status === 'not_authorized') {
       // Person is logged into FB but has not authorized Events@Penn
-      
     } else {
       // Person not logged into FB
-      
+
     }
   }
 
