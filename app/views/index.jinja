@@ -14,7 +14,6 @@ var RESPONSE;
     });
   };
 
-  var loginSuccessful = function () {
     FB.api('/me', { locale: 'en_US', fields: 'name, email' },
     function(response) {
       console.log(response);
@@ -81,7 +80,7 @@ var RESPONSE;
     <div class="card">
       <h3 class="card-header">Connect your Facebook</h3>
       <div class="card-block">
-        <p class="card-text fb-connect-info">In order to automatically add events, we need for you to login with Facebook. So login fam</p>
+        <p class="card-text fb-connect-info">In order to automatically add events, we need for you to login with Facebook. So login fam pls</p>
         <fb:login-button scope="public_profile,email" onlogin="checkLoginState();"></fb:login-button>
       </div>
     </div>
