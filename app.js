@@ -28,14 +28,6 @@ app.get('/test', function(req, res) {
 
   User.sync();
 
-  User.create({pennKey: "agrav",
-    firstName: "Alex",
-    lastName: "Graves",
-    student: true,
-    faculty: false,
-    fbID: "aa1e22"}
-  );
-
   User.all({
       // include: [ models.Task ]
     }).then(function(users) {
