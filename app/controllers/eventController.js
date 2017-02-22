@@ -1,9 +1,9 @@
 module.exports = function(app){
-  app.get('/events/new', function(req, res) {
+  app.get('/event/new', function(req, res) {
     res.render('events/new.jinja', {});
   });
 
-  app.get('/events/view', function(req, res) {
+  app.get('/event/view', function(req, res) {
     res.render('events/view.jinja', {});
   });
 };
