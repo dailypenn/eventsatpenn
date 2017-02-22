@@ -1,12 +1,13 @@
-// constructor
-function User(fName, lName, fbID) {
-  this.fName = fName;
-  this.lName = lName;
-  this.fbID = fbID;
-}
+"use strict";
+module.exports = function(sequelize, DataTypes) {
+  var User = sequelize.define("User", {
+    pennKey: { type: DataTypes.STRING, primaryKey: true},
+    firstName: DataTypes.STRING,
+    lastName: DataTypes.STRING,
+    student: DataTypes.BOOLEAN,
+    faculty: DataTypes.BOOLEAN,
+    fbID: DataTypes.STRING
+  });
 
-User.prototype.fullName = function() {
-  return this.fName + ' ' + this.lName;
+  return User;
 };
-
-module.exports = User;
