@@ -1,45 +1,17 @@
-var express = require('express');
-var app = express();
-var path = require('path');
 var nunjucks = require('nunjucks');
+var path     = require('path');
+var models   = require('./app/models');
+var express  = require('express');
+var app      = express();
+var routes   = require('./app/controllers')(app); // Routing
 
-var models = require('./app/models');
-require('./app/controllers')(app); // Routing
-
-app.set('views', path.join(__dirname, './apps/views'));
-app.use(express.static('public'));
+app.use(express.static('app/public'));
+app.set('port', process.env.PORT || 8000);
 
 nunjucks.configure('app/views', {
     autoescape: true,
     express: app
 });
 
-var user = {
-  name: "hello",
-  email: "email"
-}
-
-app.get('/', function(req, res) {
-  res.render('index.jinja', {});
-});
-
-app.get('/test', function(req, res) {
-  var User = models.User;
-
-  User.sync();
-
-  User.all({
-      // include: [ models.Task ]
-    }).then(function(users) {
-      res.render('index.jinja', {
-        users: users
-      });
-    });
-})
-
-app.get('/calendar', function(req, res) {
-  res.render('calendar.jinja', {});
-});
-
-app.listen(process.env.PORT || 8000); //starts up the server
-console.log('server is running');
+app.listen(app.get('port')); //starts up the server
+console.log('Server running on port', app.get('port'));
