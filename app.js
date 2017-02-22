@@ -2,7 +2,9 @@ var express = require('express');
 var app = express();
 var path = require('path');
 var nunjucks = require('nunjucks');
-var models = require('./app/models/index.js');
+
+var models = require('./app/models');
+require('./app/controllers')(app); // Routing
 
 app.set('views', path.join(__dirname, './apps/views'));
 app.use(express.static('public'));
@@ -18,13 +20,15 @@ var user = {
 }
 
 app.get('/', function(req, res) {
-  res.render('index.jinja', {foo: user});
+  res.render('index.jinja', {});
 });
 
 app.get('/test', function(req, res) {
-  models.User.sync();
+  var User = models.User;
 
-  models.User.create({pennKey: "agrav",
+  User.sync();
+
+  User.create({pennKey: "agrav",
     firstName: "Alex",
     lastName: "Graves",
     student: true,
@@ -32,7 +36,7 @@ app.get('/test', function(req, res) {
     fbID: "aa1e22"}
   );
 
-  models.User.findAll({
+  User.all({
       // include: [ models.Task ]
     }).then(function(users) {
       res.render('index.jinja', {
@@ -42,27 +46,7 @@ app.get('/test', function(req, res) {
 })
 
 app.get('/calendar', function(req, res) {
-      res.render('calendar.jinja', {foo: user});
-});
-
-app.get('/organization/new', function(req, res) {
-      res.render('organization/new.jinja', {foo: user});
-});
-
-app.get('/organization/view', function(req, res) {
-      res.render('organization/view.jinja', {foo: user});
-});
-
-app.get('/organization/:id', function(req, res) {
-      res.render('organization/view.jinja', {foo: user, id: req.params['id']})
-})
-
-app.get('/events/new', function(req, res) {
-      res.render('events/new.jinja', {foo: user});
-});
-
-app.get('/events/view', function(req, res) {
-      res.render('events/view.jinja', {foo: user});
+  res.render('calendar.jinja', {});
 });
 
 app.listen(process.env.PORT || 8000); //starts up the server
