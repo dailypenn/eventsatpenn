@@ -8,15 +8,36 @@ module.exports = function(app){
     })
   });
 
+  app.post('/org', function(req, res) {
+    console.log('>> Creating org ', req.body.name);
+    // Sync to DB, then create org
+    Org.sync().then(function() {
+      Org.create({
+        name: req.body.name,
+        website: req.body.website,
+        fbPage: req.body.fbURL
+      }).then(function(newOrg) {
+        console.log('>> Successfully created org', newOrg.get('name'));
+        res.redirect('/org/' + newOrg.id);
+      });
+    });
+  });
+
   app.get('/org/new', function(req, res) {
-        res.render('orgs/new.jinja', {});
+    res.render('orgs/new.jinja', {});
   });
 
   app.get('/org/view', function(req, res) {
-        res.render('orgs/view.jinja', {});
+    res.render('orgs/view.jinja', {});
   });
 
   app.get('/org/:id', function(req, res) {
-        res.render('orgs/view.jinja', {id: req.params['id']})
+    Org.findOne({
+      where: {
+        id: req.params.id
+      }
+    }).then(function(org) {
+      res.render('orgs/view.jinja', {org: org})
+    });
   })
 };

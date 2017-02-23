@@ -1,5 +1,11 @@
 {% extends "../base.jinja" %}
 
 {% block content %}
-<h1>New Organization Goes Here</h1>
+<h1>Create an Organization</h1>
+<form action="/org" method="post">
+  <div class="form-group"><input name="name" type="text" class="form-control" required="true" placeholder="Organization Name" value=""></div>
+  <div class="form-group"><input name="website" type="text" class="form-control" required="true" placeholder="Website Link"></div>
+  <div class="form-group"><input name="fbURL" type="text" class="form-control" required="true" placeholder="FB Page Link"></div>
+  <div class="form-group"><button class="btn btn-md btn-success btn-block" type='submit'>CrEaTe GrOuP</button></div>
+</form>
 {% endblock %}

@@ -1,5 +1,8 @@
 {% extends "../base.jinja" %}
 
 {% block content %}
-<h1>{{'Organization '+id|default('ID Here') }}</h1>
+<h1>{{'Organization '+org.id|default('ID Here') }}</h1>
+Name: {{ org.name }} <br>
+URL: {{ org.website }} <br>
+FB Page: {{ org.fbPage }}
 {% endblock %}
