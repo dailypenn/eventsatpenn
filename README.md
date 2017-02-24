@@ -1,5 +1,5 @@
 # Events@Penn
-Events@Penn is back.
+Events@Penn is back
 
 ## Usage
 
