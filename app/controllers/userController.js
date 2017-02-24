@@ -2,21 +2,17 @@ module.exports = function(app){
   var User = require('../models').User;
 
   app.post('/user', function(req, res) {
-    var newPennKey = req.body.pennKey;
-    console.log('>> Creating user for pennKey', newPennKey);
+    console.log('>> Creating user');
     // Sync to DB, then create user
     User.sync().then(function() {
       User.create({
-        pennKey: newPennKey,
-        firstName: req.body.fName, // FIXME when we have pennkey
-        lastName: req.body.lName,
+        firstName: req.body.first_name,
+        lastName: req.body.last_name,
         email: req.body.email,
-        student: true, // FIXME when we have pennkey
-        faculty: false,
-        fbID: "xxxxxx"
+        fbID: req.body.id
       }).then(function(newUser) {
-        console.log('>> Successfully created user for pennKey', newUser.get('pennKey'));
-        res.redirect('/user/' + newUser.id);
+        console.log('>> Successfully created user', newUser.get('firstName'));
+        res.send({status: 'success'});
       });
     });
   });

@@ -1,6 +1,14 @@
 {% extends "base.jinja" %}
 
 {% block content %}
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8&appId=257770147972284";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
@@ -14,20 +22,13 @@ var RESPONSE;
     });
   };
 
-    FB.api('/me', { locale: 'en_US', fields: 'name, email' },
-    function(response) {
-      console.log(response);
-      $('.fb-connect-info').text("Welcome " + response.name + " to Events@Penn! (User ID: " + response.id + ", email: " + response.email + ")");
-    });
-  };
-
-  (function(d, s, id){
-     var js, fjs = d.getElementsByTagName(s)[0];
-     if (d.getElementById(id)) {return;}
-     js = d.createElement(s); js.id = id;
-     js.src = "//connect.facebook.net/en_US/sdk.js";
-     fjs.parentNode.insertBefore(js, fjs);
-   }(document, 'script', 'facebook-jssdk'));
+var loginSuccessful = function(){
+  FB.api('/me', { locale: 'en_US', fields: 'first_name, last_name, email' },
+  function(response) {
+    console.log(response);
+    $('.fb-connect-info').text("Welcome " + response.name + " to Events@Penn! (User ID: " + response.id + ", email: " + response.email + ")");
+  });
+}
 
   function statusChangeCallback(response) {
     console.log('statusChangeCallback');
