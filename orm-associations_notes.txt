@@ -1,0 +1,6 @@
+ORM Associations
+
+Organization belongs to USERS
+    * Each user in USERS is an admin for that organization
+
+EVENTS belong to organizations

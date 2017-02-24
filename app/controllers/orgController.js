@@ -1,6 +1,8 @@
 module.exports = function(app){
   var Org = require('../models').Org;
 
+  var UserController = require('./userController.js');
+
   app.get('/org', function(req, res) {
     Org.sync();
     Org.findAll().then(function(orgs) {
@@ -18,6 +20,15 @@ module.exports = function(app){
         fbPage: req.body.fbURL
       }).then(function(newOrg) {
         console.log('>> Successfully created org', newOrg.get('name'));
+
+        //Get userId from current session
+        var userId = req.session.userId;
+          
+        //Add the org as an association of the user
+        UserController(userId, function (user) {
+          user.addOrg(newOrg, {});
+        });
+
         res.redirect('/org/' + newOrg.id);
       });
     });
