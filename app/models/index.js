@@ -24,6 +24,7 @@ fs
     db[model.name] = model;
   });
 
+// Creates all associations
 Object.keys(db).forEach(function(modelName) {
   if (db[modelName].associate) {
     db[modelName].associate(db);
@@ -32,5 +33,7 @@ Object.keys(db).forEach(function(modelName) {
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
+
+sequelize.sync()
 
 module.exports = db;

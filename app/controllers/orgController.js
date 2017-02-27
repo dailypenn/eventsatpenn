@@ -1,5 +1,6 @@
 module.exports = function(app){
   var Org = require('../models').Org;
+  var User = require('../models').User;
 
   var UserController = require('./userController.js');
 
@@ -22,12 +23,13 @@ module.exports = function(app){
         console.log('>> Successfully created org', newOrg.get('name'));
 
         //Get userId from current session
-        var userId = req.session.userId;
-          
-        //Add the org as an association of the user
-        UserController(userId, function (user) {
+        // var userId = req.session.userId;
+        User.findById(1).then(function(user) {
           user.addOrg(newOrg, {});
         });
+        //Add the org as an association of the user
+        // UserController(userId, function (user) {
+        // });
 
         res.redirect('/org/' + newOrg.id);
       });

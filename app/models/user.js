@@ -1,15 +1,19 @@
 "use strict";
 module.exports = function(sequelize, DataTypes) {
-  var Org = require("./org.js")(sequelize, DataTypes);
+  var models = require("./index.js");
+
   var User = sequelize.define("User", {
     firstName: DataTypes.STRING,
     lastName: DataTypes.STRING,
     email: DataTypes.STRING,
     fbID: DataTypes.STRING
+  }, {
+    classMethods: {
+      associate: function(models) {
+        User.belongsToMany(models.Org, {through: 'OrgUser', foreignKey: 'user_id'});
+      }
+    }
   });
-
-  User.belongsToMany(Org, {through: "OrgAdmin", foreignKey: "id"});
-  Org.belongsToMany(User, {through: "OrgAdmin", foreignKey: "id"});
 
   return User;
 };
