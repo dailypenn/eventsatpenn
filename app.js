@@ -8,7 +8,6 @@ var FacebookStrategy = require('passport-facebook').Strategy
 var authConfig = require('./app/config/auth.js');
 var session  = require('express-session')
 var app      = express();
-var routes   = require('./app/controllers')(app); // Routing
 
 // Passport session setup.
 passport.serializeUser(function(user, done) {
@@ -37,17 +36,16 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(session({ secret: authConfig.sessionSecret }));
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(function(req, res, next) { // Global app variables
+  res.locals.user = req.user;
+  next();
+});
 
 nunjucks.configure('app/views', {
     autoescape: true,
     express: app
 });
 
-app.get('/', function(req, res){
-      console.log(req.user);
-  //     console.log(req.isAuthenticated());
-  res.render('index.jinja', { user: req.user });
-});
 
 app.get('/auth/facebook', passport.authenticate('facebook'));
 
@@ -68,5 +66,6 @@ function ensureAuthenticated(req, res, next) {
   res.redirect('/login')
 }
 
+require('./app/controllers')(app); // Allow for Routing
 app.listen(app.get('port')); //starts up the server
 console.log('Server running on port', app.get('port'));
