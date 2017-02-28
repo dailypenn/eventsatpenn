@@ -20,7 +20,8 @@ passport.deserializeUser(function(obj, done) {
 passport.use(new FacebookStrategy({
   clientID        : authConfig.facebookAuth.clientID,
   clientSecret    : authConfig.facebookAuth.clientSecret,
-  callbackURL     : authConfig.facebookAuth.callbackURL
+  callbackURL     : authConfig.facebookAuth.callbackURL,
+  profileFields: ['id', 'displayName', 'photos', 'email', 'profileUrl', 'first_name', 'last_name', 'education', 'accounts']
 }, function(accessToken, refreshToken, profile, done) {
   process.nextTick(function () {
     //Check whether the User exists or not using profile.id
@@ -45,7 +46,6 @@ nunjucks.configure('app/views', {
     autoescape: true,
     express: app
 });
-
 
 app.get('/auth/facebook', passport.authenticate('facebook'));
 
