@@ -26,9 +26,13 @@
           <li class="nav-item">
             <a class="nav-link" href="/org">Organizations</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" data-toggle="modal" data-target="#loginModal">Log In / Sign Up</a>
-          </li>
+          {% if user %}
+            Hello, {{ user.name }}
+          {% else %}
+            <li class="nav-item">
+              <a class="nav-link" data-toggle="modal" data-target="#loginModal">Log In / Sign Up</a>
+            </li>
+          {% endif %}
         </ul>
       </nav>
     </header>

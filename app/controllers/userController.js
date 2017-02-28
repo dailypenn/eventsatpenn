@@ -17,16 +17,6 @@ module.exports = function(app){
     });
   });
 
-  function getUser(userId, callback) {
-    User.findOne({
-      where: {
-        id: userId
-      }
-    }).then(function(user) {
-      callback(user);
-    });
-  };
-
   app.get('/user/:id', function(req, res) {
     User.findOne({
       where: {

@@ -11,6 +11,10 @@ module.exports = function(sequelize, DataTypes) {
     classMethods: {
       associate: function(models) {
         User.belongsToMany(models.Org, {through: 'OrgUser', foreignKey: 'user_id'});
+      },
+      login: function(passport) {
+
+
       }
     }
   });
