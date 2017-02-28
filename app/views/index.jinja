@@ -1,61 +1,6 @@
 {% extends "base.jinja" %}
 
 {% block content %}
-<div id="fb-root"></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8&appId=257770147972284";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-
-<script>
-var RESPONSE;
-  window.fbAsyncInit = function() {
-    FB.init({
-      appId      : '257770147972284',
-      xfbml      : true,
-      version    : 'v2.8'
-    });
-  };
-
-var loginSuccessful = function(){
-  FB.api('/me', { locale: 'en_US', fields: 'first_name, last_name, email' },
-  function(response) {
-    console.log(response);
-    $('.fb-connect-info').text("Welcome " + response.name + " to Events@Penn! (User ID: " + response.id + ", email: " + response.email + ")");
-  });
-}
-
-  function statusChangeCallback(response) {
-    console.log('statusChangeCallback');
-    console.log(response);
-    console.log(response.authResponse);
-    RESPONSE = response;
-    if (response.status === 'connected') {
-      // Logged into Events@Penn
-     loginSuccessful();
-    } else if (response.status === 'not_authorized') {
-      // Person is logged into FB but has not authorized Events@Penn
-    } else {
-      // Person not logged into FB
-
-    }
-  }
-
-  // This function is called when someone finishes with the Login
-  // Button.  See the onlogin handler attached to it in the sample
-  // code below.
-  function checkLoginState() {
-    FB.getLoginStatus(function(response) {
-      statusChangeCallback(response);
-    });
-  }
-</script>
-
 <div class="row">
   <div class="col-md-6">
     <div class="card">
