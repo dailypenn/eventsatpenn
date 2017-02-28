@@ -19,7 +19,6 @@
   "homepage": "https://github.com/dailypenn/eventsatpenn#readme",
   "dependencies": {
     "body-parser": "^1.16.1",
-    "cookie-parser": "^1.4.3",
     "express": "^4.14.0",
     "express-session": "^1.15.1",
     "mysql": "^2.13.0",

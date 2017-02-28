@@ -4,7 +4,6 @@ var models   = require('./app/models');
 var express  = require('express');
 var passport = require('passport');
 var bodyParser = require('body-parser');
-// var cookieParser      =     require('cookie-parser')
 var FacebookStrategy = require('passport-facebook').Strategy
 var authConfig = require('./app/config/auth.js');
 var session  = require('express-session')
@@ -34,7 +33,6 @@ passport.use(new FacebookStrategy({
 app.set('port', process.env.PORT || 8000);
 
 app.use(express.static('app/public'));
-// app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(session({ secret: authConfig.sessionSecret }));
 app.use(passport.initialize());
