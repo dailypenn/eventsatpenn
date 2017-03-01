@@ -26,6 +26,25 @@ passport.use(new FacebookStrategy({
   process.nextTick(function () {
     //Check whether the User exists or not using profile.id
     console.log(profile);
+
+    models.User.findOne({ where: { id: profile.id }}).then(function(user) {
+      if (!user) {
+        console.log('>> New User! Creating ' + profile.id);
+        models.User.create({
+          id: profile.id,
+          displayName: profile.displayName,
+          firstName: profile.name.givenName,
+          lastName: profile.name.familyName,
+          email: profile.emails[0].value
+        }).then(function(newUser) {
+          newUser.save();
+          console.log('>> Successfully created user', newUser.get('id'));
+        });
+      } else {
+        console.log('>> Found user. Redirecting to ' + profile.id);
+      }
+    });
+    // console.log(profile);
     return done(null, profile);
   });
 }));

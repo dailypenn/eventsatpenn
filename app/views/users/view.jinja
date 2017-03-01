@@ -1,9 +1,15 @@
 {% extends "../base.jinja" %}
 
 {% block content %}
-<h1>{{'user '+user.id|default('ID Here') }}</h1>
-Name: {{user.firstName}} {{user.lastName}}
-Email: {{user.email}}
+{% if user %}
+<h1>Hello, {{ user.firstName }} {{ user.lastName }}</h1>
+ID: {{ user.id }} <br>
+Name: {{ user.firstName }} {{ user.lastName }} <br>
+Email: {{ user.email }}
+{% else %}
+  <h1>Please log in!</h1>
+{% endif %}
+
 <!-- {% for name, item in user %}
    <li>{{ name }}: {{ item }}</li>
 {% endfor %} -->
