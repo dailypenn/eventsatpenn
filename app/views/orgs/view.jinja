@@ -4,5 +4,10 @@
 <h1>{{'Organization '+org.id|default('ID Here') }}</h1>
 Name: {{ org.name }} <br>
 URL: {{ org.website }} <br>
-FB Page: {{ org.fbPage }}
+FB Page: {{ org.fbPage }} <br>
+{% if user %}
+<a href="/event/new" class="btn btn-secondary">Create an event</a>
+{% endif %}
+<br>
+<a href="/org" class="btn btn-secondary">Back to all</a>
 {% endblock %}

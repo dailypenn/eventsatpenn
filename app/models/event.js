@@ -12,6 +12,12 @@ module.exports = function(sequelize, DataTypes) {
     recurring: DataTypes.BOOLEAN,
     recurrence_freq: DataTypes.ENUM(config.recFreqs),
     recurrence_amt: DataTypes.INTEGER,
+  }, {
+    classMethods: {
+      associate: function(models) {
+        PlannedEvent.belongsTo(models.Org, {through: 'OrgEvent',  foreignKey: 'event_id'});
+      }
+    }
   });
 
   return PlannedEvent;

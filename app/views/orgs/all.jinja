@@ -3,6 +3,6 @@
 {% block content %}
 <h1>Organizations</h1>
 {% for org in orgs %}
-<li>{{ org.name }}</li>
+<li><a href="/org/{{ org.id }}">{{ org.name }}</a></li>
 {% endfor %}
 {% endblock %}
