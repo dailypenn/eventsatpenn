@@ -6,7 +6,8 @@ var passport = require('passport');
 var bodyParser = require('body-parser');
 var FacebookStrategy = require('passport-facebook').Strategy
 var authConfig = require('./app/config/auth.js');
-var session  = require('express-session')
+var session  = require('express-session');
+var FB       = require('fb');
 var app      = express();
 
 // Passport session setup.
@@ -17,6 +18,14 @@ passport.deserializeUser(function(obj, done) {
   done(null, obj);
 });
 
+// FB config
+FB.options({
+  appId:          authConfig.facebookAuth.clientID,
+  appSecret:      authConfig.facebookAuth.clientSecret,
+  redirectUri:    authConfig.facebookAuth.callbackURL
+});
+
+
 passport.use(new FacebookStrategy({
   clientID        : authConfig.facebookAuth.clientID,
   clientSecret    : authConfig.facebookAuth.clientSecret,
@@ -25,7 +34,29 @@ passport.use(new FacebookStrategy({
 }, function(accessToken, refreshToken, profile, done) {
   process.nextTick(function () {
     //Check whether the User exists or not using profile.id
+    console.log('>>>>>>>> profile:');
     console.log(profile);
+
+    // FB.api(profile.id + '/events', {
+    //     type: 'created', // get events the user created
+    //     total_count: 25, // get 25 items by default TODO: Paging if more
+    //     include_canceled: false, // don't incude canceled events
+    //     access_token:   accessToken
+    // }, function (result) {
+    //     if(!result || result.error) {
+    //         return res.send(500, 'error');
+    //     }
+    //     console.log(result);
+    // });
+
+    FB.api(profile.id + '/accounts', {
+        access_token:   accessToken
+    }, function (result) {
+        if(!result || result.error) {
+            console.error(result.error || "no result returned.");
+        }
+        console.log(result);
+    });
 
     models.User.findOne({ where: { id: profile.id }}).then(function(user) {
       if (!user) {
@@ -66,7 +97,9 @@ nunjucks.configure('app/views', {
     express: app
 });
 
-app.get('/auth/facebook', passport.authenticate('facebook'));
+app.get('/auth/facebook', passport.authenticate('facebook', {
+  scope: ['public_profile', 'email', 'user_events', 'manage_pages']
+}));
 
 app.get('/auth/facebook/callback', passport.authenticate('facebook', {
   successRedirect : '/',
