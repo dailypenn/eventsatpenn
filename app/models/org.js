@@ -4,8 +4,12 @@ module.exports = function(sequelize, DataTypes) {
 
   var Org = sequelize.define("Org", {
     name: DataTypes.STRING,
+    tagline: DataTypes.STRING,
+    bio: DataTypes.STRING,
+    fbID: DataTypes.INTEGER,
+    fbUsername: DataTypes.STRING,
+    category: DataTypes.STRING,
     website: DataTypes.STRING,
-    fbID: DataTypes.STRING,
     isPublic: DataTypes.BOOLEAN
   }, {
     classMethods: {

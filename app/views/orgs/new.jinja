@@ -2,10 +2,21 @@
 
 {% block content %}
 <h1>Create an Organization</h1>
-<form action="/org" method="post">
-  <div class="form-group"><input name="name" type="text" class="form-control" required="true" placeholder="Organization Name" value=""></div>
-  <div class="form-group"><input name="website" type="text" class="form-control" required="true" placeholder="Website Link"></div>
-  <div class="form-group"><input name="fbURL" type="text" class="form-control" required="true" placeholder="FB Page Link"></div>
-  <div class="form-group"><button class="btn btn-md btn-success btn-block" type='submit'>CrEaTe GrOuP</button></div>
-</form>
+<div class="row">
+  <div class="col-sm-6">
+    <h3>Create from a Facebook Group</h3>
+    {% for page in pages %}
+      {{ page.name }} <br>
+    {% endfor %}
+  </div>
+  <div class="col-sm-6">
+    <h3>Create from Scratch</h3>
+    <form action="/org" method="post">
+      <div class="form-group"><input name="name" type="text" class="form-control" required="true" placeholder="Organization Name" value=""></div>
+      <div class="form-group"><input name="website" type="text" class="form-control" required="true" placeholder="Website Link"></div>
+      <div class="form-group"><input name="fbURL" type="text" class="form-control" required="true" placeholder="FB Page Link"></div>
+      <div class="form-group"><button class="btn btn-md btn-success btn-block" type='submit'>CrEaTe GrOuP</button></div>
+    </form>
+  </div>
+</div>
 {% endblock %}

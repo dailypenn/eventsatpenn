@@ -52,10 +52,13 @@ passport.use(new FacebookStrategy({
     FB.api(profile.id + '/accounts', {
         access_token:   accessToken
     }, function (result) {
-        if(!result || result.error) {
-            console.error(result.error || "no result returned.");
-        }
-        console.log(result);
+      if(!result || result.error) {
+          console.error(result.error || "no result returned.");
+      }
+      result.data.forEach(function(elt) {
+        // console.log(elt);
+        // pageInfoByID(elt.id, profile.id, accessToken)
+      });
     });
 
     models.User.findOne({ where: { id: profile.id }}).then(function(user) {
