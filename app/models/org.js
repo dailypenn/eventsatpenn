@@ -5,7 +5,8 @@ module.exports = function(sequelize, DataTypes) {
   var Org = sequelize.define("Org", {
     name: DataTypes.STRING,
     website: DataTypes.STRING,
-    fbPage: DataTypes.STRING
+    fbID: DataTypes.STRING,
+    isPublic: DataTypes.BOOLEAN
   }, {
     classMethods: {
       associate: function(models) {

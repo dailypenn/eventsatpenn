@@ -20,12 +20,24 @@
         </ul>
         <ul class="nav navbar-nav float-xs-right">
           <li class="nav-item">
-            <a class="nav-link" href="/profile">Profile</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/org">Organizations</a>
+            <a class="nav-link" href="/org">All Organizations</a>
           </li>
           {% if user %}
+            <li class="nav-item">
+              <a class="nav-link" href="/profile">Your Profile</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="http://example.com" id="navProfileDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Organizations
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navProfileDropdown">
+                <h6 class="dropdown-header">Your Organizations</h6>
+                {{ user.getOrganizations }}
+                <a class="dropdown-item" href="#">Org One</a>
+                <a class="dropdown-item" href="#">Org Two</a>
+                <a class="dropdown-item" href="/org/new"><b>+ Add an Organization</b></a>
+              </div>
+            </li>
             <li class="nav-item">
               <span class="nav-link">Hello, {{ user.displayName }}</span>
             </li>
