@@ -1,22 +1,66 @@
 {% extends "../base.jinja" %}
 
 {% block content %}
+
+<script type="text/javascript">
+  var initiateCreateGroup = function(pageID) {
+    $.ajax({
+      url: `/org/fbdetails/${pageID}`,
+      dataType: 'json'
+    })
+    .done(function(data) {
+      $('#createOrgName').val(data.name);
+      $('#createOrgWebsite').val(data.website);
+      $('#createOrgFBPage').val(data.link);
+
+
+      $('#createList').slideUp();
+      $('#createForm').slideDown();
+      console.log(data);
+    })
+    .fail(function(err) {
+      console.error(err);
+      console.log("error");
+    });
+  }
+
+  var initiateGroupFromName = function() {
+    var name = $('#orgScratchName').val();
+    $('#createOrgName').val(name);
+    $('#createList').slideUp();
+    $('#createForm').slideDown();
+  }
+</script>
+
 <h1>Create an Organization</h1>
 <div class="row">
   <div class="col-sm-6">
-    <h3>Create from a Facebook Group</h3>
-    {% for page in pages %}
-      {{ page.name }} <br>
-    {% endfor %}
-  </div>
-  <div class="col-sm-6">
-    <h3>Create from Scratch</h3>
-    <form action="/org" method="post">
-      <div class="form-group"><input name="name" type="text" class="form-control" required="true" placeholder="Organization Name" value=""></div>
-      <div class="form-group"><input name="website" type="text" class="form-control" required="true" placeholder="Website Link"></div>
-      <div class="form-group"><input name="fbURL" type="text" class="form-control" required="true" placeholder="FB Page Link"></div>
-      <div class="form-group"><button class="btn btn-md btn-success btn-block" type='submit'>CrEaTe GrOuP</button></div>
+    <h3>Create a new Organization</h3>
+    <div id="createList">
+      <h4>From a Facebook Page</h4>
+      <ul>
+        {% for page in pages %}
+          <li><a onclick="initiateCreateGroup({{ page.id }})">{{ page.name }}</a></li>
+        {% endfor %}
+      </ul>
+      <h4>From Scratch</h4>
+        <div class="form-group"><input name="name" type="text" class="form-control" required="true" placeholder="Organization Name" id="orgScratchName"></div>
+        <div class="form-group"><button class="btn btn-md btn-secondary btn-block" onclick='initiateGroupFromName()'>Continue</button></div>
+    </div>
+    <form id="createForm" action="/org" method="post" style="display: none;">
+      <div class="form-group"><input name="name" type="text" class="form-control" required="true" placeholder="Organization Name" id="createOrgName"></div>
+      <div class="form-group"><input name="website" type="text" class="form-control" required="true" placeholder="Website Link" id="createOrgWebsite"></div>
+      <div class="form-group"><input name="fbURL" type="text" class="form-control" required="true" placeholder="FB Page Link" id="createOrgFBPage"></div>
+      <div class="form-group"><button disabled class="btn btn-md btn-success btn-block" type='submit'>CrEaTe GrOuP</button></div>
     </form>
   </div>
+
+  <div class="col-sm-6">
+    <h3>Your Organizations</h3>
+    {% for page in user.orgs %}
+      <li>{{ org.name }}</li>
+    {% endfor %}
+  </div>
 </div>
+
 {% endblock %}
