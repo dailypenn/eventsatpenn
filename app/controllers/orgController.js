@@ -73,6 +73,9 @@ module.exports = function(app){
   });
 
   app.get('/org/new', function(req, res) {
+    if (!req.user) {
+      res.redirect('/');
+    }
     var accessToken = req.user._json.accounts.data[0].access_token;
     var pageData = [];
     // TODO: Fix this callback hell
@@ -99,8 +102,10 @@ module.exports = function(app){
     var accessToken = req.user._json.accounts.data[0].access_token;
     FB.api(`/${req.params.fbID}`, {
         access_token:   accessToken,
-        fields: ['name', 'about', 'description', 'category', 'link', 'username', 'website']
+        fields: ['name', 'about', 'description', 'category', 'link', 'username', 'website', 'picture.height(512)'],
+        height: 1024
     }, function (result) {
+      console.log(result);
       res.send(result);
     });
   });

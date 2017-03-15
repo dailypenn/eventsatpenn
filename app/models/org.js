@@ -7,10 +7,10 @@ module.exports = function(sequelize, DataTypes) {
     tagline: DataTypes.STRING,
     bio: DataTypes.STRING,
     fbID: DataTypes.INTEGER,
-    fbUsername: DataTypes.STRING,
+    fbLink: DataTypes.STRING,
     category: DataTypes.STRING,
     website: DataTypes.STRING,
-    isPublic: DataTypes.BOOLEAN
+    photo: DataTypes.BLOB
   }, {
     classMethods: {
       associate: function(models) {
