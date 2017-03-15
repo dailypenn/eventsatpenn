@@ -7,7 +7,7 @@ module.exports = function(sequelize, DataTypes) {
     tagline: DataTypes.STRING,
     bio: DataTypes.STRING,
     fbID: DataTypes.INTEGER,
-    fbLink: DataTypes.STRING,
+    fbURL: DataTypes.STRING,
     category: DataTypes.STRING,
     website: DataTypes.STRING,
     photo: DataTypes.BLOB

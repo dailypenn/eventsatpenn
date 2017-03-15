@@ -55,6 +55,7 @@ module.exports = function(app){
       tagline: req.body.tagline,
       bio: req.body.bio,
       fbID: req.body.fbID,
+      fbURL: req.body.fbURL,
       category: req.body.category,
       website: req.body.website,
       photo: req.body.photo
@@ -100,7 +101,6 @@ module.exports = function(app){
         fields: ['name', 'about', 'description', 'category', 'link', 'username', 'website', 'picture.height(512)'],
         height: 1024
     }, function (result) {
-      console.log(result);
       res.send(result);
     });
   });
@@ -112,7 +112,6 @@ module.exports = function(app){
       }
     }).then(function(org) {
       org.getUsers().then(function(admins) {
-        console.log(admins);
         res.render('orgs/view.jinja', {org: org, admins: admins})
       })
     });
