@@ -9,7 +9,9 @@ module.exports = function(sequelize, DataTypes) {
     displayName: DataTypes.STRING,
     email: DataTypes.STRING
   }, {
-    classMethods: {
+    getterMethods : {
+     fullName : function()  { return this.firstName + ' ' + this.lastName }
+    }, classMethods: {
       associate: function(models) {
         User.belongsToMany(models.Org, {through: 'OrgUser', foreignKey: 'user_id'});
       },

@@ -5,6 +5,11 @@
 Name: {{ org.name }} <br>
 URL: {{ org.website }} <br>
 FB Page: {{ org.fbPage }} <br>
+
+<h3>Admins</h3>
+{% for admin in admins %}
+  {{ admin.firstName }} {{ admin.lastName }}
+{% endfor %}
 {% if user %}
 <a href="/event/new" class="btn btn-secondary">Create an event</a>
 {% endif %}

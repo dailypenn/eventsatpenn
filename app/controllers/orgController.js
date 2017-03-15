@@ -48,25 +48,20 @@ module.exports = function(app){
   });
 
   app.post('/org', function(req, res) {
-    console.log('>> Creating org ', req.body.name);
-    // Sync to DB, then create org
-    Org.sync().then(function() {
-      Org.create({
-        name: req.body.name,
-        website: req.body.website,
-        fbID: req.body.fbURL
-      }).then(function(newOrg) {
-        console.log('>> Successfully created org', newOrg.get('name'));
+    console.log(`>> Creating org ${req.body.name} with fbID ${req.body.id}`);
+    console.log(req.body);
+    Org.create({
+      name: req.body.name,
+      tagline: req.body.tagline,
+      bio: req.body.bio,
+      fbID: req.body.fbID,
+      category: req.body.category,
+      website: req.body.website,
+      photo: req.body.photo
+    }).then(function(newOrg) {
+      console.log(`>> Successfully created org ${newOrg.get('name')}`);
 
-        //Get userId from current session
-        // var userId = req.session.userId;
-        User.findById(1).then(function(user) {
-          user.addOrg(newOrg, {});
-        });
-        //Add the org as an association of the user
-        // UserController(userId, function (user) {
-        // });
-
+      newOrg.addUser(req.user.id).then(function(){
         res.redirect('/org/' + newOrg.id);
       });
     });
@@ -116,7 +111,10 @@ module.exports = function(app){
         id: req.params.id
       }
     }).then(function(org) {
-      res.render('orgs/view.jinja', {org: org})
+      org.getUsers().then(function(admins) {
+        console.log(admins);
+        res.render('orgs/view.jinja', {org: org, admins: admins})
+      })
     });
   })
 };

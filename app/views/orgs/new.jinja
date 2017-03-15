@@ -3,6 +3,21 @@
 {% block content %}
 
 <script type="text/javascript">
+
+  function toDataURI(url, callback) {
+    var xhr = new XMLHttpRequest();
+    xhr.onload = function() {
+      var reader = new FileReader();
+      reader.onloadend = function() {
+        callback(reader.result);
+      }
+      reader.readAsDataURL(xhr.response);
+    };
+    xhr.open('GET', url);
+    xhr.responseType = 'blob';
+    xhr.send();
+  }
+
   var initiateCreateGroup = function(pageID) {
     $.ajax({
       url: `/org/fbdetails/${pageID}`,
@@ -16,7 +31,13 @@
       $('#createOrgFBCategory').val(data.category);
       $('#createOrgBio').val(data.description);
       $('#createOrgTagline').val(data.about);
+
+
+      toDataURI(data.picture.data.url, function(base64Img) {
+        $('#createOrgPhotoBlob').val(base64Img);
+      });
       $('#createOrgPhoto').attr('src', data.picture.data.url);
+
 
       $('#createList').slideUp();
       $('#createForm').slideDown();
@@ -68,10 +89,12 @@
           <div class="form-group">Bio <textarea rows="4" name="bio" type="text" class="form-control" required="true" placeholder="Bio" id="createOrgBio"></textarea></div>
           <div class="form-group">Website <input name="website" type="text" class="form-control" required="true" placeholder="Website Link" id="createOrgWebsite"></div>
           <div class="form-group">Facebook Page<input name="fbURL" type="text" class="form-control" required="true" placeholder="FB Page Link" id="createOrgFBPage"></div>
-          <div class="form-group">Category <input name="fbURL" type="text" class="form-control" required="true" placeholder="FB Page Link" id="createOrgFBCategory"></div>
+          <div class="form-group">Category <input name="category" type="text" class="form-control" required="true" placeholder="FB Page Link" id="createOrgFBCategory"></div>
         </div>
       </div>
 
+      {# hidden fields #}
+      <input hidden name="photo" type="text" id="createOrgPhotoBlob">
       <input hidden name="fbID" type="text" id="createOrgFBID">
       <div class="form-group"><button class="btn btn-md btn-success btn-block" type='submit'>CrEaTe GrOuP</button></div>
     </form>
