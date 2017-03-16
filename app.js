@@ -61,11 +61,17 @@ passport.use(new FacebookStrategy({
 
 app.set('port', process.env.PORT || 8000);
 
+app.use(session({
+  secret            : authConfig.session.secret,
+  name              : authConfig.session.cookieName,
+  resave            : true,
+  saveUninitialized : false
+}));
 app.use(express.static('app/public'));
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(session({ secret: authConfig.sessionSecret }));
 app.use(passport.initialize());
 app.use(passport.session());
+
 
 app.use(function(req, res, next) { // Set global app variable
   res.locals.user = req.user;
