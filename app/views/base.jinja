@@ -32,7 +32,9 @@
               </a>
               <div class="dropdown-menu" aria-labelledby="navProfileDropdown">
                 <h6 class="dropdown-header">Your Organizations</h6>
-                {{ user.getOrganizations }}
+                {% for org in user.userOrgs %}
+                {{ org.name }}
+                {% endfor %}
                 <a class="dropdown-item" href="#">Org One</a>
                 <a class="dropdown-item" href="#">Org Two</a>
                 <a class="dropdown-item" href="/org/new"><b>+ Add an Organization</b></a>

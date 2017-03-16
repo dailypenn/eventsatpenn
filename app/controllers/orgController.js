@@ -98,8 +98,7 @@ module.exports = function(app){
     var accessToken = req.user._json.accounts.data[0].access_token;
     FB.api(`/${req.params.fbID}`, {
         access_token:   accessToken,
-        fields: ['name', 'about', 'description', 'category', 'link', 'username', 'website', 'picture.height(512)'],
-        height: 1024
+        fields: ['name', 'about', 'description', 'category', 'link', 'username', 'website', 'picture.height(512)']
     }, function (result) {
       res.send(result);
     });

@@ -18,6 +18,7 @@ passport.deserializeUser(function(obj, done) {
   done(null, obj);
 });
 
+
 // FB config
 FB.options({
   appId:          authConfig.facebookAuth.clientID,
@@ -33,33 +34,6 @@ passport.use(new FacebookStrategy({
   profileFields: ['id', 'displayName', 'photos', 'email', 'profileUrl', 'first_name', 'last_name', 'education', 'accounts']
 }, function(accessToken, refreshToken, profile, done) {
   process.nextTick(function () {
-    //Check whether the User exists or not using profile.id
-    console.log('>>>>>>>> profile:');
-    console.log(profile);
-
-    // FB.api(profile.id + '/events', {
-    //     type: 'created', // get events the user created
-    //     total_count: 25, // get 25 items by default TODO: Paging if more
-    //     include_canceled: false, // don't incude canceled events
-    //     access_token:   accessToken
-    // }, function (result) {
-    //     if(!result || result.error) {
-    //         return res.send(500, 'error');
-    //     }
-    //     console.log(result);
-    // });
-
-    FB.api(profile.id + '/accounts', {
-        access_token:   accessToken
-    }, function (result) {
-      if(!result || result.error) {
-          console.error(result.error || "no result returned.");
-      }
-      result.data.forEach(function(elt) {
-        // console.log(elt);
-        // pageInfoByID(elt.id, profile.id, accessToken)
-      });
-    });
 
     models.User.findOne({ where: { id: profile.id }}).then(function(user) {
       if (!user) {
@@ -69,7 +43,9 @@ passport.use(new FacebookStrategy({
           displayName: profile.displayName,
           firstName: profile.name.givenName,
           lastName: profile.name.familyName,
-          email: profile.emails[0].value
+          email: profile.emails[0].value,
+          photoURL: profile.photos[0].value,
+          fbLink: profile.profileUrl
         }).then(function(newUser) {
           newUser.save();
           console.log('>> Successfully created user', newUser.get('id'));
@@ -90,14 +66,15 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(session({ secret: authConfig.sessionSecret }));
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(function(req, res, next) { // Global app variables
+
+app.use(function(req, res, next) { // Set global app variable
   res.locals.user = req.user;
   next();
 });
 
 nunjucks.configure('app/views', {
-    autoescape: true,
-    express: app
+  autoescape: true,
+  express: app
 });
 
 app.get('/auth/facebook', passport.authenticate('facebook', {
