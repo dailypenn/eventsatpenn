@@ -38,7 +38,9 @@ app.use(passport.session());
 // app.use('/session', session);
 
 app.use(function(req, res, next) { // Set global app variable
-  res.locals.user = req.session.passport.user; // pass session user to all templates
+  if (res.locals) {
+    res.locals.user = req.session.passport.user; // pass session user to all templates
+  }
   next();
 });
 
@@ -105,6 +107,9 @@ app.get('/auth/facebook/callback', passport.authenticate('facebook', {
 
 app.get('/logout', function(req, res){
   req.logout();
+  if (req.session && req.session.user) {
+    req.session.user = null;
+  }
   res.redirect('/');
 });
 
