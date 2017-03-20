@@ -1,6 +1,6 @@
 "use strict";
 module.exports = function(sequelize, DataTypes) {
-  var config       = require(__dirname + '/../config/eventConfig.js');
+  var config       = require(__base + '/config/eventConfig.js');
   var PlannedEvent = sequelize.define("Event", {
     title: DataTypes.STRING,
     start_time: DataTypes.DATE,

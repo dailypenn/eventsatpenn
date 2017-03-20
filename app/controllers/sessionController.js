@@ -2,7 +2,7 @@ var User   = require('../models').User;
 var passport = require('passport');
 var FacebookStrategy = require('passport-facebook').Strategy
 var FB       = require('fb');
-var authConfig = require('../config/auth.js');
+var authConfig = require(__base + 'config/auth.js');
 
 FB.options({
   appId:          authConfig.facebookAuth.clientID,

@@ -1,5 +1,5 @@
 var FB       = require('fb');
-var authConfig = require('../config/auth.js');
+var authConfig = require(__base + 'config/auth.js');
 
 FB.options({
   appId:          authConfig.facebookAuth.clientID,
