@@ -19,7 +19,6 @@ app.use(cookieSession({
   maxAge : 1000 * 60 * 60 * 24           // 24 hrs in miliseconds
 }));
 
-
 // App middleware
 app.use(function(req, res, next) {
   // Set global app variables
@@ -43,5 +42,6 @@ nunjucks.configure('app/views', {
 });
 
 require('./app/controllers')(app); // Allow for Routing
+require('./log/logger.js'); // console overrides and config
 app.listen(app.get('port')); //starts up the server
-console.log('Server running on port', app.get('port'));
+console.log(`Server running on port ${app.get('port')}`);

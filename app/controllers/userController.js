@@ -2,14 +2,14 @@ module.exports = function(app){
   var User = require('../models').User;
 
   app.post('/user', function(req, res) {
-    console.log('>> Creating user with id ' + req.body.id);
+    console.info('Creating user with id ' + req.body.id);
     User.create({
       id: req.body.id,
       firstName: req.body.first_name,
       lastName: req.body.last_name,
       email: req.body.email
     }).then(function(newUser) {
-      console.log('>> Successfully created user', newUser.get('firstName'));
+      console.info('Successfully created user', newUser.get('firstName'));
       res.send({status: 'success'});
     });
   });

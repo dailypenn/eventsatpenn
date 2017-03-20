@@ -32,7 +32,7 @@ passport.use(new FacebookStrategy({
   process.nextTick(function () {
     User.findOne({ where: { id: profile.id }}).then(function(user) {
       if (!user) {
-        console.log('>> New User! Creating ' + profile.id);
+        console.info('New User! Creating ' + profile.id);
         User.create({
           id: profile.id,
           displayName: profile.displayName,
@@ -43,11 +43,11 @@ passport.use(new FacebookStrategy({
           fbLink: profile.profileUrl
         }).then(function(newUser) {
           newUser.save();
-          console.log('>> Successfully created user', newUser.get('id'));
+          console.info('Successfully created user', newUser.get('id'));
           currUser = newUser;
         });
       } else {
-        console.log('>> Found user. Redirecting to ' + profile.id);
+        console.info('Found user. Redirecting to ' + profile.id);
         currUser = user;
       }
     }).then(function() {

@@ -33,7 +33,7 @@ module.exports = function(app){
   });
 
   app.post('/org', function(req, res) {
-    console.log(`>> Creating org ${req.body.name} with fbID ${req.body.id}`);
+    console.info(`Creating org ${req.body.name} with fbID ${req.body.id}`);
     Org.create({
       name: req.body.name,
       tagline: req.body.tagline,
@@ -44,7 +44,7 @@ module.exports = function(app){
       website: req.body.website,
       photo: req.body.photo
     }).then(function(newOrg) {
-      console.log(`>> Successfully created org ${newOrg.get('name')}`);
+      console.info(`Successfully created org ${newOrg.get('name')}`);
 
       newOrg.addUser(req.user.id).then(function(){
         res.redirect('/org/' + newOrg.id);
