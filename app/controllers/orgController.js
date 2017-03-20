@@ -53,9 +53,6 @@ module.exports = function(app){
   });
 
   app.get('/org/new', function(req, res) {
-    if (!req.user) {
-      res.redirect('/');
-    }
     var accessToken = req.session.fbAccessToken;
     var userID = req.session.passport.user.id;
     var userPages = req.session.fbGroups
@@ -68,7 +65,6 @@ module.exports = function(app){
       }, function (result) {
         pageData.push(result);
         if (pageData.length == userPages.length) {
-          console.log(pageData);
           res.render('orgs/new.jinja', {pages: pageData});
         }
       });
