@@ -32,12 +32,12 @@
       $('#createOrgBio').val(data.description);
       $('#createOrgTagline').val(data.about);
 
-
-      toDataURI(data.picture.data.url, function(base64Img) {
-        $('#createOrgPhotoBlob').val(base64Img);
-      });
-      $('#createOrgPhoto').attr('src', data.picture.data.url);
-
+      if (data.picture) {
+        toDataURI(data.picture.data.url, function(base64Img) {
+          $('#createOrgPhotoBlob').val(base64Img);
+        });
+        $('#createOrgPhoto').attr('src', data.picture.data.url);
+      }
 
       $('#createList').slideUp();
       $('#createForm').slideDown();

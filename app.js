@@ -4,11 +4,15 @@ var models   = require('./app/models');
 var express  = require('express');
 var passport = require('passport');
 var bodyParser = require('body-parser');
+var cookieParser = require('cookie-parser');
+var cookieSession = require('cookie-session');
 var FacebookStrategy = require('passport-facebook').Strategy
 var authConfig = require('./app/config/auth.js');
 var session  = require('express-session');
 var FB       = require('fb');
 var app      = express();
+
+app.set('port', process.env.PORT || 8000);
 
 // Passport session setup.
 passport.serializeUser(function(user, done) {
@@ -18,6 +22,25 @@ passport.deserializeUser(function(obj, done) {
   done(null, obj);
 });
 
+app.use(bodyParser.urlencoded({ keepExtensions:true }));
+app.use(cookieParser());
+app.use(cookieSession({
+    secret: 'I love stackoverflow',
+    cookie: { maxage: 60000 } // 1 minute : this isn't working.
+}));
+
+app.use(express.static('app/public'));
+app.use(passport.initialize());
+app.use(passport.session());
+
+
+// app.use('/', routes);
+// app.use('/session', session);
+
+app.use(function(req, res, next) { // Set global app variable
+  res.locals.user = req.session.passport.user; // pass session user to all templates
+  next();
+});
 
 // FB config
 FB.options({
@@ -26,15 +49,17 @@ FB.options({
   redirectUri:    authConfig.facebookAuth.callbackURL
 });
 
-
 passport.use(new FacebookStrategy({
   clientID        : authConfig.facebookAuth.clientID,
   clientSecret    : authConfig.facebookAuth.clientSecret,
   callbackURL     : authConfig.facebookAuth.callbackURL,
-  profileFields: ['id', 'displayName', 'photos', 'email', 'profileUrl', 'first_name', 'last_name', 'education', 'accounts']
-}, function(accessToken, refreshToken, profile, done) {
+  profileFields: ['id', 'displayName', 'photos', 'email', 'profileUrl', 'first_name', 'last_name', 'education', 'accounts'],
+  passReqToCallback: true
+}, function(req, accessToken, refreshToken, profile, done) {
+  req.session.fbAccessToken = profile._json.accounts.data[0].access_token;
+  req.session.fbGroups = profile._json.accounts.data;
+  var currUser;
   process.nextTick(function () {
-
     models.User.findOne({ where: { id: profile.id }}).then(function(user) {
       if (!user) {
         console.log('>> New User! Creating ' + profile.id);
@@ -49,34 +74,18 @@ passport.use(new FacebookStrategy({
         }).then(function(newUser) {
           newUser.save();
           console.log('>> Successfully created user', newUser.get('id'));
+          currUser = newUser;
         });
       } else {
         console.log('>> Found user. Redirecting to ' + profile.id);
+        currUser = user;
       }
+    }).then(function() {
+      req.user = currUser;
+      return done(null, currUser);
     });
-    // console.log(profile);
-    return done(null, profile);
   });
 }));
-
-app.set('port', process.env.PORT || 8000);
-
-app.use(session({
-  secret            : authConfig.session.secret,
-  name              : authConfig.session.cookieName,
-  resave            : true,
-  saveUninitialized : false
-}));
-app.use(express.static('app/public'));
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(passport.initialize());
-app.use(passport.session());
-
-
-app.use(function(req, res, next) { // Set global app variable
-  res.locals.user = req.user;
-  next();
-});
 
 nunjucks.configure('app/views', {
   autoescape: true,
@@ -98,11 +107,6 @@ app.get('/logout', function(req, res){
   req.logout();
   res.redirect('/');
 });
-
-function ensureAuthenticated(req, res, next) {
-  if (req.isAuthenticated()) { return next(); }
-  res.redirect('/login')
-}
 
 require('./app/controllers')(app); // Allow for Routing
 app.listen(app.get('port')); //starts up the server
