@@ -1,6 +1,5 @@
 var express       = require('express');
 var nunjucks      = require('nunjucks');
-var winston       = require('winston')
 var bodyParser    = require('body-parser');
 var cookieParser  = require('cookie-parser');
 var cookieSession = require('cookie-session');
@@ -20,30 +19,6 @@ app.use(cookieSession({
   maxAge : 1000 * 60 * 60 * 24           // 24 hrs in miliseconds
 }));
 
-winston.setLevels({
-  logs  : 4,
-  info  : 3,
-  debug : 2,
-  warn  : 1,
-  error : 0
-});
-
-winston.addColors({
-  logs  : 'green',
-  info  : 'cyan',
-  debug : 'grey',
-  warn  : 'yellow',
-  error : 'red'
-});
-
-winston.remove(winston.transports.Console)
-winston.add(winston.transports.Console, {
-  level: 'logs',
-  prettyPrint: true,
-  colorize: true,
-  silent: false,
-  timestamp: false
-});
 
 // App middleware
 app.use(function(req, res, next) {
@@ -69,4 +44,4 @@ nunjucks.configure('app/views', {
 
 require('./app/controllers')(app); // Allow for Routing
 app.listen(app.get('port')); //starts up the server
-winston.logs('Server running on port', app.get('port'));
+console.log('Server running on port', app.get('port'));
