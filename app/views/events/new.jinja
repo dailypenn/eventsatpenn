@@ -1,0 +1,33 @@
+{% extends "../base.jinja" %}
+
+{% block content %}
+<h1>Add an Event to the Calendar</h1>
+
+<p>
+  Choose an event from your profile or one of your pages to add it to the
+  events@penn calendar. After adding, it will be visible to Penn students who
+  can RSVP by visiting the event's facebook page.
+</p>
+
+<div class="dropdown">
+  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+    Select an event
+    <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+    <li class="dropdown-header">Your Events</li>
+    <li><a href="#">Picnic With Friends</a></li>
+    <li><a href="#">Fundraiser for Kids</a></li>
+    <li role="separator" class="divider"></li>
+
+    <li class="dropdown-header">Page: Ski Team Events</li>
+    <li><a href="#">Ski Event</a></li>
+    <li><a href="#">Go Climb a Mountain</a></li>
+    <li><a href="#">Another Event</a></li>
+  </ul>
+</div>
+
+
+<a href="#" class="btn btn-secondary">Add to Calendar</a>
+
+{% endblock %}

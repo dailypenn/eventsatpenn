@@ -1,10 +1,9 @@
 var assert = require('assert');
 
-describe('Dumb Tests', function() {
-  it('should return true because this is a dumb test', function() {
-    assert.equal(25, 25);
-  });
-  it('should also be true', function() {
-    assert(true);
+describe('Model Tests', function () {
+  describe('User', function () {
+    var tests = require('./models/user-tests.js');
+    it('should always pass', tests.testAssertion);
+    it('User should create without error', tests.userCreates);
   });
 });

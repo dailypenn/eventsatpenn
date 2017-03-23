@@ -1,12 +1,23 @@
-// constructor
-function User(fName, lName, fbID) {
-  this.fName = fName;
-  this.lName = lName;
-  this.fbID = fbID;
-}
+"use strict";
+module.exports = function(sequelize, DataTypes) {
+  var models = require("./index.js");
 
-User.prototype.fullName = function() {
-  return this.fName + ' ' + this.lName;
+  var User = sequelize.define("User", {
+    id:          { type: DataTypes.INTEGER, primaryKey: true },
+    firstName:   DataTypes.STRING,
+    lastName:    DataTypes.STRING,
+    displayName: DataTypes.STRING,
+    email:       DataTypes.STRING,
+    photoURL:    DataTypes.STRING,
+    fbLink:      DataTypes.STRING
+  }, {
+    getterMethods : {
+      fullName : function() { return this.firstName + ' ' + this.lastName }
+    }, classMethods: {
+      associate: function(models) {
+        User.belongsToMany(models.Org, {through: 'OrgUser', foreignKey: 'user_id'});
+      }
+    }
+  });
+  return User;
 };
-
-module.exports = User;

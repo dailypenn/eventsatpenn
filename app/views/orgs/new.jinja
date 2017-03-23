@@ -1,0 +1,111 @@
+{% extends "../base.jinja" %}
+
+{% block content %}
+
+<script type="text/javascript">
+
+  function toDataURI(url, callback) {
+    var xhr = new XMLHttpRequest();
+    xhr.onload = function() {
+      var reader = new FileReader();
+      reader.onloadend = function() {
+        callback(reader.result);
+      }
+      reader.readAsDataURL(xhr.response);
+    };
+    xhr.open('GET', url);
+    xhr.responseType = 'blob';
+    xhr.send();
+  }
+
+  var initiateCreateGroup = function(pageID) {
+    $.ajax({
+      url: `/org/fbdetails/${pageID}`,
+      dataType: 'json'
+    })
+    .done(function(data) {
+      $('#createOrgName').val(data.name);
+      $('#createOrgWebsite').val(data.website);
+      $('#createOrgFBPage').val(data.link);
+      $('#createOrgFBID').val(data.id);
+      $('#createOrgFBCategory').val(data.category);
+      $('#createOrgBio').val(data.description);
+      $('#createOrgTagline').val(data.about);
+
+      if (data.picture) {
+        toDataURI(data.picture.data.url, function(base64Img) {
+          $('#createOrgPhotoBlob').val(base64Img);
+        });
+        $('#createOrgPhoto').attr('src', data.picture.data.url);
+      }
+
+      $('#createList').slideUp();
+      $('#createForm').slideDown();
+      console.log(data);
+    })
+    .fail(function(err) {
+      console.error(err);
+      console.log("error");
+    });
+  }
+
+  var initiateGroupFromName = function() {
+    var name = $('#orgScratchName').val();
+    $('#createOrgName').val(name);
+    $('#createList').slideUp();
+    $('#createForm').slideDown();
+  }
+</script>
+
+<h1>Create an Organization</h1>
+<div class="row">
+  <div class="col-sm-8">
+    {# Group Selection Form #}
+    <h3>Create a new Organization</h3>
+    <div id="createList">
+      <h4>From a Facebook Page</h4>
+      {% for page in pages %}
+        <button class="btn btn-md btn-success btn-block" type='submit' onclick="initiateCreateGroup({{ page.id }})">{{ page.name }}</button>
+      {% endfor %}
+      <h4>From Scratch</h4>
+        <div class="form-group"><input name="name" type="text" class="form-control" required="true" placeholder="Organization Name" id="orgScratchName"></div>
+        <div class="form-group"><button class="btn btn-md btn-secondary btn-block" onclick='initiateGroupFromName()'>Continue</button></div>
+    </div>
+
+    {# Group Creation Form#}
+    <form id="createForm" action="/org" method="post" style="display: none;">
+      <div class="row">
+        <div class="col-sm-4">
+          <div class="card text-center">
+            <img src="#" class="img img-fluid card-img-top" alt="Your Group Photo" id="createOrgPhoto">
+            <div class="card-block">
+              <a href="#" class="btn btn-secondary">Change Photo</a>
+            </div>
+          </div>
+          <div class="form-group">Name <input name="name" type="text" class="form-control" required="true" placeholder="Organization Name" id="createOrgName"></div>
+        </div>
+        <div class="col-sm-8">
+          <div class="form-group">Tagline <input name="tagline" type="text" class="form-control" required="true" placeholder="Tagline" id="createOrgTagline"></div>
+          <div class="form-group">Bio <textarea rows="4" name="bio" type="text" class="form-control" required="true" placeholder="Bio" id="createOrgBio"></textarea></div>
+          <div class="form-group">Website <input name="website" type="text" class="form-control" required="true" placeholder="Website Link" id="createOrgWebsite"></div>
+          <div class="form-group">Facebook Page<input name="fbURL" type="text" class="form-control" required="true" placeholder="FB Page Link" id="createOrgFBPage"></div>
+          <div class="form-group">Category <input name="category" type="text" class="form-control" required="true" placeholder="FB Page Link" id="createOrgFBCategory"></div>
+        </div>
+      </div>
+
+      {# hidden fields #}
+      <input hidden name="photo" type="text" id="createOrgPhotoBlob">
+      <input hidden name="fbID" type="text" id="createOrgFBID">
+      <div class="form-group"><button class="btn btn-md btn-success btn-block" type='submit'>CrEaTe GrOuP</button></div>
+    </form>
+  </div>
+
+  <div class="col-sm-4">
+    <h3>Your Organizations</h3>
+    {% for page in user.orgs %}
+      <li>{{ org.name }}</li>
+    {% endfor %}
+  </div>
+</div>
+
+{% endblock %}
