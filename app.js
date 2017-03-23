@@ -20,6 +20,10 @@ app.get('/', function(req, res) {
       res.render('index.jinja', {foo: user});
 });
 
+app.get('/event', function(req, res) {
+      res.render('event.jinja', {foo: user});
+});
+
 
 app.listen(process.env.PORT || 8000);
 console.log('server is running');
