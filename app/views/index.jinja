@@ -2,26 +2,12 @@
 
 {% block content %}
 <div class="row">
-  <div class="col-md-6">
-    <div class="card">
-      <h3 class="card-header">Users</h3>
-      <div class="card-block">
-        {% for user in users %}
-        <li>{{ user.firstName }} {{ user.lastName }}</li>
-        {% endfor %}
-      </div>
-    </div>
+  <div class="col-md-8">
+    <div id="calendar"></div>
   </div>
 
-  <div class="col-md-6">
-    <div class="card">
-      <h3 class="card-header">Add Events</h3>
-      <div class="card-block">
-        {% if user %}
-          <a href="/event/new" class="btn btn-danger">Add Facebook Event</a>
-        {% endif %}
-      </div>
-    </div>
+  <div class="col-md-4">
+    <div id="dayview"></div>
   </div>
 </div>
 {% endblock %}

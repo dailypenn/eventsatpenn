@@ -17,3 +17,4 @@ module.exports = function(app) {
   var passApp = function(controller) {controller(app)};
   requireDirectory(module, {visit: passApp});
 };
+
