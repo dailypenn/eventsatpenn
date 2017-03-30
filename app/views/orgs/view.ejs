@@ -40,9 +40,8 @@
   </div>
 </div>
 
-{% if user %}
-<a href="/event/new" class="btn btn-secondary">Create an event</a>
-{% endif %}
+<% if (user) { %>
+  <a href="/event/new" class="btn btn-secondary">Create an event</a>
+<% } %>
 <br>
 <a href="/org" class="btn btn-secondary">Back to all</a>
-{% endblock %}
