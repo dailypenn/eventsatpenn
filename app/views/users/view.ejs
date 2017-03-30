@@ -1,16 +1,9 @@
-{% extends "../base.jinja" %}
-
-{% block content %}
-{% if user %}
-<h1>Hello, {{ user.firstName }} {{ user.lastName }}</h1>
-ID: {{ user.id }} <br>
-Name: {{ user.firstName }} {{ user.lastName }} <br>
-Email: {{ user.email }}
-{% else %}
-  <h1>Please log in!</h1>
-{% endif %}
-
-<!-- {% for name, item in user %}
-   <li>{{ name }}: {{ item }}</li>
-{% endfor %} -->
-{% endblock %}
+<% if (user) { %>
+  <h1>Hello, <%= user.firstName %> <%= user.lastName %></h1> <br>
+  ID: <%= user.id %> <br>
+  FBID: <%= user.fbId %> <br>
+  Email: <%= user.email %>
+<% } else { %>
+  // Should never get here...
+  Please log in.
+<% } %>
