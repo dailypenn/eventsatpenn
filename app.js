@@ -1,5 +1,5 @@
 var express       = require('express');
-// var nunjucks      = require('nunjucks');
+var layout = require('express-ejs-layouts');
 var bodyParser    = require('body-parser');
 var cookieParser  = require('cookie-parser');
 var cookieSession = require('cookie-session');
@@ -10,8 +10,9 @@ global.__base = __dirname + '/';
 
 app.set('name', 'Events@Penn');
 app.set('port', process.env.PORT || 8000);
-app.set('view engine', 'ejs');
 app.set('views','app/views');
+app.set('view engine', 'ejs');
+app.use(layout);
 app.use(express.static('app/public'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
