@@ -1,5 +1,5 @@
 var express       = require('express');
-var nunjucks      = require('nunjucks');
+// var nunjucks      = require('nunjucks');
 var bodyParser    = require('body-parser');
 var cookieParser  = require('cookie-parser');
 var cookieSession = require('cookie-session');
@@ -10,6 +10,8 @@ global.__base = __dirname + '/';
 
 app.set('name', 'Events@Penn');
 app.set('port', process.env.PORT || 8000);
+app.set('view engine', 'ejs');
+app.set('views','app/views');
 app.use(express.static('app/public'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
@@ -37,10 +39,10 @@ app.use(function(req, res, next) {
 
 
 // Nunjucks template configuration
-nunjucks.configure('app/views', {
-  autoescape: true,
-  express: app
-});
+// nunjucks.configure('app/views', {
+//   autoescape: true,
+//   express: app
+// });
 
 require('./app/controllers')(app); // Allow for Routing
 // require('./log/logger.js'); // console overrides and config
