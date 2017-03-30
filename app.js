@@ -43,6 +43,6 @@ nunjucks.configure('app/views', {
 });
 
 require('./app/controllers')(app); // Allow for Routing
-require('./log/logger.js'); // console overrides and config
+// require('./log/logger.js'); // console overrides and config
 app.listen(app.get('port')); //starts up the server
 console.log(`Server running on port ${app.get('port')}`);

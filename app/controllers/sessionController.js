@@ -30,11 +30,11 @@ passport.use(new FacebookStrategy({
   req.session.fbGroups = profile._json.accounts.data;
   var currUser;
   process.nextTick(function () {
-    User.findOne({ where: { id: profile.id }}).then(function(user) {
+    User.findOne({ where: { fbId: profile.id }}).then(function(user) {
       if (!user) {
         console.info('New User! Creating ' + profile.id);
         User.create({
-          id: profile.id,
+          fbId: profile.id,
           displayName: profile.displayName,
           firstName: profile.name.givenName,
           lastName: profile.name.familyName,
@@ -68,7 +68,7 @@ module.exports = function(app){
 
   app.get('/auth/facebook/callback', passport.authenticate('facebook', {
     successRedirect : '/',
-    failureRedirect: '/login'
+    failureRedirect: '/'
   }), function(req, res) {
     res.redirect('/');
   });

@@ -4,7 +4,7 @@ module.exports = function(app){
   app.post('/user', function(req, res) {
     console.info('Creating user with id ' + req.body.id);
     User.create({
-      id: req.body.id,
+      fbId: req.body.id,
       firstName: req.body.first_name,
       lastName: req.body.last_name,
       email: req.body.email
@@ -24,7 +24,18 @@ module.exports = function(app){
   //   });
   // })
 
+  function* getGroups(user) {
+    return yield wait.for(user.getOrgs());;
+  }
+
   app.get('/profile', function(req, res) {
+    User.findById(req.session.passport.user.id).then(function(user) {
+      // console.log(user.groups);
+
+      wait.launchFiber(getGroups, user);
+
+      // console.log();
+    })
     res.render('users/view.jinja');
   })
 };

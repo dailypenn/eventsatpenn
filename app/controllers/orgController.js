@@ -46,7 +46,7 @@ module.exports = function(app){
     }).then(function(newOrg) {
       console.info(`Successfully created org ${newOrg.get('name')}`);
 
-      newOrg.addUser(req.user.id).then(function(){
+      newOrg.addUser(req.session.passport.user.id).then(function(){
         res.redirect('/org/' + newOrg.id);
       });
     });

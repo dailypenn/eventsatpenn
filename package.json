@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/dailypenn/eventsatpenn#readme",
   "dependencies": {
+    "async": "^2.2.0",
     "body-parser": "^1.16.1",
     "cli-color": "^1.2.0",
     "cookie-parser": "^1.4.3",
