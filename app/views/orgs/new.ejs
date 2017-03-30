@@ -1,7 +1,3 @@
-{% extends "../base.jinja" %}
-
-{% block content %}
-
 <script type="text/javascript">
 
   function toDataURI(url, callback) {
@@ -64,15 +60,15 @@
     <h3>Create a new Organization</h3>
     <div id="createList">
       <h4>From a Facebook Page</h4>
-      {% for page in pages %}
-        <button class="btn btn-md btn-success btn-block" type='submit' onclick="initiateCreateGroup({{ page.id }})">{{ page.name }}</button>
-      {% endfor %}
+      <% for (var i=0; i<pages.length; i++) { %>
+        <button class="btn btn-md btn-success btn-block" type='submit' onclick="initiateCreateGroup(<%= pages[i].id %>)"><%= pages[i].name %></button>
+      <% } %>
       <h4>From Scratch</h4>
         <div class="form-group"><input name="name" type="text" class="form-control" required="true" placeholder="Organization Name" id="orgScratchName"></div>
         <div class="form-group"><button class="btn btn-md btn-secondary btn-block" onclick='initiateGroupFromName()'>Continue</button></div>
     </div>
 
-    {# Group Creation Form#}
+    <%# Group Creation Form #%>
     <form id="createForm" action="/org" method="post" style="display: none;">
       <div class="row">
         <div class="col-sm-4">
@@ -102,10 +98,6 @@
 
   <div class="col-sm-4">
     <h3>Your Organizations</h3>
-    {% for page in user.orgs %}
-      <li>{{ org.name }}</li>
-    {% endfor %}
+    TODO
   </div>
 </div>
-
-{% endblock %}

@@ -28,7 +28,7 @@ module.exports = function(app){
   app.get('/org', function(req, res) {
     Org.sync();
     Org.findAll().then(function(orgs) {
-      res.render('orgs/all.jinja', {orgs: orgs});
+      res.render('orgs/all', {orgs: orgs});
     })
   });
 
@@ -65,7 +65,7 @@ module.exports = function(app){
       }, function (result) {
         pageData.push(result);
         if (pageData.length == userPages.length) {
-          res.render('orgs/new.jinja', {pages: pageData});
+          res.render('orgs/new', {pages: pageData});
         }
       });
     })
@@ -92,7 +92,7 @@ module.exports = function(app){
       }
     }).then(function(org) {
       org.getUsers().then(function(admins) {
-        res.render('orgs/view.jinja', {org: org, admins: admins})
+        res.render('orgs/view', {org: org, admins: admins});
       })
     });
   })
