@@ -71,10 +71,6 @@ module.exports = function(app){
     })
   });
 
-  app.get('/org/view', function(req, res) {
-    res.render('orgs/view.jinja', {});
-  });
-
   app.get('/org/fbdetails/:fbID', function(req, res) {
     var accessToken = req.session.fbAccessToken;
     FB.api(`/${req.params.fbID}`, {

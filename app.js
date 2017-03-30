@@ -26,7 +26,7 @@ app.use(cookieSession({
 app.use(function(req, res, next) {
   // Set global app variables
   if (res.locals && req.session.passport) {
-    res.locals.user = req.session.passport.user; // pass user to all templates
+    global.user = req.session.passport.user; // pass user to all templates
   }
   // Check authentication
   var securePaths = ['/org/new', '/profile'];

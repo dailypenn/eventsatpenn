@@ -36,6 +36,6 @@ module.exports = function(app){
 
       // console.log();
     })
-    res.render('users/view.jinja');
+    res.render('users/view');
   })
 };
