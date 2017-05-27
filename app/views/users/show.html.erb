@@ -1,0 +1,8 @@
+<h3>User</h3>
+<p>Name: <%= @user.full_name if @user.full_name %></p>
+
+<strong> Owner of FB pages: </strong><br>
+<% pages = session[:user_hash]['extra']['raw_info']['accounts']['data'] %>
+<% pages.each do |page| %>
+  <%= page.name %> <br>
+<% end %>

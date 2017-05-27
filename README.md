@@ -1,24 +1,48 @@
-# Events@Penn
-Events@Penn is back.
+Eventsatpenn
+================
 
-## Usage
+This application was generated with the [rails_apps_composer](https://github.com/RailsApps/rails_apps_composer) gem
+provided by the [RailsApps Project](http://railsapps.github.io/).
 
-### Development
-Run `npm start` or `node app.js`
+Rails Composer is supported by developers who purchase our RailsApps tutorials.
 
-### Testing
-Run `npm test` or `mocha test` to run tests. You must have mocha installed 
-globally for this to work (`npm install -g mocha`).
+Problems? Issues?
+-----------
 
-### Deployment
-Download the AWS Elastic Beanstalk CLI
+Need help? Ask on Stack Overflow with the tag 'railsapps.'
 
-    sudo pip install --upgrade --user awsebcli
-    eb --version # check your install went okay
+Your application contains diagnostics in the README file. Please provide a copy of the README file when reporting any issues.
 
-Deploy the app to the Events@Penn instance
+If the application doesn't work as expected, please [report an issue](https://github.com/RailsApps/rails_apps_composer/issues)
+and include the diagnostics.
 
-    eb deploy
+Ruby on Rails
+-------------
 
-⚠️ If it is your first time deploying, it will ask you for credentials for the
-AWS. There is a service account set up--just head to IAM on the AWS dashboard.
+This application requires:
+
+- Ruby 2.4.0
+- Rails 5.1.1
+
+Learn more about [Installing Rails](http://railsapps.github.io/installing-rails.html).
+
+Getting Started
+---------------
+
+Documentation and Support
+-------------------------
+
+Issues
+-------------
+
+Similar Projects
+----------------
+
+Contributing
+------------
+
+Credits
+-------
+
+License
+-------
