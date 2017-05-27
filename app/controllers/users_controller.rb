@@ -10,4 +10,8 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
+  def fb_pages
+    session[:user_hash]['extra']['raw_info']['accounts']['data']
+  end
+
 end

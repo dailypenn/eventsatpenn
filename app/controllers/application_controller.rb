@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   helper_method :current_user
+  helper_method :user_fb_pages
   helper_method :user_signed_in?
   helper_method :correct_user?
 
@@ -17,6 +18,10 @@ class ApplicationController < ActionController::Base
     rescue Exception => e
       nil
     end
+  end
+
+  def user_fb_pages
+    session[:user_hash]['extra']['raw_info']['accounts']['data'] if user_signed_in?
   end
 
   private

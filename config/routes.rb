@@ -11,4 +11,7 @@ Rails.application.routes.draw do
   get '/signout' => 'sessions#destroy', :as => :signout
   get '/auth/:provider/callback' => 'sessions#create'
   get '/auth/failure' => 'sessions#failure'
+
+  # Orgs
+  post '/orgs/new/fb' => 'orgs#new_from_fb'
 end

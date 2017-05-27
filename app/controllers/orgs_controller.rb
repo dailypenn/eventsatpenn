@@ -17,6 +17,12 @@ class OrgsController < ApplicationController
     @org = Org.new
   end
 
+  def new_from_fb
+    p '~~~~~~~~'
+    org_params = params['fb_page']
+    @org = Org.new(name: org_params['name'], category: org_params['category'], fbID: org_params['id'])
+  end
+
   # GET /orgs/1/edit
   def edit
   end
