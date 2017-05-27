@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170527214148) do
+ActiveRecord::Schema.define(version: 20170527222333) do
 
   create_table "events", force: :cascade do |t|
     t.string "title"
@@ -39,6 +39,15 @@ ActiveRecord::Schema.define(version: 20170527214148) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "orgs_users", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "org_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["org_id"], name: "index_orgs_users_on_org_id"
+    t.index ["user_id"], name: "index_orgs_users_on_user_id"
+  end
+
   create_table "sessions", force: :cascade do |t|
     t.string "session_id", null: false
     t.text "data"
@@ -46,6 +55,15 @@ ActiveRecord::Schema.define(version: 20170527214148) do
     t.datetime "updated_at", null: false
     t.index ["session_id"], name: "index_sessions_on_session_id", unique: true
     t.index ["updated_at"], name: "index_sessions_on_updated_at"
+  end
+
+  create_table "user_orgs", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "org_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["org_id"], name: "index_user_orgs_on_org_id"
+    t.index ["user_id"], name: "index_user_orgs_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|

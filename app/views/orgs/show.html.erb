@@ -35,5 +35,12 @@
   <%= @org.photo_url %>
 </p>
 
+<h3>Admins:</h3>
+<ul>
+  <% @org.users.each do |user| %>
+    <li><%= user.full_name %></li>
+  <% end %>
+</ul>
+
 <%= link_to 'Edit', edit_org_path(@org) %> |
 <%= link_to 'Back', orgs_path %>

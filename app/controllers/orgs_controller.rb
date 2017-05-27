@@ -34,6 +34,7 @@ class OrgsController < ApplicationController
 
     respond_to do |format|
       if @org.save
+        current_user.orgs << @org
         format.html { redirect_to @org, notice: 'Org was successfully created.' }
         format.json { render :show, status: :created, location: @org }
       else

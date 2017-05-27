@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  attr_accessor :user_hash
+  has_and_belongs_to_many :orgs
 
   def self.create_with_omniauth(auth)
     create! do |user|
