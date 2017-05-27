@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  resources :events
+  resources :orgs
   resources :users
   root to: 'application#index'
 

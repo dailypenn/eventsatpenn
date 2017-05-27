@@ -10,7 +10,34 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170527211047) do
+ActiveRecord::Schema.define(version: 20170527214148) do
+
+  create_table "events", force: :cascade do |t|
+    t.string "title"
+    t.time "start_time"
+    t.time "end_time"
+    t.string "description"
+    t.string "location"
+    t.string "category"
+    t.boolean "twentyone"
+    t.boolean "recurring"
+    t.string "recurrence_freq"
+    t.integer "recurrence_amt"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "orgs", force: :cascade do |t|
+    t.string "name"
+    t.string "tagline"
+    t.string "bio"
+    t.string "fbID"
+    t.string "category"
+    t.string "website"
+    t.string "photo_url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "sessions", force: :cascade do |t|
     t.string "session_id", null: false
