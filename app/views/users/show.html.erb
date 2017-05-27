@@ -1,2 +1,9 @@
 <h3>User</h3>
 <p>Name: <%= @user.full_name if @user.full_name %></p>
+
+<h3>Admin of:</h3>
+<ul>
+<% @user.orgs.each do |org| %>
+ <li><%= org.name %></li>
+<% end %>
+</ul
