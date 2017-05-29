@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_user
   helper_method :user_fb_pages
+  helper_method :access_token
   helper_method :user_signed_in?
   helper_method :correct_user?
 
@@ -22,6 +23,10 @@ class ApplicationController < ActionController::Base
 
   def user_fb_pages
     session[:user_hash]['extra']['raw_info']['accounts']['data'] if user_signed_in?
+  end
+
+  def access_token
+    session[:user_hash]['credentials']['token']
   end
 
   private

@@ -11,7 +11,6 @@ class SessionsController < ApplicationController
     reset_session
     session[:user_id] = user.id
     session[:user_hash] = request.env['omniauth.auth']
-    user.user_hash = request.env['omniauth.auth']
 
     redirect_to root_url, :notice => 'Signed in!'
   end
