@@ -1,2 +1,14 @@
 <h3>Welcome</h3>
+
+<div class="row">
+  <div class="col-md-8">
+    <select class="form-control pull-left calendar-filter" disabled>
+      <option>Filter Events by Category</option disabled>
+    </select>
+    <a class="btn btn-info pull-right calendar-create">Add an Event</a>
+    <%= month_calendar do |date| %>
+      <%= date.day %>
+    <% end %>
+  </div>
+</div>
 <p><%= link_to 'Users:', users_path %> <%= User.count %> registered</p>

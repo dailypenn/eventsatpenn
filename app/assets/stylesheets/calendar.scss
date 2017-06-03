@@ -1,0 +1,70 @@
+.calendar-filter {
+  max-width: 200px;
+  display: inline;
+}
+
+.simple-calendar {
+
+  .calendar-heading {
+    text-align: center;
+    margin-top: -20px;
+    width: 100%;
+  }
+
+  .calendar-title {
+    font-size: 4rem;
+  }
+
+  table {
+    background-color: #eee;
+  }
+
+  td {
+    border: 1px solid #ccc;
+  }
+
+  th {
+    border: 1px solid #ccc;
+    text-align: center;
+    font-weight: 100;
+    font-size: 2rem;
+  }
+
+  .day {
+    width: 14.285%; // 1/7th
+    height: 115px;
+  }
+
+  .wday-0 {}
+  .wday-1 {}
+  .wday-2 {}
+  .wday-3 {}
+  .wday-4 {}
+  .wday-5 {}
+  .wday-6 {}
+
+  .today {
+    background-color: #a83;
+  }
+  .past {}
+  .prev-month{
+    background-color: #fff;
+  }
+  
+  .future {}
+  .next-month{
+    background-color: #fff;
+  }
+
+  .start-date {}
+
+  .prev-month {}
+  .next-month { }
+  .current-month {}
+
+  .has-events {}
+
+  .table-striped > tbody > tr:nth-of-type(odd) {
+    background-color: inherit; // seriously why
+  }
+}
