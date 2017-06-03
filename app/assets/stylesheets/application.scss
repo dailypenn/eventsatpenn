@@ -18,6 +18,25 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+body {
+  font-family: 'Nunito', 'Avenir', 'Helvetica Neue', Helvetica, sans-serif;
+  font-weight: 400;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  &.pill {
+    background-color: #aa1e22;
+    display: inline-block;
+    padding: 8px 30px;
+    border-radius: 50px;
+    color: #fff;
+  }
+}
+
+strong {
+  font-weight: 900;
+}
+
 main {
   padding-top: 50px;
 }
@@ -100,4 +119,8 @@ section {
   margin-top: 40px;
   max-height: calc(100% - 40px);
   overflow: scroll;
+}
+
+.panel.filled {
+  background-color: #f5f5f5;
 }
