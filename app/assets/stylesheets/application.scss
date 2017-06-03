@@ -95,3 +95,9 @@ section {
   @extend .btn-primary;
   @extend .btn-xs;
 }
+
+.calendar-sidebar {
+  margin-top: 40px;
+  max-height: calc(100% - 40px);
+  overflow: scroll;
+}
