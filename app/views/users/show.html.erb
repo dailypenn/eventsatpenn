@@ -1,0 +1,43 @@
+<h1 class="pill">User Profile: <%= @user.full_name %></h1>
+
+<div class="row">
+
+  <div class="col-md-6">
+    <div class="panel panel-default calendar-sidebar">
+      <div class="panel-heading">
+        <h3 class="panel-title">User Details</h3>
+      </div>
+      <div class="panel-body">
+        <img class="img img-responsive" src="<%= @user.image_url %>" alt="<%= @user.full_name%> Photo">
+
+        <h3>Info:</h3>
+        <strong>Name: </strong> <%= @user.full_name %><br>
+        <strong>Email: </strong> <%= @user.email %><br>
+        <strong></strong>
+
+        <h3>Organizations:</h3>
+        <ul>
+          <% @user.orgs.each do |org| %>
+            <li><%= org.name %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <div class="panel panel-default calendar-sidebar">
+      <div class="panel-heading">
+        <h3 class="panel-title">Upcoming Events</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+          <li>Foo</li>
+          <li>Foo</li>
+          <li>Foo</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</div>

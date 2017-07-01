@@ -1,0 +1,2 @@
+class PennFBMember < ApplicationRecord
+end
