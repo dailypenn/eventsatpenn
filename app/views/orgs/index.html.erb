@@ -21,7 +21,7 @@
 
   <div class="row">
     <div class="panel panel-default filled list-all">
-      <% @orgs.each do |org| %>
+      <% @orgs.sort_by(&:name).each do |org| %>
         <div class="row">
           <%= link_to org.name, org %>
         </div>
