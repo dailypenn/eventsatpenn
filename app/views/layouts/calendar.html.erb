@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= content_for?(:title) ? yield(:title) : "Events@Penn" %></title>
+    <meta name="description" content="<%= content_for?(:description) ? yield(:description) : " Eventsatpenn" %>">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:300,400,400i,900" rel="stylesheet">
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => 'reload' %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+    <header>
+      <%= render 'layouts/navigation' %>
+    </header>
+    <main role="main">
+      <h2></h2>
+      <div class="container-fluid">
+        <%= render 'layouts/messages' %>
+        <div class="row">
+          <div class="col-md-8">
+            <select class="form-control pull-left calendar-filter" disabled>
+              <option>Filter Events by Category</option disabled>
+            </select>
+            <a class="btn btn-info pull-right calendar-create" href="/events/new">Add an Event</a>
+            <% @events = Event.all %>
+            <%= month_calendar(attribute: :start_date, end_attribute: :end_date, events: @events) do |date, meetings| %>
+            <div class="date"><%= date.day %></div>
+            <% meetings.each do |event| %>
+            <div class="calendar-event">
+              <%= link_to event.title, event %>
+            </div>
+            <% end %>
+            <% end %>
+          </div>
+          <div class="col-md-4"></div>
+          <div class="panel panel-default filled calendar-sidebar">
+            <div class="panel-body text-center">
+              <%= yield %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
