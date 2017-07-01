@@ -127,15 +127,11 @@ section {
   margin: 0;
   padding: 0;
   padding-left: 15px;
+  padding-right: 15px;
   padding-top: 10px;
 
   .navbar-logo {
     height: 28px;
-  }
-
-  svg {
-    transform: scale(.5);
-    transform-origin: top left;
   }
 }
 
@@ -242,8 +238,8 @@ section {
 
 .turbolinks-progress-bar {
   background-color: #AA1E22;
+}
 
 .row {
   margin-right: 0;
-
 }
