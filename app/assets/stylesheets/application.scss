@@ -38,7 +38,9 @@ strong {
 }
 
 main {
-  padding-top: 50px;
+  max-width: 100%;
+  padding-top: 75px;
+  padding-bottom: 25px;
 }
 
 // make all images responsive by default
@@ -113,12 +115,40 @@ section {
   border: 0 none;
   margin: 0;
   padding: 0;
-  padding-left: 25px;
-  padding-top: 5px;
+  padding-left: 15px;
+  padding-top: 10px;
+
+  .navbar-logo {
+    height: 28px;
+  }
 
   svg {
-    transform: scale(.65);
+    transform: scale(.5);
     transform-origin: top left;
+  }
+}
+
+.navbar-static-bottom {
+  margin-bottom: 0px;
+  min-height: 40px;
+
+  .navbar-header {
+    float: right;
+
+    @media screen and (max-width: 700px) {
+      padding-right: 15px;
+    }
+  }
+
+  .navbar-brand {
+    padding-top: 10px;
+    height: 40px;
+
+    .logo-bottom {
+      padding-left: 5px;
+      display: inline;
+      height: 25px;
+    }
   }
 }
 
@@ -136,4 +166,13 @@ section {
 
 .panel.filled {
   background-color: #f5f5f5;
+}
+
+.intro {
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+.dp-logo {
+  padding-bottom: 20px;
 }
