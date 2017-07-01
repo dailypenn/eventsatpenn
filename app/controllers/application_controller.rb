@@ -10,8 +10,7 @@ class ApplicationController < ActionController::Base
   helper_method :correct_user?
 
   def index
-    @events = Event.all
-    render :'welcome/index.html.erb'
+    render :'welcome/index.html.erb', layout: 'calendar'
   end
 
   def current_user

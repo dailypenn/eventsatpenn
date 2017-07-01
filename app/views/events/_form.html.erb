@@ -1,4 +1,4 @@
-<%= form_with(model: event, local: true) do |form| %>
+<%= form_with(model: event, local: true, class: 'form-group') do |form| %>
   <% if event.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(event.errors.count, "error") %> prohibited this event from being saved:</h2>
@@ -11,55 +11,59 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :title %>
-    <%= form.text_field :title, id: :event_title %>
+  <div class="row">
+    <div class="col-sm-4">
+      <label for="title" class="col-form-label">Event Name</label>
+    </div>
+    <div class="col-sm-8">
+      <%= form.text_field :title, id: :event_title, class: 'form-control' %>
+    </div>
   </div>
 
 
   <div class="field">
     <%= form.label :start_date %>
-    <%= form.datetime_select :start_date, id: :event_start_date %>
+    <%= form.datetime_select :start_date, id: :event_start_date, class: 'form-control' %>
   </div>
 
   <div class="field">
     <%= form.label :end_date %>
-    <%= form.datetime_select :end_date, id: :event_end_date %>
+    <%= form.datetime_select :end_date, id: :event_end_date, class: 'form-control' %>
   </div>
 
   <div class="field">
     <%= form.label :description %>
-    <%= form.text_field :description, id: :event_description %>
+    <%= form.text_field :description, id: :event_description, class: 'form-control' %>
   </div>
 
   <div class="field">
     <%= form.label :location %>
-    <%= form.text_field :location, id: :event_location %>
+    <%= form.text_field :location, id: :event_location, class: 'form-control' %>
   </div>
 
   <div class="field">
     <%= form.label :category %>
-    <%= form.text_field :category, id: :event_category %>
+    <%= form.text_field :category, id: :event_category, class: 'form-control' %>
   </div>
 
   <div class="field">
     <%= form.label :twentyone %>
-    <%= form.check_box :twentyone, id: :event_twentyone %>
+    <%= form.check_box :twentyone, id: :event_twentyone, class: 'form-check-input' %>
   </div>
 
   <div class="field">
     <%= form.label :recurring %>
-    <%= form.check_box :recurring, id: :event_recurring %>
+    <%= form.check_box :recurring, id: :event_recurring, class: 'form-check-input' %>
   </div>
 
   <div class="field">
     <%= form.label :recurrence_freq %>
-    <%= form.text_field :recurrence_freq, id: :event_recurrence_freq %>
+    <%= form.text_field :recurrence_freq, id: :event_recurrence_freq, class: 'form-control' %>
   </div>
 
   <div class="field">
     <%= form.label :recurrence_amt %>
-    <%= form.number_field :recurrence_amt, id: :event_recurrence_amt %>
+    <%= form.number_field :recurrence_amt, id: :event_recurrence_amt, class: 'form-control' %>
   </div>
 
   <div class="actions">
