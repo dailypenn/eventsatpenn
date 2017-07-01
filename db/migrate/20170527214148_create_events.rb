@@ -11,7 +11,7 @@ class CreateEvents < ActiveRecord::Migration[5.1]
       t.boolean :recurring
       t.string :recurrence_freq
       t.integer :recurrence_amt
-
+      t.belongs_to :org
       t.timestamps
     end
   end
