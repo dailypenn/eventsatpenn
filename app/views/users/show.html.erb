@@ -31,11 +31,14 @@
         <h3 class="panel-title">Upcoming Events</h3>
       </div>
       <div class="panel-body">
+        <% @user.orgs.each do |org| %>
+        <h4><%= org.name %></h4>
         <ul>
-          <li>Foo</li>
-          <li>Foo</li>
-          <li>Foo</li>
+          <% org.events.each do |event| %>
+            <li><%= link_to event.title, event %> on <%= event.start_date %></li>
+          <% end %>
         </ul>
+        <% end %>
       </div>
     </div>
   </div>
