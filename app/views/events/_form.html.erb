@@ -11,62 +11,51 @@
     </div>
   <% end %>
 
+
   <div class="row">
     <div class="col-sm-4">
-      <label for="title" class="col-form-label">Event Name</label>
+      <%= form.label :event_title, "Event Name:" %>
+      <%= form.text_field :title, id: :event_title, class: 'form-control' %>
+      <%= form.label :location, "Event Location:" %>
+      <%= form.text_field :location, id: :event_location, class: 'form-control' %>
+      <%= form.label :org, "Event Host:" %>
+      <%= form.select 'org', options_from_collection_for_select(current_user.orgs, :id, :name), class: 'form-control' %>
     </div>
     <div class="col-sm-8">
-      <%= form.text_field :title, id: :event_title, class: 'form-control' %>
+      <%= form.label :start_date, "Start:" %>
+      <%= form.datetime_select :start_date, id: :event_start_date, class: 'form-control' %>
+      <%= form.label :end_date, "End:" %>
+      <%= form.datetime_select :end_date, id: :event_end_date, class: 'form-control' %>
+
+      <br>
+      <div class="checkbox">
+        <label>
+          <%= form.check_box :all_day, id: :event_all_day %> All Day?
+        </label>
+
+      </div>
     </div>
   </div>
 
 
-  <div class="field">
-    <%= form.label :start_date %>
-    <%= form.datetime_select :start_date, id: :event_start_date, class: 'form-control' %>
-  </div>
+  <%= form.label :description %>
+  <%= form.text_area :description, id: :event_description, class: 'form-control' %>
 
-  <div class="field">
-    <%= form.label :end_date %>
-    <%= form.datetime_select :end_date, id: :event_end_date, class: 'form-control' %>
-  </div>
 
-  <div class="field">
-    <%= form.label :description %>
-    <%= form.text_field :description, id: :event_description, class: 'form-control' %>
-  </div>
+  <%= form.label :category %>
+  <%= form.text_field :category, id: :event_category, class: 'form-control' %>
 
-  <div class="field">
-    <%= form.label :location %>
-    <%= form.text_field :location, id: :event_location, class: 'form-control' %>
-  </div>
+  <%= form.label :twentyone %>
+  <%= form.check_box :twentyone, id: :event_twentyone, class: 'form-check-input' %>
 
-  <div class="field">
-    <%= form.label :category %>
-    <%= form.text_field :category, id: :event_category, class: 'form-control' %>
-  </div>
+  <%= form.label :recurring %>
+  <%= form.check_box :recurring, id: :event_recurring, class: 'form-check-input' %>
 
-  <div class="field">
-    <%= form.label :twentyone %>
-    <%= form.check_box :twentyone, id: :event_twentyone, class: 'form-check-input' %>
-  </div>
+  <%= form.label :recurrence_freq %>
+  <%= form.text_field :recurrence_freq, id: :event_recurrence_freq, class: 'form-control' %>
 
-  <div class="field">
-    <%= form.label :recurring %>
-    <%= form.check_box :recurring, id: :event_recurring, class: 'form-check-input' %>
-  </div>
+  <%= form.label :recurrence_amt %>
+  <%= form.number_field :recurrence_amt, id: :event_recurrence_amt, class: 'form-control' %>
 
-  <div class="field">
-    <%= form.label :recurrence_freq %>
-    <%= form.text_field :recurrence_freq, id: :event_recurrence_freq, class: 'form-control' %>
-  </div>
-
-  <div class="field">
-    <%= form.label :recurrence_amt %>
-    <%= form.number_field :recurrence_amt, id: :event_recurrence_amt, class: 'form-control' %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
+  <%= form.submit class: "btn btn-success" %>
 <% end %>

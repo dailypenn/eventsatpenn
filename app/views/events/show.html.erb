@@ -50,5 +50,10 @@
   <%= @event.recurrence_amt %>
 </p>
 
+<p>
+  <strong>Hosted by:</strong>
+  <%= link_to @event.org.name, @event.org %>
+</p>
+
 <%= link_to 'Edit', edit_event_path(@event) %> |
 <%= link_to 'Back', events_path %>

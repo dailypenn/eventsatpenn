@@ -42,5 +42,12 @@
   <% end %>
 </ul>
 
+<h3>Upcoming Events:</h3>
+<ul>
+  <% @org.events.each do |event| %>
+    <li><%= link_to event.title, event %> on <%= event.start_date %></li>
+  <% end %>
+</ul>
+
 <%= link_to 'Edit', edit_org_path(@org) %> |
 <%= link_to 'Back', orgs_path %>

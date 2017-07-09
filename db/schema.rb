@@ -16,6 +16,7 @@ ActiveRecord::Schema.define(version: 20170529180117) do
     t.string "title"
     t.datetime "start_date"
     t.datetime "end_date"
+    t.boolean "all_day"
     t.string "description"
     t.string "location"
     t.string "category"
@@ -23,8 +24,10 @@ ActiveRecord::Schema.define(version: 20170529180117) do
     t.boolean "recurring"
     t.string "recurrence_freq"
     t.integer "recurrence_amt"
+    t.integer "org_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["org_id"], name: "index_events_on_org_id"
   end
 
   create_table "orgs", force: :cascade do |t|

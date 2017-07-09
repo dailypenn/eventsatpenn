@@ -25,7 +25,10 @@ class EventsController < ApplicationController
   # POST /events
   # POST /events.json
   def create
-    @event = Event.new(event_params)
+    new_event_params = event_params
+    new_event_params['org'] = Org.find(event_params['org'])
+    p new_event_params
+    @event = Event.new(new_event_params)
 
     respond_to do |format|
       if @event.save
@@ -70,6 +73,6 @@ class EventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
-      params.require(:event).permit(:title, :start_date, :end_date, :description, :location, :category, :twentyone, :recurring, :recurrence_freq, :recurrence_amt)
+      params.require(:event).permit(:title, :start_date, :end_date, :description, :location, :category, :twentyone, :recurring, :recurrence_freq, :recurrence_amt, :all_day, :org)
     end
 end

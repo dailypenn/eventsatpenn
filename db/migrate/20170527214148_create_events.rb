@@ -4,6 +4,7 @@ class CreateEvents < ActiveRecord::Migration[5.1]
       t.string :title
       t.datetime :start_date
       t.datetime :end_date
+      t.boolean :all_day
       t.string :description
       t.string :location
       t.string :category
