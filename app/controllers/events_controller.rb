@@ -27,7 +27,6 @@ class EventsController < ApplicationController
   def create
     new_event_params = event_params
     new_event_params['org'] = Org.find(event_params['org'])
-    p new_event_params
     @event = Event.new(new_event_params)
 
     respond_to do |format|
