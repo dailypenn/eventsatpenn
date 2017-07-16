@@ -257,3 +257,14 @@ label {
   // padding-top: 15px;
   // display: block;
 }
+
+.col-app {
+  display: inline-block;
+  width: calc(100% - 300px);
+}
+
+.col-ads {
+  display: inline-block;
+  max-width: 300px;
+  position: absolute;
+}
