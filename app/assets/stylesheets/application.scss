@@ -261,10 +261,15 @@ label {
 .col-app {
   display: inline-block;
   width: calc(100% - 300px);
+  min-height: calc(100vh - 120px);
 }
 
 .col-ads {
   display: inline-block;
   max-width: 300px;
   position: absolute;
+}
+
+.navbar-static-bottom {
+  bottom: 0;
 }
