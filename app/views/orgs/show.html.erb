@@ -15,10 +15,12 @@
   <%= @org.bio %>
 </p>
 
+<% if @org.is_fb? %>
 <p>
   <strong>Fbid:</strong>
   <%= @org.fbID %>
 </p>
+<% end %>
 
 <p>
   <strong>Category:</strong>

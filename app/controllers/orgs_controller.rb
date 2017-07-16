@@ -10,6 +10,7 @@ class OrgsController < ApplicationController
   # GET /orgs/1
   # GET /orgs/1.json
   def show
+    ScrapeNewEventsJob.perform_now(@org, access_token) if @org.is_fb?
   end
 
   # GET /orgs/new
