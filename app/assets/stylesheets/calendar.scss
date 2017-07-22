@@ -59,6 +59,7 @@
 
   .date {
     font-weight: 300;
+    pointer-events: none;
   }
 
   .today {
@@ -94,5 +95,9 @@
 
   .table-striped > tbody > tr:nth-of-type(odd) {
     background-color: inherit; // seriously why
+  }
+
+  table > tbody > tr > td.active {
+    background-color: #F4E3E3;
   }
 }

@@ -5,9 +5,9 @@ class EventsController < ApplicationController
   # GET /events.json
   def index
     p params
-    if params['day']
-      min = Date.parse(params['day'])
-      max = Date.parse(params['day']) + 1.day
+    if params['start_date']
+      min = Date.parse(params['start_date'])
+      max = Date.parse(params['start_date']) + 1.day
       @events = Event.where('start_date >= ? AND end_date >= ?', min, max)
     else
       @events = Event.all

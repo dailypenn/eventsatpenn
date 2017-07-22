@@ -27,7 +27,9 @@
             <% end %>
             <% @events = Event.all %>
             <%= month_calendar(attribute: :start_date, end_attribute: :end_date, events: @events) do |date, meetings| %>
-            <div class="date"><%= date.day %></div>
+            <div class="date" data-date="<%= "#{date.year}-#{date.month}-#{date.day}" %>">
+              <%= date.day %>
+            </div>
             <% meetings.each do |event| %>
             <div class="calendar-event">
               <%= link_to event.title, event %>

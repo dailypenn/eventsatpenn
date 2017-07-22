@@ -15,3 +15,50 @@
 //= require turbolinks
 //= require bootstrap-sprockets
 //= require_tree .
+
+function formatDate(date) {
+  var dayNames = [
+    "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"
+  ]
+
+  var monthNames = [
+    "January", "February", "March", "April", "May", "June", "July", "August",
+    "September", "October", "November", "December"
+  ];
+
+  var weekday = dayNames[date.getDay()]
+  var day = date.getDate();
+  var month = monthNames[date.getMonth()];
+  var year = date.getFullYear();
+
+  return weekday + ' ' + month + ' ' + day + ', ' + year;
+}
+
+$(document).ready(function() {
+  $('td.day').on('click', function(e) {
+    $('td.day').removeClass('active')
+    $(e.target).addClass('active')
+    e.preventDefault();
+    // Get data-date of inner date element
+    var dateStr = $(e.target).find('.date')[0].dataset.date;
+    var date = new Date(dateStr);
+    // Get and parse json
+    $.getJSON("/events.json?start_date=" + dateStr, function(data) {
+
+      var htmlStr = ''
+      $.each(data, function(i) {
+        var event = data[i];
+        htmlStr += '<div>'
+        htmlStr += '<strong>' + event.title + '</strong>'
+        htmlStr += '<em>' + event.location + '</em>'
+        htmlStr += '</div>'
+      });
+      $('.calendar-sidebar .panel-body').html('') // clear it first
+      $('.calendar-sidebar .panel-body').html(
+        '<h3 class="text-center">' + formatDate(date) + '</h3>' +
+        htmlStr
+      )
+    });
+
+  });
+});
