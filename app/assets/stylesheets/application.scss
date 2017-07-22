@@ -136,6 +136,7 @@ section {
 }
 
 .navbar-static-bottom {
+  bottom: 0;
   margin-bottom: 0px;
   min-height: 40px;
 
@@ -159,25 +160,13 @@ section {
   }
 }
 
-.col-md-8 {
-  .col-sm-4 {
-    padding-left: 15px;
-    padding-right: 15px;
-  }
+.list-search {
+  margin-top: 10px;
+  padding-left: 0px;
+}
 
-  .col-sm-4:first-of-type {
-    padding-left: 0px;
-  }
-
-  .col-sm-4:last-of-type {
-    padding-right: 0px;
-  }
-
-  @media screen and (max-width: 700px) {
-    .col-sm-4 {
-      padding: 0px;
-    }
-  }
+.list-categories {
+  padding-right: 0px;
 }
 
 .button-xs {
@@ -188,12 +177,12 @@ section {
 
 .calendar-sidebar {
   margin-top: 40px;
-  max-height: calc(100% - 40px);
+  max-height: calc(100% - 100px);
   overflow: scroll;
 }
 
 .list-all {
-  max-height: calc(100vh - 215px);
+  max-height: calc(100vh - 270px);
   padding: 15px;
   margin-top: 10px;
   overflow: scroll;
@@ -268,8 +257,4 @@ label {
   display: inline-block;
   max-width: 300px;
   position: absolute;
-}
-
-.navbar-static-bottom {
-  bottom: 0;
 }
