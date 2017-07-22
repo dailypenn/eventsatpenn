@@ -16,6 +16,7 @@ gem 'activerecord-session_store'
 gem 'fb_graph2'
 gem "simple_calendar", "~> 2.0"
 gem 'inline_svg'
+gem 'filterrific'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
