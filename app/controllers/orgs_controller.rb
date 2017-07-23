@@ -3,10 +3,6 @@ class OrgsController < ApplicationController
 
   # GET /orgs
   # GET /orgs.json
-  # def index
-  #   @orgs = Org.all
-  # end
-
   def index
     @filterrific = initialize_filterrific(
       Org,
@@ -15,7 +11,7 @@ class OrgsController < ApplicationController
         with_category: Org.categories
       }
     ) || return
-    @orgs = @filterrific.find.sort_by { |org| org.name }
+    @orgs = @filterrific.find.sort_by(&:name)
 
     respond_to do |format|
       format.html

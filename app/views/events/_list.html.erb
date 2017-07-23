@@ -1,14 +1,14 @@
 <div id="filterrific_results">
   <div class="row">
     <div class="panel panel-default filled list-all">
-      <% @orgs.each do |org| %>
+      <% @events.each do |event| %>
         <div class="row">
-          <%= link_to org.name, org %>
+          <%= link_to event.name, event %>
         </div>
       <% end %>
-      <% if @orgs.empty? %>
+      <% if @events.empty? %>
         <div class="row">
-          No organizations found! Try different filters.
+          No events found! Try different filters.
         </div>
       <% end %>
     </div>

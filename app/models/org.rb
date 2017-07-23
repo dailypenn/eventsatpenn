@@ -30,7 +30,8 @@ class Org < ApplicationRecord
     fbID?
   end
 
+  # TODO: dummy categories
   def self.categories
-    %w(Arts Sports)
+    %w(Arts Sports Publications)
   end
 end

@@ -11,7 +11,7 @@
   <div class="row">
     <%= form_for_filterrific @filterrific do |f| %>
       <div class="col-sm-6 list-search">
-        <%# give the search field the 'filterrific-periodically-observed' class for live updates %>
+        <%# 'filterrific-periodically-observed' class allows live updates %>
         <%= f.text_field(
           :search_query,
           class: 'form-control filterrific-periodically-observed',

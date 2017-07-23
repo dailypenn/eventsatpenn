@@ -4,13 +4,24 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
-    p params
     if params['start_date']
       min = Date.parse(params['start_date'])
       max = Date.parse(params['start_date']) + 1.day
       @events = Event.where('start_date >= ? AND end_date >= ?', min, max)
     else
-      @events = Event.all
+      @filterrific = initialize_filterrific(
+        Event,
+        params[:filterrific],
+        select_options: {
+          with_category: Event.categories
+        }
+      ) || return
+      @events = @filterrific.find.sort_by(&:name)
+
+      respond_to do |format|
+        format.html
+        format.js
+      end
     end
   end
 
