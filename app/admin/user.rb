@@ -29,8 +29,6 @@ ActiveAdmin.register User do
         image_tag user.image_url
       end
     end
-
-
   end
 
   form do |f|
@@ -45,5 +43,4 @@ ActiveAdmin.register User do
     end
     f.actions
   end
-
 end
