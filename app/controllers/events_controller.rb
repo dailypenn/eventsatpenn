@@ -16,7 +16,7 @@ class EventsController < ApplicationController
           with_category: Event.categories
         }
       ) || return
-      @events = @filterrific.find.sort_by(&:name)
+      @events = @filterrific.find.sort_by(&:title)
 
       respond_to do |format|
         format.html
