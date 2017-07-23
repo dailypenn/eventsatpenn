@@ -1,4 +1,6 @@
 class Org < ApplicationRecord
+  require 'uri'
+
   filterrific(
     available_filters: [
       :search_query,
@@ -8,6 +10,9 @@ class Org < ApplicationRecord
 
   has_and_belongs_to_many :users
   has_many :events
+  validates :name, presence: true, uniqueness: true
+  validates :category, presence: true
+  validate :valid_url?
 
   scope :search_query, lambda { |query|
     return nil if query.blank?
@@ -25,6 +30,19 @@ class Org < ApplicationRecord
   scope :with_category, lambda { |categories|
     where(category: [*categories])
   }
+
+  def valid_url?
+    true if photo_url.empty?
+    uri = URI.parse(photo_url)
+    if uri.path
+      # supported image types are png and jpg/jpeg
+      errors.add(photo_url, 'is not a valid image URL. Supported image types are png, jpg, and jpeg.') unless uri.is_a?(URI::HTTP) && !uri.host.nil? && uri.path.match(/\.(png|jpg|jpeg)\Z/i)
+    else
+      errors.add(photo_url, 'is not a valid image URL.')
+    end
+  rescue URI::InvalidURIError
+    false
+  end
 
   def fb?
     fbID?
