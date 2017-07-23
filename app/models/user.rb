@@ -1,6 +1,9 @@
 class User < ApplicationRecord
   has_and_belongs_to_many :orgs
 
+  # attr_accessor :email, :password, :password_confirmation, :remember_me
+
+
   def self.create_with_omniauth(auth)
     create! do |user|
       user.provider = auth['provider']
@@ -13,5 +16,9 @@ class User < ApplicationRecord
          user.image_url = auth['info']['image'] || ""
       end
     end
+  end
+
+  def admin?
+    admin
   end
 end

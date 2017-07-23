@@ -41,4 +41,12 @@ class ApplicationController < ActionController::Base
   def authenticate_user!
     redirect_to root_url, alert: 'Sign in for access.' unless current_user
   end
+
+  def authenticate_admin_user!
+    return false if current_user.nil?
+    unless current_user.admin?
+      flash[:alert] = 'You are not an administrator.'
+      redirect_to root_path
+    end
+  end
 end
