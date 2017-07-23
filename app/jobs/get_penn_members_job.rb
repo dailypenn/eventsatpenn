@@ -14,7 +14,6 @@ class GetPennMembersJob < ApplicationJob
 
   def add_members(members)
     members.each do |member|
-      p member.name
       PennFBMember.create(fbID: member.id, name: member.name)
     end
   end

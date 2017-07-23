@@ -9,23 +9,28 @@
     <h1 class="pill">Organizations</h1>
   </div>
   <div class="row">
-    <div class="col-sm-6 list-search">
-      <input type="text" class="form-control" value="Search will go here…">
-    </div>
-    <div class="col-sm-6 list-categories">
-      <select class="form-control filter" disabled>
-        <option>Filter Organizations by Category</option disabled>
-      </select>
-    </div>
+    <%= form_for_filterrific @filterrific do |f| %>
+      <div class="col-sm-6 list-search">
+        <%# 'filterrific-periodically-observed' class allows live updates %>
+        <%= f.text_field(
+          :search_query,
+          class: 'form-control filterrific-periodically-observed',
+          placeholder: 'Search organizations…'
+        ) %>
+      </div>
+      <div  class="col-sm-6 list-categories">
+        <%= f.select(
+          :with_category,
+          @filterrific.select_options[:with_category],
+          { include_blank: 'Any category' },
+          { class: 'form-control filter' }
+        ) %>
+      </div>
+    <% end %>
   </div>
 
-  <div class="row">
-    <div class="panel panel-default filled list-all">
-      <% @orgs.each do |org| %>
-        <div class="row">
-          <%= link_to org.name, org %>
-        </div>
-      <% end %>
-    </div>
-  </div>
+  <%= render(
+    partial: 'orgs/list',
+    locals: { orgs: @orgs }
+  ) %>
 </div>

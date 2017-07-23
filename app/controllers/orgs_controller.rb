@@ -4,13 +4,25 @@ class OrgsController < ApplicationController
   # GET /orgs
   # GET /orgs.json
   def index
-    @orgs = Org.all
+    @filterrific = initialize_filterrific(
+      Org,
+      params[:filterrific],
+      select_options: {
+        with_category: Org.categories
+      }
+    ) || return
+    @orgs = @filterrific.find.sort_by(&:name)
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   # GET /orgs/1
   # GET /orgs/1.json
   def show
-    ScrapeNewEventsJob.perform_now(@org, access_token) if @org.is_fb?
+    ScrapeNewEventsJob.perform_now(@org, access_token) if @org.fb?
   end
 
   # GET /orgs/new
@@ -19,7 +31,6 @@ class OrgsController < ApplicationController
   end
 
   def new_from_fb
-    p '~~~~~~~~'
     org_params = params['fb_page']
     @org = Org.new(name: org_params['name'], category: org_params['category'], fbID: org_params['id'])
   end

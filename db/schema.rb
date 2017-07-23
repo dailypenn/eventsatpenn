@@ -34,7 +34,7 @@ ActiveRecord::Schema.define(version: 20170529180117) do
   end
 
   create_table "orgs", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.string "tagline"
     t.string "bio"
     t.string "fbID"

@@ -90,6 +90,7 @@ GEM
       rack-oauth2 (>= 1.1)
       url_safe_base64
     ffi (1.9.18)
+    filterrific (2.1.2)
     globalid (0.4.0)
       activesupport (>= 4.2.0)
     hashie (3.5.5)
@@ -242,6 +243,7 @@ DEPENDENCIES
   capybara (~> 2.13)
   coffee-rails (~> 4.2)
   fb_graph2
+  filterrific
   high_voltage
   inline_svg
   jbuilder (~> 2.5)
@@ -267,4 +269,4 @@ RUBY VERSION
    ruby 2.4.0p0
 
 BUNDLED WITH
-   1.15.0
+   1.15.1

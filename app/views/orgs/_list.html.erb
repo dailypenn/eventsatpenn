@@ -1,0 +1,16 @@
+<div id="filterrific_results">
+  <div class="row">
+    <div class="panel panel-default filled list-all">
+      <% @orgs.each do |org| %>
+        <div class="row">
+          <%= link_to org.name, org %>
+        </div>
+      <% end %>
+      <% if @orgs.empty? %>
+        <div class="row">
+          No organizations found! Try different filters.
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

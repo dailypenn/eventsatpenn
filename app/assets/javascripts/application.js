@@ -14,6 +14,7 @@
 //= require rails-ujs
 //= require turbolinks
 //= require bootstrap-sprockets
+//= require filterrific/filterrific-jquery
 //= require_tree .
 
 function formatDate(date) {
