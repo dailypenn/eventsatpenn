@@ -2,7 +2,6 @@
   <% if event.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(event.errors.count, "error") %> prohibited this event from being saved:</h2>
-
       <ul>
       <% event.errors.full_messages.each do |message| %>
         <li><%= message %></li>
@@ -11,51 +10,48 @@
     </div>
   <% end %>
 
+  <%= form.label :event_title, "Event Name" %>
+  <%= form.text_field :title, id: :event_title, class: 'form-control' %>
+  <%= form.label :org, "Host Organization" %>
+  <%= form.select 'org', options_from_collection_for_select(current_user.orgs, :id, :name), {}, { class: 'form-control' } %>
+  <%= form.label :category %>
+  <%= form.select :category, Event.categories, {}, { class: 'form-control' } %>
+  <%= form.label :location %>
+  <%= form.text_field :location, id: :event_location, class: 'form-control' %>
 
+  <div class="checkbox">
+    <label>
+      <%= form.check_box :all_day, id: :event_all_day, class: 'form-check-input checkbox-inline' %> All Day?
+    </label>
+  </div>
   <div class="row">
-    <div class="col-sm-4">
-      <%= form.label :event_title, "Event Name:" %>
-      <%= form.text_field :title, id: :event_title, class: 'form-control' %>
-      <%= form.label :location, "Event Location:" %>
-      <%= form.text_field :location, id: :event_location, class: 'form-control' %>
-      <%= form.label :org, "Event Host:" %>
-      <%= form.select 'org', options_from_collection_for_select(current_user.orgs, :id, :name), class: 'form-control' %>
-    </div>
-    <div class="col-sm-8">
+    <div class="col-xs-12">
       <%= form.label :start_date, "Start:" %>
-      <%= form.datetime_select :start_date, id: :event_start_date, class: 'form-control' %>
+      <%= form.datetime_select :start_date, { id: :event_start_date }, { class: 'form-control', style: 'width:auto;display:inline;' } %>
+    </div>
+    <div class="col-xs-12">
       <%= form.label :end_date, "End:" %>
-      <%= form.datetime_select :end_date, id: :event_end_date, class: 'form-control' %>
-
-      <br>
-      <div class="checkbox">
-        <label>
-          <%= form.check_box :all_day, id: :event_all_day %> All Day?
-        </label>
-
-      </div>
+      <%= form.datetime_select :end_date, { id: :event_end_date }, { class: 'form-control', style: 'width:auto;display:inline;' } %>
     </div>
   </div>
+  <div class="checkbox">
+    <label>
+      <%= form.check_box :twentyone, id: :event_twentyone, class: 'form-check-input checkbox-inline' %> 21+?
+    </label>
+  </div>
 
+  <% # Commenting these out for the time being; probably won't do recurring events for MVP %>
+  <% # form.label :recurring %>
+  <% # form.check_box :recurring, id: :event_recurring, class: 'form-check-input' %>
+
+  <% # form.label :recurrence_freq %>
+  <% # form.text_field :recurrence_freq, id: :event_recurrence_freq, class: 'form-control' %>
+
+  <% # form.label :recurrence_amt %>
+  <% # form.number_field :recurrence_amt, id: :event_recurrence_amt, class: 'form-control' %>
 
   <%= form.label :description %>
-  <%= form.text_area :description, id: :event_description, class: 'form-control' %>
-
-
-  <%= form.label :category %>
-  <%= form.text_field :category, id: :event_category, class: 'form-control' %>
-
-  <%= form.label :twentyone %>
-  <%= form.check_box :twentyone, id: :event_twentyone, class: 'form-check-input' %>
-
-  <%= form.label :recurring %>
-  <%= form.check_box :recurring, id: :event_recurring, class: 'form-check-input' %>
-
-  <%= form.label :recurrence_freq %>
-  <%= form.text_field :recurrence_freq, id: :event_recurrence_freq, class: 'form-control' %>
-
-  <%= form.label :recurrence_amt %>
-  <%= form.number_field :recurrence_amt, id: :event_recurrence_amt, class: 'form-control' %>
+  <%= form.text_area :description, id: :event_description, class: 'form-control description' %>
 
   <%= form.submit class: "btn btn-success" %>
 <% end %>

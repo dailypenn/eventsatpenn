@@ -3,7 +3,7 @@
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= content_for?(:title) ? yield(:title) : "Events@Penn" %></title>
-    <meta name="description" content="<%= content_for?(:description) ? yield(:description) : " Eventsatpenn" %>">
+    <meta name="description" content="<%= content_for?(:description) ? yield(:description) : " Events@Penn" %>">
     <link href="https://fonts.googleapis.com/css?family=Nunito:300,400,400i,900" rel="stylesheet">
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => 'reload' %>
@@ -14,7 +14,7 @@
       <%= render 'layouts/navigation' %>
     </header>
     <main role="main">
-      <div class="container-fluid">
+      <div class="container-fluid main">
         <%= render 'layouts/messages' %>
         <div class="row">
           <div class="col-md-8">
@@ -36,11 +36,21 @@
             <% end %>
             <% end %>
           </div>
-          <div class="col-md-4"></div>
-          <div class="panel panel-default filled calendar-sidebar">
-            <div class="panel-body">
-              <%= yield %>
-            </div>
+          <div class="col-md-4">
+            <% if current_page?(new_event_path) %>
+              <h2 class="new-event">Add Event</h2>
+              <div class="panel panel-default filled calendar-sidebar new-event">
+                <div class="panel-body">
+                  <%= yield %>
+                </div>
+              </div>
+            <% else %>
+              <div class="panel panel-default filled calendar-sidebar">
+                <div class="panel-body">
+                  <%= yield %>
+                </div>
+              </div>
+            <% end %>
           </div>
         </div>
       </div>

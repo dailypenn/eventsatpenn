@@ -1,8 +1,17 @@
 <p id="notice"><%= notice %></p>
 
+<% p @event.start_date %>
+<% p @event.end_date %>
+<% p @event.start_date < @event.end_date %>
+
 <p>
   <strong>Title:</strong>
   <%= @event.title %>
+</p>
+
+<p>
+  <strong>All Day?</strong>
+  <%= @event.all_day %>
 </p>
 
 <p>
@@ -31,11 +40,12 @@
 </p>
 
 <p>
-  <strong>Twentyone:</strong>
+  <strong>21+?</strong>
   <%= @event.twentyone %>
 </p>
 
-<p>
+<!-- Not being used for MVP -->
+<!-- <p>
   <strong>Recurring:</strong>
   <%= @event.recurring %>
 </p>
@@ -48,7 +58,7 @@
 <p>
   <strong>Recurrence amt:</strong>
   <%= @event.recurrence_amt %>
-</p>
+</p> -->
 
 <p>
   <strong>Hosted by:</strong>

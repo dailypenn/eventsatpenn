@@ -36,6 +36,11 @@ h1, h2, h3, h4, h5, h6 {
       margin-top: 20px;
     }
   }
+  &.new-event {
+    margin: 0;
+    margin-right: 15px;
+    text-align: center;
+  }
 }
 
 strong {
@@ -44,6 +49,8 @@ strong {
 
 main {
   max-width: 100%;
+  padding-left: 15px;
+  padding-right: 15px;
   padding-top: 75px;
 }
 
@@ -52,6 +59,12 @@ input {
   padding: 10px;
   border-radius: 4px;
   height: 35px;
+}
+
+.container-fluid {
+  &.main {
+    padding: 0px;
+  }
 }
 
 // make all images responsive by default
@@ -127,25 +140,22 @@ section {
   margin: 0;
   padding: 0;
   padding-left: 15px;
-  padding-right: 15px;
   padding-top: 10px;
 
   .navbar-logo {
     height: 28px;
+    padding-right: 15px;
   }
 }
 
 .navbar-static-bottom {
+  border-radius: 0;
   bottom: 0;
   margin-bottom: 0px;
   min-height: 40px;
 
   .navbar-header {
     float: right;
-
-    @media screen and (max-width: 700px) {
-      padding-right: 15px;
-    }
   }
 
   .navbar-brand {
@@ -176,9 +186,15 @@ section {
 }
 
 .calendar-sidebar {
-  margin-top: 40px;
+  border-radius: 4px;
+  margin-top: 43px;
+  margin-left: -15px;
   max-height: calc(100% - 100px);
   overflow: scroll;
+
+  &.new-event {
+    margin-top: 10px;
+  }
 }
 
 .list-all {
@@ -229,12 +245,12 @@ section {
   background-color: #AA1E22;
 }
 
-.row {
-  margin-right: 0;
-}
-
 .form-control {
   margin-bottom: 10px;
+
+  &.description {
+    height: 100px;
+  }
 }
 
 input[type="checkbox"] {
@@ -251,10 +267,23 @@ label {
   display: inline-block;
   width: calc(100% - 300px);
   min-height: calc(100vh - 120px);
+  padding-right: 15px;
 }
 
 .col-ads {
   display: inline-block;
   max-width: 300px;
   position: absolute;
+}
+
+@media screen and (max-width: 992px) {
+  .calendar-sidebar {
+    margin-left: 0;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .logo-bottom {
+    padding-right: 15px;
+  }
 }
