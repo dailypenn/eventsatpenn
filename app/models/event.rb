@@ -7,6 +7,7 @@ class Event < ApplicationRecord
   )
 
   belongs_to :org
+  validates :title, :start_date, :end_date, :location, :category, presence: true
 
   scope :search_query, lambda { |query|
     return nil if query.blank?
@@ -31,6 +32,6 @@ class Event < ApplicationRecord
 
   # TODO: dummy categories
   def self.categories
-    %w(Arts Sports)
+    %w(Arts Sports Publications)
   end
 end
