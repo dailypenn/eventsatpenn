@@ -12,7 +12,8 @@ class Org < ApplicationRecord
   has_many :events
   validates :name, presence: true, uniqueness: true
   validates :category, presence: true
-  validate :valid_url?
+  validate :valid_website?
+  validate :valid_photo?
 
   scope :search_query, lambda { |query|
     return nil if query.blank?
@@ -31,8 +32,16 @@ class Org < ApplicationRecord
     where(category: [*categories])
   }
 
-  def valid_url?
-    true if photo_url.empty?
+  def valid_website?
+    return if website.empty?
+    uri = URI.parse(website)
+    errors.add(website, 'is not a valid URL.') unless uri.is_a?(URI::HTTP) && !uri.host.nil?
+  rescue URI::InvalidURIError
+    false
+  end
+
+  def valid_photo?
+    return if photo_url.empty?
     uri = URI.parse(photo_url)
     if uri.path
       # supported image types are png and jpg/jpeg
