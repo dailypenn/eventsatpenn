@@ -1,19 +1,27 @@
-<h1>New Organization</h1>
+<h1 class="pill">Add Organization</h1>
 
-<div class="col-sm-6">
-  <h2>From a Facebook Group</h2>
-  <% user_fb_pages.each do |page| %>
-    <% page.delete('access_token') %>
-    <% page.delete('perms') %>
-    <%= button_to "#{page.name}", '/orgs/new/fb', {params: {fb_page: page}} %> <br>
-  <% end %>
+<div class="row">
+  <div class="col-sm-6">
+    <div class="panel panel-default filled list-all add-org">
+      <div class="row">
+        <h3 class="add-org-header">From Facebook</h3>
+        <p class="add-org-header">Import the details from Facebook organizations that you manage. You'll be able to edit this information after importing.</p>
+      </div>
+      <% user_fb_pages.each do |page| %>
+        <% page.delete('access_token') %>
+        <% page.delete('perms') %>
+        <div class="row">
+          <%= link_to page.name, orgs_new_fb_path(fb_page: page), method: :post %> <br>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="col-sm-6 add-org-scratch">
+    <div class="panel panel-default filled add-org-form">
+      <h3 class="add-org-header">From Scratch</h3>
+      <p>We recommend connecting your organization's Facebook with Events@Penn, because we'll be able to pull all of your events automatically. If you don't want to do that, though, use this form.</p>
+      <%= render 'form', org: @org %>
+    </div>
+  </div>
 </div>
-
-<div class="col-sm-6">
-  <h2>From Scratch</h2>
-  <%= render 'form', org: @org %>
-</div>
-
-
-
-<%= link_to 'Back', orgs_path %>

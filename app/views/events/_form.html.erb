@@ -40,18 +40,18 @@
     </label>
   </div>
 
-  <% # Commenting these out for the time being; probably won't do recurring events for MVP %>
-  <% # form.label :recurring %>
-  <% # form.check_box :recurring, id: :event_recurring, class: 'form-check-input' %>
+  <!-- Commenting these out for the time being; probably won't do recurring events for MVP -->
+  <!-- <%= form.label :recurring %>
+  <%= form.check_box :recurring, id: :event_recurring, class: 'form-check-input' %>
 
-  <% # form.label :recurrence_freq %>
-  <% # form.text_field :recurrence_freq, id: :event_recurrence_freq, class: 'form-control' %>
+  <%= form.label :recurrence_freq %>
+  <%= form.text_field :recurrence_freq, id: :event_recurrence_freq, class: 'form-control' %>
 
-  <% # form.label :recurrence_amt %>
-  <% # form.number_field :recurrence_amt, id: :event_recurrence_amt, class: 'form-control' %>
+  <%= form.label :recurrence_amt %>
+  <%= form.number_field :recurrence_amt, id: :event_recurrence_amt, class: 'form-control' %> -->
 
   <%= form.label :description %>
   <%= form.text_area :description, id: :event_description, class: 'form-control description' %>
 
-  <%= form.submit class: "btn btn-success" %>
+  <%= form.submit class: 'btn btn-success' %>
 <% end %>
