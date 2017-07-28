@@ -22,7 +22,7 @@ gem "simple_calendar", "~> 2.0"
 gem 'inline_svg'
 gem 'filterrific'
 gem 'activeadmin', github: 'activeadmin'
-gem 'devise'
+gem 'active_bootstrap_skin'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
