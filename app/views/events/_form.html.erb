@@ -16,29 +16,46 @@
   <%= form.select 'org', options_from_collection_for_select(current_user.orgs, :id, :name), {}, { class: 'form-control' } %>
   <%= form.label :category %>
   <%= form.select :category, Event.categories, {}, { class: 'form-control' } %>
+
+  <div class="checkbox">
+    <label>
+      <%= form.check_box :twentyone, id: :event_twentyone, class: 'form-check-input checkbox-inline' %> Is this a 21+ event?
+    </label>
+  </div>
+
   <%= form.label :location %>
   <%= form.text_field :location, id: :event_location, class: 'form-control' %>
 
   <div class="checkbox">
     <label>
-      <%= form.check_box :all_day, id: :event_all_day, class: 'form-check-input checkbox-inline' %> All Day?
+      <%= form.check_box :all_day, id: :event_all_day, class: 'form-check-input checkbox-inline' %> Is this an all-day event?
     </label>
   </div>
+
   <div class="row">
-    <div class="col-xs-12">
-      <%= form.label :start_date, "Start:" %>
-      <%= form.datetime_select :start_date, { id: :event_start_date }, { class: 'form-control', style: 'width:auto;display:inline;' } %>
+    <div class="col-sm-6 add-event-start">
+      <%= form.label :start_date, "Start Time" %>
+      <%= form.datetime_select :start_date %>
     </div>
-    <div class="col-xs-12">
-      <%= form.label :end_date, "End:" %>
-      <%= form.datetime_select :end_date, { id: :event_end_date }, { class: 'form-control', style: 'width:auto;display:inline;' } %>
+    <div class="col-sm-6 add-event-end">
+      <%= form.label :end_date, "End Time" %>
+      <%= form.datetime_select :end_date %>
     </div>
   </div>
-  <div class="checkbox">
-    <label>
-      <%= form.check_box :twentyone, id: :event_twentyone, class: 'form-check-input checkbox-inline' %> 21+?
-    </label>
-  </div>
+  <script type="text/javascript">
+    $(function () {
+      $('#start_date').datetimepicker();
+      $('#end_date').datetimepicker({
+        useCurrent: false
+      });
+      $("#start_date").on("dp.change", function (e) {
+          $('#end_date').data("DateTimePicker").minDate(e.date);
+      });
+      $("#end_date").on("dp.change", function (e) {
+          $('#start_date').data("DateTimePicker").maxDate(e.date);
+      });
+    });
+  </script>
 
   <!-- Commenting these out for the time being; probably won't do recurring events for MVP -->
   <!-- <%= form.label :recurring %>

@@ -14,9 +14,11 @@ gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 gem 'activerecord-session_store'
 gem 'fb_graph2'
-gem "simple_calendar", "~> 2.0"
+gem 'simple_calendar', '~> 2.0'
 gem 'inline_svg'
 gem 'filterrific'
+gem 'momentjs-rails', '>= 2.9.0'
+gem 'bootstrap3-datetimepicker-rails', '~> 4.17.47'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

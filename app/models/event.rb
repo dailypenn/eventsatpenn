@@ -28,7 +28,6 @@ class Event < ApplicationRecord
   }
 
   def valid_dates?
-    p start_date < end_date
     errors.add(start_date.to_s, 'Event must end after start time.') unless start_date < end_date
   end
 
