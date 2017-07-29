@@ -2,7 +2,6 @@
   <% if event.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(event.errors.count, "error") %> prohibited this event from being saved:</h2>
-
       <ul>
       <% event.errors.full_messages.each do |message| %>
         <li><%= message %></li>
@@ -11,51 +10,93 @@
     </div>
   <% end %>
 
+  <%= form.hidden_field :fbID, id: :event_fbID %>
 
-  <div class="row">
-    <div class="col-sm-4">
-      <%= form.label :event_title, "Event Name:" %>
-      <%= form.text_field :title, id: :event_title, class: 'form-control' %>
-      <%= form.label :location, "Event Location:" %>
-      <%= form.text_field :location, id: :event_location, class: 'form-control' %>
-      <%= form.label :org, "Event Host:" %>
-      <%= form.select 'org', options_from_collection_for_select(current_user.orgs, :id, :name), class: 'form-control' %>
-    </div>
-    <div class="col-sm-8">
-      <%= form.label :start_date, "Start:" %>
-      <%= form.datetime_select :start_date, id: :event_start_date, class: 'form-control' %>
-      <%= form.label :end_date, "End:" %>
-      <%= form.datetime_select :end_date, id: :event_end_date, class: 'form-control' %>
+  <%= form.label :event_title, "Event Name" %>
+  <%= form.text_field :title, id: :event_title, class: 'form-control' %>
+  <%= form.label :org, "Host Organization" %>
+  <%= form.select 'org', options_from_collection_for_select(current_user.orgs, :id, :name), {}, { class: 'form-control' } %>
+  <%= form.label :category %>
+  <%= form.select :category, Event.categories, {}, { class: 'form-control' } %>
 
-      <br>
-      <div class="checkbox">
-        <label>
-          <%= form.check_box :all_day, id: :event_all_day %> All Day?
-        </label>
-
-      </div>
-    </div>
+  <div class="checkbox">
+    <label>
+      <%= form.check_box :twentyone, id: :event_twentyone, class: 'form-check-input checkbox-inline' %> Is this a 21+ event?
+    </label>
   </div>
 
+  <%= form.label :location %>
+  <%= form.text_field :location, id: :event_location, class: 'form-control' %>
 
-  <%= form.label :description %>
-  <%= form.text_area :description, id: :event_description, class: 'form-control' %>
+  <div class="checkbox">
+    <label>
+      <%= form.check_box :all_day, id: :event_all_day, class: 'form-check-input checkbox-inline', id: 'all-day-event' %> Is this an all-day event?
+    </label>
+  </div>
 
+  <div class="row" id="date-and-time">
+    <div class="col-sm-6 add-event-start">
+      <%= form.label :start_date, "Start Time" %>
+      <%= form.datetime_select :start_date %>
+    </div>
+    <div class="col-sm-6 add-event-end">
+      <%= form.label :end_date, "End Time" %>
+      <%= form.datetime_select :end_date %>
+    </div>
+  </div>
+  <div class="row" id="date">
+    <div class="col-xs-12">
+      <%= form.label :start_date, "Event Date" %>
+      <%= form.date_select :start_date, id: 'all_day_date' %>
+    </div>
+  </div>
+  
+  <script type="text/javascript">
+    $(function () {
+      $('#start_date').datetimepicker();
+      $('#end_date').datetimepicker({
+        useCurrent: false
+      });
+      $('#start_date-all-day').datetimepicker({
+        format: 'MM/dd/YY'
+      });
 
-  <%= form.label :category %>
-  <%= form.text_field :category, id: :event_category, class: 'form-control' %>
+      $("#start_date").on("dp.change", function (e) {
+          $('#end_date').data("DateTimePicker").minDate(e.date);
+      });
+      $("#end_date").on("dp.change", function (e) {
+          $('#start_date').data("DateTimePicker").maxDate(e.date);
+      });
+    });
 
-  <%= form.label :twentyone %>
-  <%= form.check_box :twentyone, id: :event_twentyone, class: 'form-check-input' %>
+    var all_day = document.getElementById('all-day-event');
+    var date_time = document.getElementById('date-and-time');
+    var date = document.getElementById('date');
+    date.style['display'] = 'none';
+    date_time.style['display'] = 'block';
+    all_day.onchange = function() {
+       if(this.checked) {
+         date.style['display'] = 'block';
+         date_time.style['display'] = 'none';
+       } else {
+         date.style['display'] = 'none';
+         date_time.style['display'] = 'block';
+       }
+    };
+  </script>
 
-  <%= form.label :recurring %>
+  <!-- Commenting these out for the time being; probably won't do recurring events for MVP -->
+  <!-- <%= form.label :recurring %>
   <%= form.check_box :recurring, id: :event_recurring, class: 'form-check-input' %>
 
   <%= form.label :recurrence_freq %>
   <%= form.text_field :recurrence_freq, id: :event_recurrence_freq, class: 'form-control' %>
 
   <%= form.label :recurrence_amt %>
-  <%= form.number_field :recurrence_amt, id: :event_recurrence_amt, class: 'form-control' %>
+  <%= form.number_field :recurrence_amt, id: :event_recurrence_amt, class: 'form-control' %> -->
 
-  <%= form.submit class: "btn btn-success" %>
+  <%= form.label :description %>
+  <%= form.text_area :description, id: :event_description, class: 'form-control description' %>
+
+  <%= form.submit class: 'btn btn-success' %>
 <% end %>

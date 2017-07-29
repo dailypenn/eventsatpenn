@@ -1,9 +1,8 @@
-<h1 class="pill">User Profile: <%= @user.full_name %></h1>
+<h1 class="pill"><%= @user.full_name %></h1>
 
-<div class="row">
-
+<div class="row user-profile">
   <div class="col-md-6">
-    <div class="panel panel-default calendar-sidebar">
+    <div class="panel panel-default">
       <div class="panel-heading">
         <h3 class="panel-title">User Details</h3>
       </div>
@@ -18,15 +17,15 @@
         <h3>Organizations:</h3>
         <ul>
           <% @user.orgs.each do |org| %>
-            <li><%= org.name %></li>
+            <li><%= link_to org.name, org %></li>
           <% end %>
         </ul>
       </div>
     </div>
   </div>
 
-  <div class="col-md-6">
-    <div class="panel panel-default calendar-sidebar">
+  <div class="col-md-6 right-hand-panel">
+    <div class="panel panel-default">
       <div class="panel-heading">
         <h3 class="panel-title">Upcoming Events</h3>
       </div>

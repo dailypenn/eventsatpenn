@@ -49,7 +49,6 @@ ActiveRecord::Schema.define(version: 20170723204830) do
 
   create_table "orgs", force: :cascade do |t|
     t.string "name", null: false
-    t.string "tagline"
     t.string "bio"
     t.string "fbID"
     t.string "category"

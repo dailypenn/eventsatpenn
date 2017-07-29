@@ -3,7 +3,7 @@
     <div class="panel panel-default filled list-all">
       <% @events.each do |event| %>
         <div class="row">
-          <%= link_to event.name, event %>
+          <%= link_to event.title, event %>
         </div>
       <% end %>
       <% if @events.empty? %>

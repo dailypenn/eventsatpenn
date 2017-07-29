@@ -22,7 +22,8 @@ class OrgsController < ApplicationController
   # GET /orgs/1
   # GET /orgs/1.json
   def show
-    ScrapeNewEventsJob.perform_now(@org, access_token) if @org.fb?
+    # TODO: head's up this is broken
+    # ScrapeNewEventsJob.perform_now(@org, access_token) if @org.fb?
   end
 
   # GET /orgs/new
@@ -88,6 +89,6 @@ class OrgsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def org_params
-      params.require(:org).permit(:name, :tagline, :bio, :fbID, :category, :website, :photo_url)
+      params.require(:org).permit(:name, :bio, :fbID, :category, :website, :photo_url)
     end
 end

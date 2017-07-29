@@ -17,6 +17,7 @@
 
 @import "bootstrap-sprockets";
 @import "bootstrap";
+@import "bootstrap-datetimepicker.css";
 
 body {
   font-family: 'Nunito', 'Avenir', 'Helvetica Neue', Helvetica, sans-serif;
@@ -36,6 +37,29 @@ h1, h2, h3, h4, h5, h6 {
       margin-top: 20px;
     }
   }
+  &.new-event {
+    margin: 0;
+    margin-right: 15px;
+    text-align: center;
+  }
+  &.org-headers {
+    margin-top: 0px;
+    a {
+      color: #AA1E22;
+      text-decoration: none;
+    }
+  }
+}
+
+a, a:hover, a:focus {
+  color: #AA1E22;
+  text-decoration: none;
+}
+
+p {
+  &.org-headers {
+    margin: 0px;
+  }
 }
 
 strong {
@@ -44,6 +68,8 @@ strong {
 
 main {
   max-width: 100%;
+  padding-left: 15px;
+  padding-right: 15px;
   padding-top: 75px;
 }
 
@@ -52,6 +78,12 @@ input {
   padding: 10px;
   border-radius: 4px;
   height: 35px;
+}
+
+.container-fluid {
+  &.main {
+    padding: 0px;
+  }
 }
 
 // make all images responsive by default
@@ -127,25 +159,22 @@ section {
   margin: 0;
   padding: 0;
   padding-left: 15px;
-  padding-right: 15px;
   padding-top: 10px;
 
   .navbar-logo {
     height: 28px;
+    padding-right: 15px;
   }
 }
 
 .navbar-static-bottom {
+  border-radius: 0;
   bottom: 0;
   margin-bottom: 0px;
   min-height: 40px;
 
   .navbar-header {
     float: right;
-
-    @media screen and (max-width: 700px) {
-      padding-right: 15px;
-    }
   }
 
   .navbar-brand {
@@ -176,9 +205,16 @@ section {
 }
 
 .calendar-sidebar {
-  margin-top: 40px;
+  border-radius: 4px;
+  margin-top: 43px;
+  margin-left: -15px;
   max-height: calc(100% - 100px);
   overflow: scroll;
+
+  &.new-event {
+    margin-top: 10px;
+    overflow: visible;
+  }
 }
 
 .list-all {
@@ -207,10 +243,45 @@ section {
   }
 }
 
+.add-org-form {
+  max-height: calc(100vh - 210px);
+  padding: 15px;
+  margin-top: 10px;
+  overflow: scroll;
+}
+
+.add-org-fb-form {
+  max-height: calc(100vh - 130px);
+  padding: 15px;
+  overflow: scroll;
+}
+
+.form-group {
+  margin-bottom: 0px;
+}
+
+.right-hand-panel {
+  padding-left: 0px;
+}
+
+.add-event-start {
+  padding-right: 7.5px;
+}
+
+.add-event-end {
+  padding-left: 7.5px;
+}
+
+.panel-title {
+  a {
+    color: #AA1E22;
+    text-decoration: none;
+  }
+}
+
 .panel.filled {
   background-color: #f5f5f5;
 }
-
 
 .filter {
   margin-top: 10px;
@@ -225,20 +296,28 @@ section {
   padding-bottom: 20px;
 }
 
+.user-profile {
+  margin-top: 5px;
+}
+
 .turbolinks-progress-bar {
   background-color: #AA1E22;
 }
 
-.row {
-  margin-right: 0;
-}
-
 .form-control {
   margin-bottom: 10px;
+
+  &.description {
+    height: 100px;
+  }
 }
 
 input[type="checkbox"] {
   margin-top: -7px;
+}
+
+input[type="submit"] {
+  margin-top: 5px;
 }
 
 label {
@@ -247,14 +326,31 @@ label {
   // display: block;
 }
 
+.input-group {
+  margin-bottom: 10px;
+}
+
 .col-app {
   display: inline-block;
   width: calc(100% - 300px);
   min-height: calc(100vh - 120px);
+  padding-right: 15px;
 }
 
 .col-ads {
   display: inline-block;
   max-width: 300px;
   position: absolute;
+}
+
+@media screen and (max-width: 992px) {
+  .calendar-sidebar {
+    margin-left: 0;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .logo-bottom {
+    padding-right: 15px;
+  }
 }

@@ -15,6 +15,8 @@
 //= require turbolinks
 //= require bootstrap-sprockets
 //= require filterrific/filterrific-jquery
+//= require moment
+//= require bootstrap-datetimepicker
 //= require_tree .
 
 function formatDate(date) {
