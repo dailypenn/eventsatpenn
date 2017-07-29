@@ -1,8 +1,12 @@
+# Gem Sources
 source 'https://rubygems.org'
+
+# Force HTTPS for Github Gems
 git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
   "https://github.com/#{repo_name}.git"
 end
+
 ruby '2.4.0'
 gem 'rails', '~> 5.1.1'
 gem 'sqlite3'
@@ -17,6 +21,8 @@ gem 'fb_graph2'
 gem "simple_calendar", "~> 2.0"
 gem 'inline_svg'
 gem 'filterrific'
+gem 'activeadmin', github: 'activeadmin'
+gem 'active_bootstrap_skin'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
