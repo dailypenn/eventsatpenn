@@ -1,0 +1,66 @@
+// SASS variable overrides must be declared before loading up Active Admin's styles.
+//
+// To view the variables that Active Admin provides, take a look at
+// `app/assets/stylesheets/active_admin/mixins/_variables.scss` in the
+// Active Admin source.
+//
+// For example, to change the sidebar width:
+// $sidebar-width: 242px;
+
+// Active Admin's got SASS!
+
+// Active Bootstrap Skin
+@import "active_bootstrap_skin";
+
+// Overriding any non-variable SASS must be done after the fact.
+// For example, to change the default status-tag color:
+//
+//   .status_tag { background: #6090DB; }
+
+.active_admin {
+  .title_bar, .footer {
+    margin-left: 15px;
+    margin-right: 15px
+  }
+
+  .flash {
+    margin: 15px;
+  }
+
+  .filter_form .select_and_search > *:not(label) {
+    width: calc(50% - 5px);
+    display: inline-block;
+    margin-right: 10px;
+
+    &:last-child {
+      margin: 0;
+    }
+  }
+
+  label.label {
+    display: block;
+    margin: 0;
+  }
+
+  .buttons > * {
+    margin: 10px 5px;
+  }
+}
+
+
+#active_admin_content {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.without_sidebar {
+  #main_content_wrapper {
+    width: 100% !important;
+  }
+
+
+  .column {
+    display: inline-block;
+    margin: 5px !important;
+  }
+}
