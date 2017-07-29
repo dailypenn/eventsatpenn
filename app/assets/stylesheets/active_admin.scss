@@ -26,7 +26,27 @@
   .flash {
     margin: 15px;
   }
+
+  .filter_form .select_and_search > *:not(label) {
+    width: calc(50% - 5px);
+    display: inline-block;
+    margin-right: 10px;
+
+    &:last-child {
+      margin: 0;
+    }
+  }
+
+  label.label {
+    display: block;
+    margin: 0;
+  }
+
+  .buttons > * {
+    margin: 10px 5px;
+  }
 }
+
 
 #active_admin_content {
     margin-left: 0;
