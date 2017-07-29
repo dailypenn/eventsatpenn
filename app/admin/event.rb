@@ -1,4 +1,5 @@
 ActiveAdmin.register Event do
+  permit_params Event.attribute_names.map(&:to_sym) # All attributes
 
   # Index Page
   index do

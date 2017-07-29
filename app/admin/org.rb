@@ -1,4 +1,5 @@
 ActiveAdmin.register Org do
+  permit_params Org.attribute_names.map(&:to_sym) # All attributes
 
   # Index Page
   index do

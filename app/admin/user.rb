@@ -1,5 +1,5 @@
 ActiveAdmin.register User do
-  permit_params :email, :password, :password_confirmation
+  permit_params User.attribute_names.map(&:to_sym) # All attributes
 
   # Index Page
   index do
