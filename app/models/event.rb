@@ -7,7 +7,7 @@ class Event < ApplicationRecord
   )
 
   belongs_to :org
-  validates :title, :start_date, :end_date, :location, :category, presence: true
+  validates :title, :start_date, :location, :category, presence: true
   validate :valid_dates?
 
   scope :search_query, lambda { |query|
@@ -28,7 +28,12 @@ class Event < ApplicationRecord
   }
 
   def valid_dates?
-    errors.add(start_date.to_s, 'Event must end after start time.') unless start_date < end_date
+    if end_date
+      errors.add(start_date.to_s, 'Event must end after start time.') unless start_date < end_date
+    else
+      errors.add(start_date.to_s, 'Event must have an end time.') unless all_day
+      self.end_date = start_date + 86_399 if all_day
+    end
   end
 
   def fb?

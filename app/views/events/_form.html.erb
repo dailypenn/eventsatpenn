@@ -10,7 +10,7 @@
     </div>
   <% end %>
 
-  <%= form.hidden_field :fbID, id: :org_fbID %>
+  <%= form.hidden_field :fbID, id: :event_fbID %>
 
   <%= form.label :event_title, "Event Name" %>
   <%= form.text_field :title, id: :event_title, class: 'form-control' %>
@@ -30,11 +30,11 @@
 
   <div class="checkbox">
     <label>
-      <%= form.check_box :all_day, id: :event_all_day, class: 'form-check-input checkbox-inline' %> Is this an all-day event?
+      <%= form.check_box :all_day, id: :event_all_day, class: 'form-check-input checkbox-inline', id: 'all-day-event' %> Is this an all-day event?
     </label>
   </div>
 
-  <div class="row">
+  <div class="row" id="date-and-time">
     <div class="col-sm-6 add-event-start">
       <%= form.label :start_date, "Start Time" %>
       <%= form.datetime_select :start_date %>
@@ -44,12 +44,23 @@
       <%= form.datetime_select :end_date %>
     </div>
   </div>
+  <div class="row" id="date">
+    <div class="col-xs-12">
+      <%= form.label :start_date, "Event Date" %>
+      <%= form.date_select :start_date, id: 'all_day_date' %>
+    </div>
+  </div>
+  
   <script type="text/javascript">
     $(function () {
       $('#start_date').datetimepicker();
       $('#end_date').datetimepicker({
         useCurrent: false
       });
+      $('#start_date-all-day').datetimepicker({
+        format: 'MM/dd/YY'
+      });
+
       $("#start_date").on("dp.change", function (e) {
           $('#end_date').data("DateTimePicker").minDate(e.date);
       });
@@ -57,6 +68,21 @@
           $('#start_date').data("DateTimePicker").maxDate(e.date);
       });
     });
+
+    var all_day = document.getElementById('all-day-event');
+    var date_time = document.getElementById('date-and-time');
+    var date = document.getElementById('date');
+    date.style['display'] = 'none';
+    date_time.style['display'] = 'block';
+    all_day.onchange = function() {
+       if(this.checked) {
+         date.style['display'] = 'block';
+         date_time.style['display'] = 'none';
+       } else {
+         date.style['display'] = 'none';
+         date_time.style['display'] = 'block';
+       }
+    };
   </script>
 
   <!-- Commenting these out for the time being; probably won't do recurring events for MVP -->

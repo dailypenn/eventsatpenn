@@ -7,7 +7,7 @@ module ActionView
       def date_select(method, _options = {}, _html_options = {})
         existing_date = @object.send(method)
         formatted_date = existing_date.to_date.strftime('%F') if existing_date.present?
-        @template.content_tag(:div, class: 'input-group', id: method) do
+        @template.content_tag(:div, class: 'input-group', id: "#{method}-all-day") do
           text_field(method, value: formatted_date, class: 'form-control datepicker', :'data-date-format' => 'YYYY-MM-DD') +
             @template.content_tag(:span, @template.content_tag(:span, '', class: 'glyphicon glyphicon-calendar'), class: 'input-group-addon')
         end
