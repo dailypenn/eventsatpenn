@@ -1,6 +1,6 @@
-<h1>Editing Org</h1>
-
-<%= render 'form', org: @org %>
-
-<%= link_to 'Show', @org %> |
-<%= link_to 'Back', orgs_path %>
+<div class="col-sm-6 right-hand-panel">
+  <div class="panel panel-default filled add-org-fb-form">
+    <h3 class="org-headers">Edit Organization: <%= link_to @org.name, @org %></h3>
+    <%= render 'form', org: @org %>
+  </div>
+</div>

@@ -4,8 +4,8 @@
   <div class="col-sm-6">
     <div class="panel panel-default filled list-all add-org-form">
       <div class="row">
-        <h3 class="add-org-header">From Facebook</h3>
-        <p class="add-org-header">Import the details from Facebook organizations that you manage. You'll be able to edit this information after importing.</p>
+        <h3 class="org-headers">From Facebook</h3>
+        <p class="org-headers">Import the details from Facebook organizations that you manage. You'll be able to edit this information after importing.</p>
       </div>
       <% user_fb_pages.each do |page| %>
         <% page.delete('access_token') %>
@@ -17,9 +17,9 @@
     </div>
   </div>
 
-  <div class="col-sm-6 add-org-scratch">
+  <div class="col-sm-6 right-hand-panel">
     <div class="panel panel-default filled add-org-form">
-      <h3 class="add-org-header">From Scratch</h3>
+      <h3 class="org-headers">From Scratch</h3>
       <p>We recommend connecting your organization's Facebook with Events@Penn, because we'll be able to pull all of your events automatically. If you don't want to do that, though, use this form.</p>
       <%= render 'form', org: @org %>
     </div>

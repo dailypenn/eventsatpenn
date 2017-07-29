@@ -42,13 +42,22 @@ h1, h2, h3, h4, h5, h6 {
     margin-right: 15px;
     text-align: center;
   }
-  &.add-org-header {
+  &.org-headers {
     margin-top: 0px;
+    a {
+      color: #AA1E22;
+      text-decoration: none;
+    }
   }
 }
 
+a, a:hover, a:focus {
+  color: #AA1E22;
+  text-decoration: none;
+}
+
 p {
-  &.add-org-header {
+  &.org-headers {
     margin: 0px;
   }
 }
@@ -251,7 +260,7 @@ section {
   margin-bottom: 0px;
 }
 
-.add-org-scratch, .user-events {
+.right-hand-panel {
   padding-left: 0px;
 }
 
@@ -261,6 +270,13 @@ section {
 
 .add-event-end {
   padding-left: 7.5px;
+}
+
+.panel-title {
+  a {
+    color: #AA1E22;
+    text-decoration: none;
+  }
 }
 
 .panel.filled {

@@ -15,12 +15,6 @@
     <%= form.text_field :name, id: :org_name, class: 'form-control' %>
   </div>
 
-  <!-- I have no clue what the point of this field is lol -->
-  <!-- <div class="field">
-    <%= form.label :tagline %>
-    <%= form.text_field :tagline, id: :org_tagline, class: 'form-control' %>
-  </div> -->
-
   <div class="field">
     <%= form.label :description %>
     <%= form.text_area :bio, id: :org_bio, class: 'form-control description' %>
@@ -30,6 +24,8 @@
     <%= form.label :category %>
     <%= form.select :category, Org.categories, {}, { class: 'form-control' } %>
   </div>
+
+  <%= form.hidden_field :fbID, id: :org_fbID %>
 
   <div class="field">
     <%= form.label :website %>
@@ -42,6 +38,6 @@
   </div>
 
   <div class="actions">
-    <%= form.submit class: 'btn btn-success' %>
+    <%= form.submit @org.new_record? ? 'Create Organization' : 'Update Organization', class: 'btn btn-success' %>
   </div>
 <% end %>

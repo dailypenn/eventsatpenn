@@ -1,24 +1,29 @@
 <% name = @org.name %>
 
-<h1 class="pill">Organization Profile: <%= name %></h1><br>
-<em><%= @org.tagline %></em>
-<p id="notice"><%= notice %></p>
+<h1 class="pill"><%= name %></h1><br>
 
 <div class="row">
-
   <div class="col-md-6">
-    <div class="panel panel-default calendar-sidebar">
+    <div class="panel panel-default">
       <div class="panel-heading">
-        <h3 class="panel-title">About <%= name %></h3>
+        <h3 class="panel-title">About <%= name %>
+        <% if @org.users.include? current_user %>
+          <%= link_to 'Edit', edit_org_path(@org), { class: 'pull-right' } %>
+        <% end %>
+        </h3>
       </div>
+
       <div class="panel-body">
+        <% unless @org.bio.empty? %>
+          <h3 class="org-headers">Description:</h3>
+          <p><%= @org.bio %></p>
+        <% end %>
 
-        <h3>Description:</h3>
-        <p><%= @org.tagline %></p>
-
-        <a href="<%= @org.website %>"><%= name %> Website &#10140;</a> <br>
+        <% unless @org.website.empty? %>
+          <a href="<%= @org.website %>" target="_blank"><%= name %> Website &#10140;</a> <br>
+        <% end %>
         <% unless @org.fbID.nil? %>
-          <a href="https://facebook.com/<%= @org.fbID %>"><%= name %> on Facebook &#10140;</a>
+          <a href="https://facebook.com/<%= @org.fbID %>" target="_blank"><%= name %> on Facebook &#10140;</a>
         <% end %>
 
         <h3>Admins:</h3>
@@ -31,8 +36,8 @@
     </div>
   </div>
 
-  <div class="col-md-6">
-    <div class="panel panel-default calendar-sidebar">
+  <div class="col-md-6 right-hand-panel">
+    <div class="panel panel-default">
       <div class="panel-heading">
         <h3 class="panel-title">Upcoming Events</h3>
       </div>
@@ -47,5 +52,3 @@
   </div>
 
 </div>
-
-<%= link_to 'Edit', edit_org_path(@org) %>

@@ -21,7 +21,7 @@
             <select class="form-control pull-left calendar-filter" disabled>
               <option>Filter Events by Category</option disabled>
             </select>
-            <% if user_signed_in? %>
+            <% if user_signed_in? && !current_user.orgs.empty? %>
               <a class="btn btn-info pull-right calendar-create" href="/events/new">Add an Event</a>
             <% end %>
             <% @events = Event.all %>
