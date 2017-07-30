@@ -1,20 +1,7 @@
-Eventsatpenn
+Events@Penn
 ================
 
-This application was generated with the [rails_apps_composer](https://github.com/RailsApps/rails_apps_composer) gem
-provided by the [RailsApps Project](http://railsapps.github.io/).
-
-Rails Composer is supported by developers who purchase our RailsApps tutorials.
-
-Problems? Issues?
------------
-
-Need help? Ask on Stack Overflow with the tag 'railsapps.'
-
-Your application contains diagnostics in the README file. Please provide a copy of the README file when reporting any issues.
-
-If the application doesn't work as expected, please [report an issue](https://github.com/RailsApps/rails_apps_composer/issues)
-and include the diagnostics.
+Events@Penn is a events aggregation website built by the web team at [The Daily Pennsylvanian](https://thedp.com).
 
 Ruby on Rails
 -------------
@@ -24,25 +11,24 @@ This application requires:
 - Ruby 2.4.0
 - Rails 5.1.1
 
-Learn more about [Installing Rails](http://railsapps.github.io/installing-rails.html).
-
 Getting Started
 ---------------
 
-Documentation and Support
--------------------------
+Make sure you have Ruby installed by running `ruby -v` on the command line. This project requires v2.4.0, so make sure you have at least that version. If the command returns `"ruby: command not found"`, run `brew install ruby` (see [here](https://github.com/dailypenn/onboarding) if you're using anything other than MacOS).
 
-Issues
--------------
+Clone the repo into whichever folder you keep your DP work in. Make sure to use SSH.
+```shell
+git clone git@github.com:dailypenn/eventsatpenn.git
+```
 
-Similar Projects
-----------------
+Move to the `eventsatpenn` root folder and run `bundle install` to install all of the gem dependencies for this project. This may take a minute.
 
-Contributing
-------------
+Run `rake db:drop`, `rake db:create`, and `rake db:migrate` to clear and set up the database tables. Run `rails s`, and go to `localhost:3000` in your browser of choice to see the app!
 
 Credits
 -------
+
+Built by the web development team at [The Daily Pennsylvanian](https://thedp.com).
 
 License
 -------
