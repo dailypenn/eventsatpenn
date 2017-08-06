@@ -196,6 +196,16 @@ section {
 
 .list-categories {
   padding-right: 0px;
+  padding-left: 0px;
+}
+
+.list-add {
+  padding-right: 0px;
+
+  .list-add-btn {
+    margin-top: 10px;
+    width: 100%;
+  }
 }
 
 .button-xs {
@@ -346,6 +356,17 @@ label {
 @media screen and (max-width: 992px) {
   .calendar-sidebar {
     margin-left: 0;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .list-search, .list-categories, .list-add {
+    padding-left: 0px;
+    padding-right: 0px;
+
+    .list-add-btn {
+      margin-top: 0px;
+    }
   }
 }
 
