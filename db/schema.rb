@@ -16,6 +16,7 @@ ActiveRecord::Schema.define(version: 20170529180117) do
     t.string "title"
     t.datetime "start_date"
     t.datetime "end_date"
+    t.datetime "event_date"
     t.boolean "all_day"
     t.string "description"
     t.string "location"

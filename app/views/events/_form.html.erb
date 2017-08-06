@@ -44,20 +44,18 @@
       <%= form.datetime_select :end_date %>
     </div>
   </div>
-  <div class="row" id="date">
-    <div class="col-xs-12">
-      <%= form.label :start_date, "Event Date" %>
-      <%= form.date_select :start_date, id: 'all_day_date' %>
-    </div>
+  <div id="date">
+    <%= form.label :event_date, "Event Date" %>
+    <%= form.date_select :event_date %>
   </div>
 
   <script type="text/javascript">
-    $(document).ready(function () {
+    $(function () {
       $('#start_date').datetimepicker();
       $('#end_date').datetimepicker({
         useCurrent: false
       });
-      $('#start_date-all-day').datetimepicker({
+      $('#event_date').datetimepicker({
         format: 'MM/dd/YY'
       });
 
@@ -71,29 +69,32 @@
       var all_day = document.getElementById('all-day-event');
       var date_time = document.getElementById('date-and-time');
       var date = document.getElementById('date');
-      date.style['display'] = 'none';
-      date_time.style['display'] = 'block';
+      if (all_day.checked) {
+        date.style['display'] = 'block';
+        date_time.style['display'] = 'none';
+      } else {
+        date.style['display'] = 'none';
+        date_time.style['display'] = 'block';
+      }
+      
       all_day.onchange = function() {
-         if(this.checked) {
-           date.style['display'] = 'block';
-           date_time.style['display'] = 'none';
-         } else {
-           date.style['display'] = 'none';
-           date_time.style['display'] = 'block';
-         }
+        if(this.checked) {
+         date.style['display'] = 'block';
+         date_time.style['display'] = 'none';
+        } else {
+         date.style['display'] = 'none';
+         date_time.style['display'] = 'block';
+        }
       };
+
+      $(date).on('click', function() {
+        var extra_cal = document.getElementById('ui-datepicker-div');
+        if (extra_cal) {
+          $(extra_cal).remove();
+        };
+      });
     });
   </script>
-
-  <!-- Commenting these out for the time being; probably won't do recurring events for MVP -->
-  <!-- <%= form.label :recurring %>
-  <%= form.check_box :recurring, id: :event_recurring, class: 'form-check-input' %>
-
-  <%= form.label :recurrence_freq %>
-  <%= form.text_field :recurrence_freq, id: :event_recurrence_freq, class: 'form-control' %>
-
-  <%= form.label :recurrence_amt %>
-  <%= form.number_field :recurrence_amt, id: :event_recurrence_amt, class: 'form-control' %> -->
 
   <%= form.label :description %>
   <%= form.text_area :description, id: :event_description, class: 'form-control description' %>
