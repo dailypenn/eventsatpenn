@@ -50,9 +50,9 @@
       <%= form.date_select :start_date, id: 'all_day_date' %>
     </div>
   </div>
-  
+
   <script type="text/javascript">
-    $(function () {
+    $(document).ready(function () {
       $('#start_date').datetimepicker();
       $('#end_date').datetimepicker({
         useCurrent: false
@@ -67,22 +67,22 @@
       $("#end_date").on("dp.change", function (e) {
           $('#start_date').data("DateTimePicker").maxDate(e.date);
       });
-    });
 
-    var all_day = document.getElementById('all-day-event');
-    var date_time = document.getElementById('date-and-time');
-    var date = document.getElementById('date');
-    date.style['display'] = 'none';
-    date_time.style['display'] = 'block';
-    all_day.onchange = function() {
-       if(this.checked) {
-         date.style['display'] = 'block';
-         date_time.style['display'] = 'none';
-       } else {
-         date.style['display'] = 'none';
-         date_time.style['display'] = 'block';
-       }
-    };
+      var all_day = document.getElementById('all-day-event');
+      var date_time = document.getElementById('date-and-time');
+      var date = document.getElementById('date');
+      date.style['display'] = 'none';
+      date_time.style['display'] = 'block';
+      all_day.onchange = function() {
+         if(this.checked) {
+           date.style['display'] = 'block';
+           date_time.style['display'] = 'none';
+         } else {
+           date.style['display'] = 'none';
+           date_time.style['display'] = 'block';
+         }
+      };
+    });
   </script>
 
   <!-- Commenting these out for the time being; probably won't do recurring events for MVP -->

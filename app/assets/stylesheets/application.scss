@@ -225,6 +225,17 @@ section {
     margin-top: 10px;
     overflow: visible;
   }
+
+  &.display-events {
+    margin-top: 17px;
+  }
+}
+
+.panel-date {
+  h3 {
+    margin: 0;
+    margin-right: 15px;
+  }
 }
 
 .list-all {

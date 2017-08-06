@@ -14,10 +14,10 @@
 //= require rails-ujs
 //= require turbolinks
 //= require bootstrap-sprockets
+//= require_tree .
 //= require filterrific/filterrific-jquery
 //= require moment
 //= require bootstrap-datetimepicker
-//= require_tree .
 
 function formatDate(date) {
   var dayNames = [
@@ -47,8 +47,11 @@ $(document).ready(function() {
     var date = new Date(dateStr);
     // Get and parse json
     $.getJSON("/events.json?start_date=" + dateStr, function(data) {
+      var htmlStr = '';
+      if (data.length == 0) {
+        htmlStr += 'There are no events today!'
+      };
 
-      var htmlStr = ''
       $.each(data, function(i) {
         var event = data[i];
         htmlStr += '<div>'
@@ -56,12 +59,16 @@ $(document).ready(function() {
         htmlStr += '<em>' + event.location + '</em>'
         htmlStr += '</div>'
       });
-      $('.calendar-sidebar .panel-body').html('') // clear it first
-      $('.calendar-sidebar .panel-body').html(
-        '<h3 class="text-center">' + formatDate(date) + '</h3>' +
-        htmlStr
-      )
-    });
 
+      $('.panel-date').html('');
+      $('.panel-date').html(
+        '<h3 class="text-center">' + formatDate(date) + '</h3>'
+      );
+      $('.calendar-sidebar .panel-body').html('');
+      $('.calendar-sidebar .panel-body').html(
+        htmlStr
+      );
+      $('.calendar-sidebar')[0].className += ' display-events';
+    });
   });
 });
