@@ -241,8 +241,13 @@ section {
 .list-all {
   max-height: calc(100vh - 270px);
   padding: 15px;
+  padding-top: 0px;
   margin-top: 10px;
   overflow: scroll;
+
+  &.show-event {
+    padding-top: 15px;
+  }
 
   .row {
     padding: 15px;
@@ -254,13 +259,26 @@ section {
     }
   }
 
-  .row:first-of-type {
-    padding-top: 0px;
-  }
-
   .row:last-of-type {
     padding-bottom: 0px;
     border-bottom: none;
+  }
+
+  &.show {
+    margin-top: 0px;
+
+    h4.org-name {
+      margin-top: 0px;
+      margin-bottom: 0px;
+    }
+
+    .row.org-name {
+      background-color: #FAFAFA;
+    }
+
+    .row.event {
+      padding-left: 30px;
+    }
   }
 }
 
@@ -269,10 +287,14 @@ section {
   padding: 15px;
   margin-top: 10px;
   overflow: scroll;
+
+  &.list-all {
+    padding-top: 0px;
+  }
 }
 
-.add-org-fb-form {
-  max-height: calc(100vh - 130px);
+.add-org-fb-form, .edit-event-form {
+  max-height: calc(100vh - 140px);
   padding: 15px;
   overflow: scroll;
 }
@@ -367,6 +389,10 @@ label {
 @media screen and (max-width: 992px) {
   .calendar-sidebar {
     margin-left: 0;
+  }
+
+  .right-hand-panel {
+    padding-left: 15px;
   }
 }
 

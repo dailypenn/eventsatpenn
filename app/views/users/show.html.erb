@@ -4,42 +4,53 @@
   <div class="col-md-6">
     <div class="panel panel-default">
       <div class="panel-heading">
-        <h3 class="panel-title">User Details</h3>
+        <h3 class="panel-title">Details</h3>
       </div>
       <div class="panel-body">
-        <img class="img img-responsive" src="<%= @user.image_url %>" alt="<%= @user.full_name%> Photo">
+        <div class="row">
+          <div class="col-sm-6">
+            <h3 class="org-headers">Information:</h3>
+            <strong>Email: </strong> <%= @user.email %><br>
 
-        <h3>Info:</h3>
-        <strong>Name: </strong> <%= @user.full_name %><br>
-        <strong>Email: </strong> <%= @user.email %><br>
-        <strong></strong>
+            <% unless @user.orgs.empty? %>
+              <h3>Organizations:</h3>
+              <ul>
+                <% @user.orgs.each do |org| %>
+                  <li><%= link_to org.name, org %></li>
+                <% end %>
+              </ul>
+            <% end %>
+          </div>
+          <div class="col-sm-6">
+            <img class="img img-responsive" src="<%= @user.image_url %>" alt="<%= @user.full_name%> photo">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-        <h3>Organizations:</h3>
-        <ul>
+  <% unless @user.orgs.empty? %>
+    <div class="col-md-6 right-hand-panel">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Upcoming Events</h3>
+        </div>
+        <div class="panel-body list-all show">
           <% @user.orgs.each do |org| %>
-            <li><%= link_to org.name, org %></li>
+            <% unless org.events.empty? %>
+            <div class="row org-name">
+              <h4 class="org-name"><%= link_to org.name, org %></h4>
+            </div>
+            <% end %>
+            <% org.events.each do |event| %>
+              <div class="row event">
+                <%= link_to event.title, event %> on <%= event.start_date.strftime("%A, %B %d, %Y") %>
+              </div>
+            <% end %>
           <% end %>
-        </ul>
+        </div>
       </div>
     </div>
-  </div>
-
-  <div class="col-md-6 right-hand-panel">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h3 class="panel-title">Upcoming Events</h3>
-      </div>
-      <div class="panel-body">
-        <% @user.orgs.each do |org| %>
-        <h4><%= org.name %></h4>
-        <ul>
-          <% org.events.each do |event| %>
-            <li><%= link_to event.title, event %> on <%= event.start_date %></li>
-          <% end %>
-        </ul>
-        <% end %>
-      </div>
-    </div>
-  </div>
+  <% end %>
 
 </div>

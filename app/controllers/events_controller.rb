@@ -49,7 +49,7 @@ class EventsController < ApplicationController
 
     respond_to do |format|
       if @event.save
-        format.html { redirect_to @event, notice: 'Event was successfully created.' }
+        format.html { redirect_to @event, notice: "#{@event.title} was successfully created." }
         format.json { render :show, status: :created, location: @event }
       else
         format.html { render :new }
@@ -61,9 +61,12 @@ class EventsController < ApplicationController
   # PATCH/PUT /events/1
   # PATCH/PUT /events/1.json
   def update
+    new_event_params = event_params
+    new_event_params['org'] = Org.find(event_params['org'])
+
     respond_to do |format|
-      if @event.update(event_params)
-        format.html { redirect_to @event, notice: 'Event was successfully updated.' }
+      if @event.update(new_event_params)
+        format.html { redirect_to @event, notice: "#{@event.title} was successfully updated." }
         format.json { render :show, status: :ok, location: @event }
       else
         format.html { render :edit }
@@ -77,7 +80,7 @@ class EventsController < ApplicationController
   def destroy
     @event.destroy
     respond_to do |format|
-      format.html { redirect_to events_url, notice: 'Event was successfully destroyed.' }
+      format.html { redirect_to events_url, notice: "#{@event.title} was successfully deleted." }
       format.json { head :no_content }
     end
   end

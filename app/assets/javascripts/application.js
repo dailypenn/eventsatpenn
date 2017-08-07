@@ -46,7 +46,7 @@ $(document).ready(function() {
     var dateStr = $(e.target).find('.date')[0].dataset.date;
     var date = new Date(dateStr);
     // Get and parse json
-    $.getJSON("/events.json?start_date=" + dateStr, function(data) {
+    $.getJSON("/events.json?start_day=" + dateStr, function(data) {
       var htmlStr = '';
       if (data.length == 0) {
         htmlStr += 'There are no events today!'
