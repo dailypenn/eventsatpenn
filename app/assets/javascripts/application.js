@@ -45,9 +45,8 @@ $(document).ready(function() {
     // Get data-date of inner date element
     var dateStr = $(e.target).find('.date')[0].dataset.date;
     var date = new Date(dateStr);
-    var jsonStr = date.toJSON();
     // Get and parse json
-    $.getJSON("/events.json?event_date=" + jsonStr, function(data) {
+    $.getJSON("/events.json?start_date=" + dateStr, function(data) {
       var htmlStr = '';
       if (data.length == 0) {
         htmlStr += 'There are no events today!'
@@ -56,7 +55,7 @@ $(document).ready(function() {
       $.each(data, function(i) {
         var event = data[i];
         htmlStr += '<div>'
-        htmlStr += '<strong>' + event.title + '</strong>'
+        htmlStr += '<strong>' + event.title + '</strong> '
         htmlStr += '<em>' + event.location + '</em>'
         htmlStr += '</div>'
       });

@@ -7,7 +7,7 @@ class EventsController < ApplicationController
     if params['start_date']
       min = Date.parse(params['start_date'])
       max = Date.parse(params['start_date']) + 1.day
-      @events = Event.where('start_date >= ? AND end_date >= ?', min, max)
+      @events = Event.where('start_date >= ? AND end_date < ?', min, max)
     else
       @filterrific = initialize_filterrific(
         Event,
