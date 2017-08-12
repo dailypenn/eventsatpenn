@@ -60,6 +60,10 @@ p {
   &.org-headers {
     margin: 0px;
   }
+
+  &.p-large {
+    font-size: 1.3em;
+  }
 }
 
 strong {
@@ -84,6 +88,14 @@ input {
   &.main {
     padding: 0px;
   }
+}
+
+.mb5 {
+  margin-bottom: 5px;
+}
+
+.mt20 {
+  margin-top: 20px;
 }
 
 // make all images responsive by default

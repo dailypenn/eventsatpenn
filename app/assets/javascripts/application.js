@@ -45,8 +45,9 @@ $(document).ready(function() {
     // Get data-date of inner date element
     var dateStr = $(e.target).find('.date')[0].dataset.date;
     var date = new Date(dateStr);
+    var jsonStr = date.toJSON();
     // Get and parse json
-    $.getJSON("/events.json?start_day=" + dateStr, function(data) {
+    $.getJSON("/events.json?event_date=" + jsonStr, function(data) {
       var htmlStr = '';
       if (data.length == 0) {
         htmlStr += 'There are no events today!'

@@ -1,11 +1,13 @@
-<h1 class="pill"><%= @event.title %></h1>
-
 <div class="row">
   <div class="col-lg-6">
     <div class="panel panel-default filled list-all show-event">
-      <p><strong>Location:</strong> <%= @event.location %></p>
+      <div class="text-center">
+        <h1 class="pill"><%= @event.title %></h1>
+      </div>
 
-      <p><strong>Time:</strong>
+      <p class="p-large mb5"><strong>Location:</strong> <%= @event.location %></p>
+
+      <p class="p-large mb5"><strong>Time:</strong>
       <% if @event.start_date.to_date == @event.end_date.to_date %>
         <% if @event.all_day %>
           <%= @event.start_date.strftime("%A, %B %d, %Y, all day") %>
@@ -19,16 +21,17 @@
       <% end %>
       </p>
 
-      <p><strong>Hosted by:</strong> <%= link_to @event.org.name, @event.org %></p>
+      <p class="p-large mb5"><strong>Hosted by:</strong> <%= link_to @event.org.name, @event.org %></p>
 
-      <p><strong>Category:</strong> <%= @event.category %></p>
+      <p class="p-large mb5"><strong>Category:</strong> <%= @event.category %></p>
 
       <% if @event.twentyone %>
-        <p>This is a 21+ event!</p>
+        <p class="p-large mb5">This is a 21+ event!</p>
       <% end %>
 
       <% unless @event.description.blank? %>
-        <p><strong>Description:</strong> <%= @event.description %></p>
+        <p class="p-large mb5 mt20"><strong>Description:</strong></p>
+        <p><%= @event.description %></p>
       <% end %>
 
       <div class="row">

@@ -33,6 +33,9 @@ class Event < ApplicationRecord
     if event_date
       self.start_date = event_date
       self.end_date = start_date + 86_399
+      event_date.to_date
+    else
+      self.event_date = start_date.to_date
     end
   end
 
