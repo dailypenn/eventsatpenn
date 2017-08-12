@@ -48,7 +48,7 @@ class OrgsController < ApplicationController
     respond_to do |format|
       if @org.save
         current_user.orgs << @org
-        format.html { redirect_to @org, notice: 'Org was successfully created.' }
+        format.html { redirect_to @org, notice: "#{@org.name} was successfully created." }
         format.json { render :show, status: :created, location: @org }
       else
         format.html { render :new }
@@ -62,7 +62,7 @@ class OrgsController < ApplicationController
   def update
     respond_to do |format|
       if @org.update(org_params)
-        format.html { redirect_to @org, notice: 'Org was successfully updated.' }
+        format.html { redirect_to @org, notice: "#{@org.name} was successfully updated." }
         format.json { render :show, status: :ok, location: @org }
       else
         format.html { render :edit }
@@ -76,7 +76,7 @@ class OrgsController < ApplicationController
   def destroy
     @org.destroy
     respond_to do |format|
-      format.html { redirect_to orgs_url, notice: 'Org was successfully destroyed.' }
+      format.html { redirect_to orgs_url, notice: "#{@org.name} was successfully deleted." }
       format.json { head :no_content }
     end
   end

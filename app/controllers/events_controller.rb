@@ -7,7 +7,7 @@ class EventsController < ApplicationController
     if params['start_date']
       min = Date.parse(params['start_date'])
       max = Date.parse(params['start_date']) + 1.day
-      @events = Event.where('start_date >= ? AND end_date >= ?', min, max)
+      @events = Event.where('start_date >= ? AND end_date < ?', min, max)
     else
       @filterrific = initialize_filterrific(
         Event,
@@ -49,7 +49,7 @@ class EventsController < ApplicationController
 
     respond_to do |format|
       if @event.save
-        format.html { redirect_to @event, notice: 'Event was successfully created.' }
+        format.html { redirect_to @event, notice: "#{@event.title} was successfully created." }
         format.json { render :show, status: :created, location: @event }
       else
         format.html { render :new }
@@ -61,9 +61,12 @@ class EventsController < ApplicationController
   # PATCH/PUT /events/1
   # PATCH/PUT /events/1.json
   def update
+    new_event_params = event_params
+    new_event_params['org'] = Org.find(event_params['org'])
+
     respond_to do |format|
-      if @event.update(event_params)
-        format.html { redirect_to @event, notice: 'Event was successfully updated.' }
+      if @event.update(new_event_params)
+        format.html { redirect_to @event, notice: "#{@event.title} was successfully updated." }
         format.json { render :show, status: :ok, location: @event }
       else
         format.html { render :edit }
@@ -77,7 +80,7 @@ class EventsController < ApplicationController
   def destroy
     @event.destroy
     respond_to do |format|
-      format.html { redirect_to events_url, notice: 'Event was successfully destroyed.' }
+      format.html { redirect_to events_url, notice: "#{@event.title} was successfully deleted." }
       format.json { head :no_content }
     end
   end
@@ -90,6 +93,6 @@ class EventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
-      params.require(:event).permit(:title, :start_date, :end_date, :description, :location, :category, :twentyone, :recurring, :recurrence_freq, :recurrence_amt, :all_day, :org)
+      params.require(:event).permit(:title, :fbID, :start_date, :end_date, :event_date, :description, :location, :category, :twentyone, :recurring, :recurrence_freq, :recurrence_amt, :all_day, :org)
     end
 end

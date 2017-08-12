@@ -1,6 +1,6 @@
-<h1>Editing Event</h1>
-
-<%= render 'form', event: @event %>
-
-<%= link_to 'Show', @event %> |
-<%= link_to 'Back', events_path %>
+<div class="col-sm-6 right-hand-panel">
+  <div class="panel panel-default filled edit-event-form">
+    <h3 class="org-headers">Edit Event: <%= link_to @event.title, @event %></h3>
+    <%= render 'form', event: @event %>
+  </div>
+</div>

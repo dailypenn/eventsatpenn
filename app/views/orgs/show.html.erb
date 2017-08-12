@@ -1,12 +1,10 @@
-<% name = @org.name %>
-
-<h1 class="pill"><%= name %></h1><br>
+<h1 class="pill"><%= @org.name %></h1><br>
 
 <div class="row">
   <div class="col-md-6">
     <div class="panel panel-default">
       <div class="panel-heading">
-        <h3 class="panel-title">About <%= name %>
+        <h3 class="panel-title">About <%= @org.name %>
         <% if @org.users.include? current_user %>
           <%= link_to 'Edit', edit_org_path(@org), { class: 'pull-right' } %>
         <% end %>
@@ -14,24 +12,30 @@
       </div>
 
       <div class="panel-body">
+        <% unless @org.photo_url.empty? %>
+          <img class="img img-responsive" src="<%= @org.photo_url %>" alt="<%= @org.name%> photo">
+        <% end %>
+        
         <% unless @org.bio.empty? %>
           <h3 class="org-headers">Description:</h3>
           <p><%= @org.bio %></p>
         <% end %>
 
         <% unless @org.website.empty? %>
-          <a href="<%= @org.website %>" target="_blank"><%= name %> Website &#10140;</a> <br>
+          <a href="<%= @org.website %>" target="_blank"><%= @org.name %> website &#10140;</a> <br>
         <% end %>
         <% unless @org.fbID.nil? %>
-          <a href="https://facebook.com/<%= @org.fbID %>" target="_blank"><%= name %> on Facebook &#10140;</a>
+          <a href="https://facebook.com/<%= @org.fbID %>" target="_blank"><%= @org.name %> on Facebook &#10140;</a>
         <% end %>
 
-        <h3>Admins:</h3>
-        <ul>
-          <% @org.users.each do |user| %>
-            <li><%= link_to user.full_name, user %></li>
-          <% end %>
-        </ul>
+        <% if @org.users.include? current_user %>
+          <h3>Admins:</h3>
+          <ul>
+            <% @org.users.each do |user| %>
+              <li><%= link_to user.full_name, user %></li>
+            <% end %>
+          </ul>
+        <% end %>
       </div>
     </div>
   </div>
@@ -41,12 +45,17 @@
       <div class="panel-heading">
         <h3 class="panel-title">Upcoming Events</h3>
       </div>
-      <div class="panel-body">
-        <ul>
-          <% @org.events.each do |event| %>
-            <li><%= link_to event.title, event %> on <%= event.start_date %></li>
-          <% end %>
-        </ul>
+      <div class="panel-body list-all show">
+        <% if @org.events.empty? %>
+        <div class="row">
+          <%= @org.name %> has no upcoming events.
+        </div>
+        <% end %>
+        <% @org.events.each do |event| %>
+          <div class="row">
+            <%= link_to event.title, event %> on <%= event.start_date.strftime("%A, %B %d, %Y") %>
+          </div>
+        <% end %>
       </div>
     </div>
   </div>

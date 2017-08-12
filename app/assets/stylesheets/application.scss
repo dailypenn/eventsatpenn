@@ -60,6 +60,10 @@ p {
   &.org-headers {
     margin: 0px;
   }
+
+  &.p-large {
+    font-size: 1.3em;
+  }
 }
 
 strong {
@@ -84,6 +88,14 @@ input {
   &.main {
     padding: 0px;
   }
+}
+
+.mb5 {
+  margin-bottom: 5px;
+}
+
+.mt20 {
+  margin-top: 20px;
 }
 
 // make all images responsive by default
@@ -196,6 +208,16 @@ section {
 
 .list-categories {
   padding-right: 0px;
+  padding-left: 0px;
+}
+
+.list-add {
+  padding-right: 0px;
+
+  .list-add-btn {
+    margin-top: 10px;
+    width: 100%;
+  }
 }
 
 .button-xs {
@@ -215,13 +237,29 @@ section {
     margin-top: 10px;
     overflow: visible;
   }
+
+  &.display-events {
+    margin-top: 17px;
+  }
+}
+
+.panel-date {
+  h3 {
+    margin: 0;
+    margin-right: 15px;
+  }
 }
 
 .list-all {
   max-height: calc(100vh - 270px);
   padding: 15px;
+  padding-top: 0px;
   margin-top: 10px;
   overflow: scroll;
+
+  &.show-event {
+    padding-top: 15px;
+  }
 
   .row {
     padding: 15px;
@@ -233,13 +271,26 @@ section {
     }
   }
 
-  .row:first-of-type {
-    padding-top: 0px;
-  }
-
   .row:last-of-type {
     padding-bottom: 0px;
     border-bottom: none;
+  }
+
+  &.show {
+    margin-top: 0px;
+
+    h4.org-name {
+      margin-top: 0px;
+      margin-bottom: 0px;
+    }
+
+    .row.org-name {
+      background-color: #FAFAFA;
+    }
+
+    .row.event {
+      padding-left: 30px;
+    }
   }
 }
 
@@ -248,10 +299,14 @@ section {
   padding: 15px;
   margin-top: 10px;
   overflow: scroll;
+
+  &.list-all {
+    padding-top: 0px;
+  }
 }
 
-.add-org-fb-form {
-  max-height: calc(100vh - 130px);
+.add-org-fb-form, .edit-event-form {
+  max-height: calc(100vh - 140px);
   padding: 15px;
   overflow: scroll;
 }
@@ -346,6 +401,21 @@ label {
 @media screen and (max-width: 992px) {
   .calendar-sidebar {
     margin-left: 0;
+  }
+
+  .right-hand-panel {
+    padding-left: 15px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .list-search, .list-categories, .list-add {
+    padding-left: 0px;
+    padding-right: 0px;
+
+    .list-add-btn {
+      margin-top: 0px;
+    }
   }
 }
 
