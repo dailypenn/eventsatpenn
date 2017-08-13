@@ -17,6 +17,7 @@ class ScrapeNewEventsJob < ApplicationJob
     place = event.raw_attributes['place']
     new_event = Event.new(
       title: event.name, start_date: event.start_time,
+      category: 'Unknown',
       end_date: event.end_time, description: event.description,
       location: "#{place['name']}, #{place['location']['street']}",
       location_lat: place['location']['latitude'],
