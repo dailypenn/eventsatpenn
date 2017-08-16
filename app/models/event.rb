@@ -7,7 +7,7 @@ class Event < ApplicationRecord
   )
 
   belongs_to :org
-  validates :title, :location, :category, presence: true
+  validates :title, :location, presence: true
   validate :dates_present?
   validate :valid_dates?
 

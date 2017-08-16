@@ -41,7 +41,7 @@ class Org < ApplicationRecord
   end
 
   def valid_photo?
-    return if photo_url.empty?
+    return true if photo_url.nil?
     uri = URI.parse(photo_url)
     if uri.path
       # supported image types are png and jpg/jpeg
