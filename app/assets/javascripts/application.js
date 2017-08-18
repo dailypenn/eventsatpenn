@@ -40,10 +40,10 @@ function formatDate(date) {
 document.addEventListener("turbolinks:load", function() {
   $('td.day').on('click', function(e) {
     $('td.day').removeClass('active')
-    $(e.target).addClass('active')
+    $(e.currentTarget).addClass('active')
     e.preventDefault();
     // Get data-date of inner date element
-    var dateStr = $(e.target).find('.date')[0].dataset.date;
+    var dateStr = $(e.currentTarget).find('.date')[0].dataset.date;
     var date = new Date(dateStr);
     // Get and parse json
     $.getJSON("/events.json?start_date=" + dateStr, function(data) {
