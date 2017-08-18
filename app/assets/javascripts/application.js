@@ -37,7 +37,7 @@ function formatDate(date) {
   return weekday + ' ' + month + ' ' + day + ', ' + year;
 }
 
-$(document).ready(function() {
+document.addEventListener("turbolinks:load", function() {
   $('td.day').on('click', function(e) {
     $('td.day').removeClass('active')
     $(e.target).addClass('active')
