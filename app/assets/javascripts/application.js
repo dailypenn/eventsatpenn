@@ -34,7 +34,7 @@ function formatDate(date) {
   var month = monthNames[date.getMonth()];
   var year = date.getFullYear();
 
-  return weekday + ' ' + month + ' ' + day + ', ' + year;
+  return weekday + ', ' + month + ' ' + day + ', ' + year;
 }
 
 document.addEventListener("turbolinks:load", function() {
@@ -47,8 +47,19 @@ document.addEventListener("turbolinks:load", function() {
     var date = new Date(dateStr);
     // Get and parse json
     $.getJSON("/events.json?start_date=" + dateStr, function(data) {
+      // clear sidebar
+      $('.panel-date').html('');
+      $('.calendar-sidebar .panel-body').html('');
+      // add date
+      $('.panel-date').html(
+        '<h3 class="text-center">' + formatDate(date) + '</h3>'
+      );
+
+      $('.calendar-sidebar')[0].className += ' display-events';
+
       if (data.length === 0) {
-        htmlStr += 'There are no events today!'
+        $('.calendar-sidebar .panel-body').html('There are no events today');
+        return;
       };
 
       standardEvents = []
@@ -63,13 +74,6 @@ document.addEventListener("turbolinks:load", function() {
         }
       });
 
-      // clear sidebar
-      $('.panel-date').html('');
-      $('.calendar-sidebar .panel-body').html('');
-      // add date
-      $('.panel-date').html(
-        '<h3 class="text-center">' + formatDate(date) + '</h3>'
-      );
       if (allDayEvents.length === 0) { // no all eay events
         $('.calendar-sidebar .panel-body').html(
           standardEvents.join(' ')
@@ -83,7 +87,6 @@ document.addEventListener("turbolinks:load", function() {
           '</div>'
         );
       }
-      $('.calendar-sidebar')[0].className += ' display-events';
     });
   });
 
