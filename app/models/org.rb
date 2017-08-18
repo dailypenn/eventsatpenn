@@ -52,7 +52,7 @@ class Org < ApplicationRecord
     fbID?
   end
 
-  # TODO: dummy categories
+  # NB: these may need to be updated
   def self.categories
     ['College & University', 'Community Organization', 'Community Services', 'Education',  'Political Organization', 'Religious Organization', 'Science', 'Technology & Engineering', 'Camera/Photo', 'Website', 'Magazine', 'Newspaper', 'Radio Station', 'Sports Team', 'Theatrical Productions']
   end
