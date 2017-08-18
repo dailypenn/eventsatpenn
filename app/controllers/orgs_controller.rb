@@ -1,5 +1,5 @@
 class OrgsController < ApplicationController
-  before_action :set_org, only: [:show, :edit, :update, :destroy]
+  before_action :set_org, only: %i[show edit update destroy]
 
   # GET /orgs
   # GET /orgs.json
@@ -7,9 +7,7 @@ class OrgsController < ApplicationController
     @filterrific = initialize_filterrific(
       Org,
       params[:filterrific],
-      select_options: {
-        with_category: Org.categories
-      }
+      select_options: { with_category: Org.categories }
     ) || return
     @orgs = @filterrific.find.sort_by(&:name)
 
@@ -33,7 +31,10 @@ class OrgsController < ApplicationController
 
   def new_from_fb
     org_params = params['fb_page']
-    @org = Org.new(name: org_params['name'], category: org_params['category'], fbID: org_params['id'])
+    @org = Org.new(name: org_params['name'], category: org_params['category'],
+                   fbID: org_params['id'], bio: org_params['about'],
+                   website: org_params['website'],
+                   photo_url: org_params['picture']['data']['url'])
   end
 
   # GET /orgs/1/edit
@@ -82,13 +83,14 @@ class OrgsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_org
-      @org = Org.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def org_params
-      params.require(:org).permit(:name, :bio, :fbID, :category, :website, :photo_url)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_org
+    @org = Org.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def org_params
+    params.require(:org).permit(:name, :bio, :fbID, :category, :website, :photo_url)
+  end
 end
