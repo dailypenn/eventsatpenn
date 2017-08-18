@@ -1,12 +1,7 @@
 class Org < ApplicationRecord
   require 'uri'
 
-  filterrific(
-    available_filters: [
-      :search_query,
-      :with_category
-    ]
-  )
+  filterrific(available_filters: %i[search_query with_category])
 
   has_and_belongs_to_many :users
   has_many :events
@@ -15,7 +10,7 @@ class Org < ApplicationRecord
   validate :valid_website?
   validate :valid_photo?
 
-  scope :search_query, lambda { |query|
+  scope :search_query, (lambda { |query|
     return nil if query.blank?
     # condition query, parse into individual keywords
     terms = query.downcase.split(/\s+/)
@@ -26,11 +21,11 @@ class Org < ApplicationRecord
       terms.map { 'LOWER(orgs.name) LIKE ?' }.join(' AND '),
       *terms.map { |e| [e] }.flatten
     )
-  }
+  })
 
-  scope :with_category, lambda { |categories|
+  scope :with_category, (lambda { |categories|
     where(category: [*categories])
-  }
+  })
 
   def valid_website?
     return if website.empty?
@@ -59,6 +54,6 @@ class Org < ApplicationRecord
 
   # TODO: dummy categories
   def self.categories
-    %w(Arts Sports Publications)
+    %w[Arts Sports Publications]
   end
 end
