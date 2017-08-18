@@ -110,7 +110,7 @@ document.addEventListener("turbolinks:load", function() {
       htmlStr += '  <div class="col-xs-9 day-view event">'
       htmlStr += '    <strong>' + event.title + '</strong><br>'
       htmlStr +=      event.location
-      htmlStr += '    <a href="' + event.url + '" class="pull-right more"><em>more&nbsp</em>&#10140</a>'
+      htmlStr += '    <a href="/events/' + event.id + '" class="pull-right more"><em>more&nbsp</em>&#10140</a>'
       htmlStr += '  </div>'
     }
     htmlStr += '</div>'

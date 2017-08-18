@@ -11,7 +11,7 @@ if Rails.env.development?
     fbID: nil,
     category: 'Animals',
     website: 'http://www.omgcatsinspace.com/',
-    photo_url: nil
+    photo_url: 'http://www.placecage.com/250/250.png'
   )
 
   hp = Org.create!(
@@ -20,7 +20,7 @@ if Rails.env.development?
     fbID: nil,
     category: 'News',
     website: 'http://www.omgcatsinspace.com/',
-    photo_url: nil
+    photo_url: 'http://www.placecage.com/251/251.png'
   )
 
   bc = Org.create!(
@@ -30,7 +30,7 @@ if Rails.env.development?
     fbID: nil,
     category: 'Company',
     website: 'http://www.omgcatsinspace.com/',
-    photo_url: nil
+    photo_url: 'http://www.placecage.com/253/253.png'
   )
 
   Event.create!(
@@ -39,7 +39,8 @@ if Rails.env.development?
     event_date: today,
     all_day: true,
     location: 'Houston Hall',
-    org: cc
+    org: cc,
+    category: 'Publications'
   )
 
   Event.create!(
@@ -50,6 +51,7 @@ if Rails.env.development?
     end_date: today + 9.hours,
     all_day: false,
     location: '4015 Walnut Street',
-    org: hp
+    org: hp,
+    category: 'Publications'
   )
 end
