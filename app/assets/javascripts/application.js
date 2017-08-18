@@ -58,7 +58,7 @@ document.addEventListener("turbolinks:load", function() {
       $('.calendar-sidebar')[0].className += ' display-events';
 
       if (data.length === 0) {
-        $('.calendar-sidebar .panel-body').html('There are no events today');
+        $('.calendar-sidebar .panel-body').html('<center class="text-center">There are no events today.</center>');
         return;
       };
 
@@ -80,9 +80,9 @@ document.addEventListener("turbolinks:load", function() {
         );
       } else {
         $('.calendar-sidebar .panel-body').html(
-          '<div class="col-xs-7">' + standardEvents.join(' ') + '</div>' +
-          '<div class="col-xs-4 col-xs-push-1">' +
-          '<h4 class="text-center">All Day Events</h4>' +
+          '<div class="col-xs-7 hour-events">' + standardEvents.join(' ') + '</div>' +
+          '<div class="col-xs-5 all-day-events">' +
+          '<h5 class="text-center">All Day Events</h5>' +
           allDayEvents.join(' ') +
           '</div>'
         );
@@ -93,11 +93,26 @@ document.addEventListener("turbolinks:load", function() {
   function htmlStrFromEvent(event) {
     htmlStr = "";
     htmlStr += '<div class="row">'
-    htmlStr += '  <div class="col-xs-12 day-view event">'
-    htmlStr += '    <strong>' + event.title + '</strong><br>'
-    htmlStr +=      event.location
-    htmlStr += '    <a href="' + event.url + '" class="pull-right"><em>more&nbsp</em>&#10140</a>'
-    htmlStr += '  </div>'
+    if (event.all_day) {
+      htmlStr += '  <div class="col-xs-12 day-view event">'
+      htmlStr += '    <strong>' + event.title + '</strong><br>'
+      htmlStr +=      event.location
+      htmlStr += '    <a href="' + event.url + '" class="pull-right more"><em>more&nbsp</em>&#10140</a>'
+      htmlStr += '  </div>'
+    } else {
+      var date = new Date(event.start_date);
+      var suffix = (date.getHours() >= 12)? 'pm' : 'am';
+      var h = ((date.getHours() + 11) % 12 + 1);
+      var m = date.getMinutes();
+      htmlStr += '  <div class="col-xs-3 day-view time">'
+      htmlStr += h + '<sup>&nbsp;' + suffix + '</sup>'
+      htmlStr += '  </div>'
+      htmlStr += '  <div class="col-xs-9 day-view event">'
+      htmlStr += '    <strong>' + event.title + '</strong><br>'
+      htmlStr +=      event.location
+      htmlStr += '    <a href="' + event.url + '" class="pull-right more"><em>more&nbsp</em>&#10140</a>'
+      htmlStr += '  </div>'
+    }
     htmlStr += '</div>'
     return htmlStr;
   }
