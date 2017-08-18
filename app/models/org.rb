@@ -54,6 +54,6 @@ class Org < ApplicationRecord
 
   # TODO: dummy categories
   def self.categories
-    %w[Arts Sports Publications]
+    ['College & University', 'Community Organization', 'Community Services', 'Education',  'Political Organization', 'Religious Organization', 'Science', 'Technology & Engineering', 'Camera/Photo', 'Website', 'Magazine', 'Newspaper', 'Radio Station', 'Sports Team', 'Theatrical Productions']
   end
 end
