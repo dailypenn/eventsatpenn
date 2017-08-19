@@ -50,10 +50,8 @@ class OrgsController < ApplicationController
       if @org.save
         current_user.orgs << @org
         format.html { redirect_to @org, notice: "#{@org.name} was successfully created." }
-        format.json { render :show, status: :created, location: @org }
       else
         format.html { render :new }
-        format.json { render json: @org.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -64,10 +62,8 @@ class OrgsController < ApplicationController
     respond_to do |format|
       if @org.update(org_params)
         format.html { redirect_to @org, notice: "#{@org.name} was successfully updated." }
-        format.json { render :show, status: :ok, location: @org }
       else
         format.html { render :edit }
-        format.json { render json: @org.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -78,7 +74,6 @@ class OrgsController < ApplicationController
     @org.destroy
     respond_to do |format|
       format.html { redirect_to orgs_url, notice: "#{@org.name} was successfully deleted." }
-      format.json { head :no_content }
     end
   end
 
