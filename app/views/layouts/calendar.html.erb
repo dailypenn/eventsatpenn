@@ -25,9 +25,9 @@
               <a class="btn btn-info pull-right calendar-create" href="/events/new">Add an Event</a>
             <% end %>
             <% @events = Event.all %>
-            <%= month_calendar(attribute: :start_date, end_attribute: :end_date, events: @events) do |date, meetings| %>
-            <div class="date" data-date="<%= "#{date.year}-#{date.month}-#{date.day}" %>">
-              <%= date.day %>
+            <%= month_calendar(attribute: :start_date, end_attribute: :end_date, events: @events) do |d, meetings| %>
+            <div class="date" data-date="<%= "#{d.strftime("%Y-%m-%d")}" %>">
+              <%= d.day %>
             </div>
             <% meetings.each do |event| %>
             <div class="calendar-event">

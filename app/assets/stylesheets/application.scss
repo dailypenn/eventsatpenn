@@ -241,6 +241,21 @@ section {
   &.display-events {
     margin-top: 17px;
   }
+
+  .hour-events {
+    padding-right: 30px;
+  }
+
+  .all-day-events {
+    padding-left: 30px;
+    border-left: 1px solid #ddd;
+  }
+
+  .more {
+    &:hover, &:active {
+      color: #ddd;
+    }
+  }
 }
 
 .panel-date {
