@@ -108,7 +108,37 @@
   table > tbody > tr > td.active {
     background-color: #F4E3E3;
   }
+
+
+  @media screen and (max-width: 768px) {
+    thead {
+      display: none;
+    }
+
+    .day:not(.has-events) {
+      display: none;
+    }
+
+    .day {
+      background-color: transparent;
+      display: table;
+      width: 100%;
+      border: none;
+      margin: 5px;
+      height: auto;
+    }
+
+    .date {
+      font-weight: 700;
+    }
+
+    .calendar-heading {
+      display: inline-block;
+      padding-top: 5px;
+    }
+  }
 }
+
 
 .day-view {
   &.event {
