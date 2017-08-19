@@ -20,5 +20,8 @@ module Eventsatpenn
 
     # Make Facebook work pls
     config.whiny_nils = false
+
+    # Google tag manager
+    GoogleTagManager.gtm_id = Rails.application.secrets.gtm_id
   end
 end

@@ -43,9 +43,6 @@ class ApplicationController < ActionController::Base
   end
 
   def authenticate_admin_user!
-    return false if current_user.nil?
-    return unless current_user.admin?
-    flash[:alert] = 'You are not an administrator.'
-    redirect_to root_path
+    current_user.admin?
   end
 end
