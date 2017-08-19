@@ -11,7 +11,6 @@ class GetPennMembersJob < ApplicationJob
       added += members.length
       add_members(members)
       members = members.next
-      p "added #{added} so far..."
     end
   end
 

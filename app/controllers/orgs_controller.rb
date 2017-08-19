@@ -22,7 +22,6 @@ class OrgsController < ApplicationController
   # GET /orgs/1
   # GET /orgs/1.json
   def show
-    # TODO: head's up this is broken
     ScrapeNewEventsJob.perform_later(@org, access_token) if @org.fb? && user_signed_in?
   end
 
@@ -44,11 +43,11 @@ class OrgsController < ApplicationController
   # POST /orgs.json
   def create
     @org = Org.new(org_params)
-    ScrapeNewEventsJob.perform_now(@org, access_token) if @org.fb? && user_signed_in?
 
     respond_to do |format|
       if @org.save
         current_user.orgs << @org
+        ScrapeNewEventsJob.perform_now(@org, access_token) if @org.fb? && user_signed_in?
         format.html { redirect_to @org, notice: "#{@org.name} was successfully created." }
         format.json { render :show, status: :created, location: @org }
       else
