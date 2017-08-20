@@ -50,6 +50,6 @@ class Event < ApplicationRecord
 
   # TODO: dummy categories
   def self.categories
-    %w[Arts Sports Publications]
+    %w(EVENT_CAUSE)
   end
 end

@@ -4,11 +4,13 @@ class GetPennMembersJob < ApplicationJob
   def perform(access_token)
     group = FbGraph2::Group.new('206461236135166').authenticate(access_token)
     group.fetch
-    add_members(group.members)
+    added = 0
+    members = group.members(limit: 500)
     loop do
-      group.members.next
-      break unless group.members.length
-      add_members(group.members)
+      break if members.empty?
+      added += members.length
+      add_members(members)
+      members = members.next
     end
   end
 
