@@ -1,4 +1,5 @@
 require_relative 'boot'
+require 'raven'
 require 'rails/all'
 
 # Require the gems listed in Gemfile, including any gems
