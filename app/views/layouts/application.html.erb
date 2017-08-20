@@ -16,17 +16,28 @@
     </header>
     <main role="main">
       <div class="container-fluid main">
-        <div class="col-app">
+        <% if mobile_device? %>
+        <div>
+        <% else %>
+          <div class="col-app">
+        <% end %>
           <%= render 'layouts/messages' %>
           <%= render 'ads/leaderboard' %>
           <%= yield %>
         </div>
-        <div class="col-ads">
-          <%= render 'ads/rectangle1' %>
-          <%= render 'ads/rectangle2' %>
-        </div>
+
+        <% unless mobile_device? %>
+          <div class="col-ads">
+            <%= render 'ads/rectangle1' %>
+            <%= render 'ads/rectangle2' %>
+          </div>
+        <% end %>
       </div>
     </main>
+    <div>
+      <%= render 'ads/rectangle1' if mobile_device? %>
+      <%= render 'ads/rectangle2' if mobile_device? %>
+    </div>
     <footer>
       <%= render 'layouts/navbottom' %>
     </footer>

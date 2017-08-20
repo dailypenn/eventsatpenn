@@ -63,6 +63,6 @@ class ApplicationController < ActionController::Base
       Silk-Accelerated|(hpw|web)OS|Fennec|Minimo|Opera M(obi|ini)|Blazer|Dolfin|
       Dolphin|Skyfire|Zune/
     )
-    request.user_agent.match(ua_regex).nil?
+    !request.user_agent.match(ua_regex).nil?
   end
 end
