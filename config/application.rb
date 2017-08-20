@@ -18,9 +18,6 @@ module Eventsatpenn
     # Set calendar first-day of week to Sunday, since this 'Murica
     config.beginning_of_week = :sunday
 
-    # Make Facebook work pls
-    config.whiny_nils = false
-
     # Google tag manager
     GoogleTagManager.gtm_id = Rails.application.secrets.gtm_id
   end
