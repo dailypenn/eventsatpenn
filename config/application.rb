@@ -1,10 +1,12 @@
 require_relative 'boot'
-
 require 'rails/all'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
+Raven.configure do |config|
+  config.dsn = ENV['SENTRY_DSN']
+end
 
 module Eventsatpenn
   class Application < Rails::Application

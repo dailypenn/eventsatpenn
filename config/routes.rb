@@ -15,4 +15,7 @@ Rails.application.routes.draw do
 
   # Orgs
   post '/orgs/new/fb' => 'orgs#new_from_fb'
+
+  # Sentry endpoint for testing
+  # get '/sentry' => 'sentry#exception'
 end
