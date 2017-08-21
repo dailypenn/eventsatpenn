@@ -8,7 +8,6 @@ class ApplicationController < ActionController::Base
   ###########################
 
   def index
-    p mobile_device?
     render :'welcome/index.html.erb', layout: 'calendar'
   end
 
