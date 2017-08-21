@@ -27,6 +27,7 @@ gem 'momentjs-rails', '>= 2.9.0'
 gem 'bootstrap3-datetimepicker-rails', '~> 4.17.47'
 gem 'activeadmin', github: 'activeadmin'
 gem 'active_bootstrap_skin'
+gem 'google-tag-manager-rails', '~> 0.1.3'
 
 group :production do
   gem 'sentry-raven'

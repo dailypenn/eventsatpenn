@@ -7,6 +7,7 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito:300,400,400i,900" rel="stylesheet">
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => 'reload' %>
+    <%= google_tag_manager %>
     <%= csrf_meta_tags %>
 
     <%-# favicons %>
@@ -27,17 +28,28 @@
     </header>
     <main role="main">
       <div class="container-fluid main">
-        <div class="col-app">
+        <% if mobile_device? %>
+        <div>
+        <% else %>
+          <div class="col-app">
+        <% end %>
           <%= render 'layouts/messages' %>
+          <%= render 'ads/leaderboard' %>
           <%= yield %>
         </div>
-        <div class="col-ads">
-          <img src="/assets/medrect.png" alt="Medium Rectangle Ad">
-          <br>
-          <img src="/assets/medrect.png" alt="Medium Rectangle Ad">
-        </div>
+
+        <% unless mobile_device? %>
+          <div class="col-ads">
+            <%= render 'ads/rectangle1' %>
+            <%= render 'ads/rectangle2' %>
+          </div>
+        <% end %>
       </div>
     </main>
+    <div>
+      <%= render 'ads/rectangle1' if mobile_device? %>
+      <%= render 'ads/rectangle2' if mobile_device? %>
+    </div>
     <footer>
       <%= render 'layouts/navbottom' %>
     </footer>

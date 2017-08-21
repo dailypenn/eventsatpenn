@@ -17,6 +17,9 @@ module Eventsatpenn
     # Set calendar first-day of week to Sunday, since this 'Murica
     config.beginning_of_week = :sunday
 
+    # Google tag manager
+    GoogleTagManager.gtm_id = Rails.application.secrets.gtm_id
+
     # filtered parameters that won't be sent to sentry
     config.filter_parameters << :password
   end

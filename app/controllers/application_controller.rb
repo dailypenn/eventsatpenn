@@ -5,15 +5,24 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
+  ###########################
+  ##   Top Level Routing   ##
+  ###########################
+
+  def index
+    render :'welcome/index.html.erb', layout: 'calendar'
+  end
+
+  ###########################
+  ## Global Helper Methods ##
+  ###########################
+
   helper_method :current_user
   helper_method :user_fb_pages
   helper_method :access_token
   helper_method :user_signed_in?
   helper_method :correct_user?
-
-  def index
-    render :'welcome/index.html.erb', layout: 'calendar'
-  end
+  helper_method :mobile_device?
 
   def current_user
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
@@ -50,9 +59,16 @@ class ApplicationController < ActionController::Base
   end
 
   def authenticate_admin_user!
-    return false if current_user.nil?
-    return unless current_user.admin?
-    flash[:alert] = 'You are not an administrator.'
-    redirect_to root_path
+    current_user.admin?
+  end
+
+  def mobile_device?
+    # The "98%" Solution for mobile user_agents https://git.io/v5fTp
+    ua_regex = %(
+      /Mobile|iP(hone|od|ad)|Android|BlackBerry|IEMobile|Kindle|NetFront|
+      Silk-Accelerated|(hpw|web)OS|Fennec|Minimo|Opera M(obi|ini)|Blazer|Dolfin|
+      Dolphin|Skyfire|Zune/
+    )
+    !request.user_agent.match(ua_regex).nil?
   end
 end

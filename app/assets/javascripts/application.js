@@ -38,6 +38,13 @@ function formatDate(date) {
 }
 
 document.addEventListener("turbolinks:load", function() {
+  var url = event.data.url;
+
+  dataLayer.push({
+    'event':'pageView',
+    'virtualUrl': url
+  });
+
   $('td.day').on('click', function(e) {
     $('td.day').removeClass('active')
     $(e.currentTarget).addClass('active')
