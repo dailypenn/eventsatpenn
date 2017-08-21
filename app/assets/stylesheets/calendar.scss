@@ -3,6 +3,29 @@
   display: inline;
 }
 
+.hour-events, .all-day-events {
+  .row {
+    margin-bottom: 10px;
+
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.day-view {
+  &.event {
+  background-color: #aa1e22;
+  color: #ffffff;
+  border-radius: 4px;
+  padding: 10px;
+}
+
+  a {
+    color: #fff;
+  }
+}
+
 .simple-calendar {
   border-color: #ddd;
 
@@ -30,6 +53,7 @@
     border-style: hidden; /* hide standard table (collapsed) border */
     border-radius: 4px;
     box-shadow: 0 0 0 1px #ddd; // fake border
+    table-layout: fixed;
   }
 
   thead tr th:first-child {
@@ -58,8 +82,30 @@
 
   .day {
     width: 14.285%; // 1/7th
+    max-width: 14.285%; // 1/7th
     height: 115px;
     border: 1px solid #ddd;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .calendar-event {
+    color: #aa1e22;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .more-events {
+    font-size: 0.8em;
+    font-style: italic;
+    text-align: right;
+    cursor: pointer;
+  }
+
+  .mobile-weekday {
+    display: none;
   }
 
   .current-month {
@@ -86,12 +132,10 @@
     }
   }
 
-  .past {}
   .prev-month{
     background-color: #fff;
   }
 
-  .future {}
   .next-month{
     background-color: #fff;
   }
@@ -117,12 +161,21 @@
       padding: 10px;
     }
 
+    .calendar-heading {
+      a {
+        display: none;
+      }
+    }
+
     .day {
       display: table;
       width: 100%;
+      max-width: 100%;
       border: none;
       border-bottom: 1px solid #ddd;
       height: auto;
+      white-space: normal;
+      overflow: visible;
 
       &:last-of-type {
         border-bottom: none;
@@ -141,6 +194,7 @@
 
     .calendar-event {
       margin: 10px;
+      white-space: normal;
     }
 
     .calendar-heading {
@@ -158,19 +212,10 @@
         text-align: center;
       }
     }
-  }
-}
 
-
-.day-view {
-  &.event {
-    background-color: #aa1e22;
-    color: #ffffff;
-    border-radius: 4px;
-    padding: 10px;
-  }
-
-  a {
-    color: #fff;
+    .more-events {
+      margin-bottom: 10px;
+      margin-right: 10px;
+    }
   }
 }

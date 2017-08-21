@@ -129,11 +129,4 @@ document.addEventListener('turbolinks:load', function() {
   if (window.location.pathname == '/events/new') {
     $('.calendar-sidebar').addClass('new-event');
   }
-
-  if (screen.width < 768) {
-    var heading = document.getElementsByClassName('calendar-heading')[0];
-    var links = heading.getElementsByTagName('a');
-    heading.removeChild(links[0]);
-    heading.removeChild(links[0]);
-  }
 });

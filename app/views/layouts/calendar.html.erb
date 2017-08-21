@@ -39,32 +39,37 @@
             <% end %>
             <% @events = Event.all %>
             <%= month_calendar(attribute: :start_date, end_attribute: :end_date, events: @events) do |d, meetings| %>
-            <div class="date" data-date="<%= "#{d.strftime("%Y-%m-%d")}" %>">
-              <span class="date-num"><%= d.day %></span>
-              <% if mobile_device? %>
-                <% case d.wday %>
-                  <% when 0 %>
-                    <span class="mobile-weekday">Sunday</span>
-                  <% when 1 %>
-                    <span class="mobile-weekday">Monday</span>
-                  <% when 2 %>
-                    <span class="mobile-weekday">Tuesday</span>
-                  <% when 3 %>
-                    <span class="mobile-weekday">Wednesday</span>
-                  <% when 4 %>
-                    <span class="mobile-weekday">Thursday</span>
-                  <% when 5 %>
-                    <span class="mobile-weekday">Friday</span>
-                  <% when 6 %>
-                    <span class="mobile-weekday">Saturday</span>
-                <% end %>
+              <div class="date" data-date="<%= "#{d.strftime("%Y-%m-%d")}" %>">
+                <span class="date-num"><%= d.day %></span>
+                <span class="mobile-weekday">
+                  <% case d.wday %>
+                    <% when 0 %>
+                      Sunday
+                    <% when 1 %>
+                      Monday
+                    <% when 2 %>
+                      Tuesday
+                    <% when 3 %>
+                      Wednesday
+                    <% when 4 %>
+                      Thursday
+                    <% when 5 %>
+                      Friday
+                    <% when 6 %>
+                      Saturday
+                  <% end %>
+                </span>
+              </div>
+              <% meetings.take(3).each do |event| %>
+                <div class="calendar-event">
+                  <%= link_to event.title, event, class: 'event-link' %>
+                </div>
               <% end %>
-            </div>
-            <% meetings.each do |event| %>
-            <div class="calendar-event">
-              <%= link_to event.title, event %>
-            </div>
-            <% end %>
+              <% if meetings.length > 3 %>
+                <div class="more-events">
+                  More (<%= meetings.length - 3 %>)
+                </div>
+              <% end %>
             <% end %>
           </div>
           <div class="col-md-4">

@@ -235,15 +235,8 @@ section {
   border-radius: 4px;
   margin-top: 50px;
   margin-left: -15px;
-  max-height: calc(100% - 100px);
-  overflow: scroll;
 
-  &.new-event {
-    margin-top: 15px;
-    overflow: visible;
-  }
-
-  &.display-events {
+  &.new-event, &.display-events {
     margin-top: 15px;
   }
 
@@ -272,7 +265,7 @@ section {
 }
 
 .list-all {
-  max-height: calc(100vh - 270px);
+  max-height: calc(100vh - 340px);
   padding: 15px;
   padding-top: 0px;
   margin-top: 10px;
@@ -316,10 +309,8 @@ section {
 }
 
 .add-org-form {
-  max-height: calc(100vh - 210px);
   padding: 15px;
   margin-top: 10px;
-  overflow: scroll;
 
   &.list-all {
     padding-top: 0px;
@@ -327,9 +318,7 @@ section {
 }
 
 .add-org-fb-form, .edit-event-form {
-  max-height: calc(100vh - 140px);
   padding: 15px;
-  overflow: scroll;
 }
 
 .form-group {
@@ -430,6 +419,10 @@ label {
 }
 
 @media screen and (max-width: 768px) {
+  .calendar-sidebar {
+    margin-top: 15px;
+  }
+
   .list-search, .list-categories, .list-add {
     padding-left: 0px;
     padding-right: 0px;
@@ -441,6 +434,14 @@ label {
 
   .page-title {
     text-align: center;
+  }
+
+  .add-event-start {
+    padding-right: 15px;
+  }
+
+  .add-event-end {
+    padding-left: 15px;
   }
 }
 
