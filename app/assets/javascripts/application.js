@@ -108,9 +108,8 @@ document.addEventListener("turbolinks:load", function() {
       htmlStr += '  </div>'
     } else {
       var date = new Date(event.start_date);
-      var zonediff = date.getTimezoneOffset() / 60; // HACK: Turn this all into erb view
       var suffix = (date.getHours() >= 12)? 'pm' : 'am';
-      var h = ((date.getHours() + 11) % 12 + 1 + zonediff);
+      var h = ((date.getHours() + 11) % 12 + 1);
       htmlStr += '  <div class="col-xs-3 day-view time">'
       htmlStr += h + '<sup>&nbsp;' + suffix + '</sup>'
       htmlStr += '  </div>'
