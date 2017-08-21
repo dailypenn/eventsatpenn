@@ -27,9 +27,12 @@ gem 'momentjs-rails', '>= 2.9.0'
 gem 'bootstrap3-datetimepicker-rails', '~> 4.17.47'
 gem 'activeadmin', github: 'activeadmin'
 gem 'active_bootstrap_skin'
-gem 'sentry-raven'
-gem 'mysql2'
 
+group :production do
+  gem 'sentry-raven'
+  gem 'mysql2'
+  gem 'unicorn'
+end
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'capybara', '~> 2.13'
