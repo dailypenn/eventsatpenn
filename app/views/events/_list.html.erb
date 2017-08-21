@@ -3,7 +3,12 @@
     <div class="panel panel-default filled list-all">
       <% @events.each do |event| %>
         <div class="row">
-          <%= link_to event.title, event %>
+          <%= link_to event.title, event %> by
+          <em><%= link_to event.org.name, event.org %></em> on
+          <em>
+            <%= event.start_date.strftime("%A, %B %d at %l:%M %P") unless event.all_day %>
+            <%= event.start_date.strftime("%A, %B %d") if event.all_day %>
+          </em>
         </div>
       <% end %>
       <% if @events.empty? %>
