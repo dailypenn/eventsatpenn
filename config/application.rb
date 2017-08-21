@@ -1,5 +1,4 @@
 require_relative 'boot'
-
 require 'rails/all'
 
 # Require the gems listed in Gemfile, including any gems
@@ -20,5 +19,8 @@ module Eventsatpenn
 
     # Google tag manager
     GoogleTagManager.gtm_id = Rails.application.secrets.gtm_id
+
+    # filtered parameters that won't be sent to sentry
+    config.filter_parameters << :password
   end
 end

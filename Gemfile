@@ -12,7 +12,6 @@ ruby '2.4.0'
 
 # Gems
 gem 'rails', '~> 5.1.1'
-gem 'sqlite3'
 gem 'puma', '~> 3.7'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
@@ -30,10 +29,16 @@ gem 'activeadmin', github: 'activeadmin'
 gem 'active_bootstrap_skin'
 gem 'google-tag-manager-rails', '~> 0.1.3'
 
+group :production do
+  gem 'sentry-raven'
+  gem 'mysql2'
+  gem 'unicorn'
+end
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'capybara', '~> 2.13'
   gem 'selenium-webdriver'
+  gem 'sqlite3'
 end
 group :development do
   gem 'web-console', '>= 3.3.0'
