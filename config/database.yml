@@ -22,4 +22,8 @@ test:
 
 production:
   adapter: mysql2
-  url: <%= ENV['DATABASE_URL'] %>
+  host: 127.0.0.1
+  port: 3306
+  database: <%= ENV.fetch("DB_NAME") %>
+  username: <%= ENV.fetch("DB_USERNAME") %>
+  password: <%= ENV.fetch("DB_PASSWORD") %>
