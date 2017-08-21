@@ -17,8 +17,7 @@ module Eventsatpenn
     # Set calendar first-day of week to Sunday, since this 'Murica
     config.beginning_of_week = :sunday
 
-    Raven.configure do |config|
-      config.dsn = 'https://bc380f8287694c2d9a3597b374e6dd07:27a8dc2c1cea49d3af537d6a49778394@sentry.io/205950'
-    end
+    # filtered parameters that won't be sent to sentry
+    config.filter_parameters << :password
   end
 end
