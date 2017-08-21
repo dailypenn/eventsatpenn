@@ -37,7 +37,7 @@ function formatDate(date) {
   return weekday + ', ' + month + ' ' + day + ', ' + year;
 }
 
-document.addEventListener("turbolinks:load", function() {
+document.addEventListener('turbolinks:load', function() {
   var url = event.data.url;
 
   dataLayer.push({
@@ -62,7 +62,7 @@ document.addEventListener("turbolinks:load", function() {
         '<h3 class="text-center">' + formatDate(date) + '</h3>'
       );
 
-      $('.calendar-sidebar')[0].className += ' display-events';
+      $('.calendar-sidebar').addClass('display-events');
 
       if (data.length === 0) {
         $('.calendar-sidebar .panel-body').html('<center class="text-center">There are no events today.</center>');
@@ -121,5 +121,11 @@ document.addEventListener("turbolinks:load", function() {
     }
     htmlStr += '</div>'
     return htmlStr;
+  }
+
+  $('tr:has(td.today)').addClass('current-week');
+
+  if (window.location.pathname == '/events/new') {
+    $('.calendar-sidebar').addClass('new-event');
   }
 });

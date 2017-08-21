@@ -39,32 +39,36 @@
             <% end %>
             <% @events = Event.all %>
             <%= month_calendar(attribute: :start_date, end_attribute: :end_date, events: @events) do |d, meetings| %>
-            <div class="date" data-date="<%= "#{d.strftime("%Y-%m-%d")}" %>">
-              <%= d.day %>
-            </div>
-            <% meetings.each do |event| %>
-            <div class="calendar-event">
-              <%= link_to event.title, event %>
-            </div>
-            <% end %>
+              <div class="date" data-date="<%= "#{d.strftime("%Y-%m-%d")}" %>">
+                <span class="date-num"><%= d.day %></span>
+                <span class="mobile-weekday">
+                  <% weekdays = %w[Sunday Monday Tuesday Wednesday Thursday Friday Saturday] %>
+                  <%= weekdays[d.wday] %>
+                </span>
+              </div>
+              <% meetings.take(3).each do |event| %>
+                <div class="calendar-event">
+                  <%= link_to event.title, event, class: 'event-link' %>
+                </div>
+              <% end %>
+              <% if meetings.length > 3 %>
+                <div class="more-events">
+                  More (<%= meetings.length - 3 %>)
+                </div>
+              <% end %>
             <% end %>
           </div>
           <div class="col-md-4">
-            <% if current_page?(new_event_path) %>
-              <h2 class="new-event">Add Event</h2>
-              <div class="panel panel-default filled calendar-sidebar new-event">
-                <div class="panel-body">
-                  <%= yield %>
-                </div>
+              <div class="panel-date">
+                <% if current_page?(new_event_path) %>
+                  <h3 class="new-event">Add Event</h3>
+                <% end %>
               </div>
-            <% else %>
-              <div class="panel-date"></div>
               <div class="panel panel-default filled calendar-sidebar">
                 <div class="panel-body">
                   <%= yield %>
                 </div>
               </div>
-            <% end %>
             <%= render 'ads/rectangle1' if mobile_device? %>
             <%= render 'ads/rectangle2' if mobile_device? %>
           </div>
