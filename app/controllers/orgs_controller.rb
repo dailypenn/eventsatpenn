@@ -33,7 +33,7 @@ class OrgsController < ApplicationController
     @org = Org.new(name: org_params['name'], category: org_params['category'],
                    fbID: org_params['id'], bio: org_params['about'],
                    website: org_params['website'],
-                   photo_url: org_params['picture']['data']['url'])
+                   photo_url: org_params['image_large'])
   end
 
   # GET /orgs/1/edit
@@ -47,7 +47,7 @@ class OrgsController < ApplicationController
 
     if @org.save
       current_user.orgs << @org
-      ScrapeNewEventsJob.perform_now(@org, access_token) if @org.fb? && user_signed_in?
+      ScrapeNewEventsJob.perform_later(@org, access_token) if @org.fb? && user_signed_in?
       redirect_to @org, notice: "#{@org.name} was successfully created."
     else
       render :new
