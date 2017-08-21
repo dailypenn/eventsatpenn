@@ -233,18 +233,18 @@ section {
 
 .calendar-sidebar {
   border-radius: 4px;
-  margin-top: 43px;
+  margin-top: 50px;
   margin-left: -15px;
   max-height: calc(100% - 100px);
   overflow: scroll;
 
   &.new-event {
-    margin-top: 10px;
+    margin-top: 15px;
     overflow: visible;
   }
 
   &.display-events {
-    margin-top: 17px;
+    margin-top: 15px;
   }
 
   .hour-events {
@@ -267,6 +267,7 @@ section {
   h3 {
     margin: 0;
     margin-right: 15px;
+    margin-top: 10px;
   }
 }
 
@@ -436,6 +437,10 @@ label {
     .list-add-btn {
       margin-top: 0px;
     }
+  }
+
+  .page-title {
+    text-align: center;
   }
 }
 

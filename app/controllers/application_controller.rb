@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
-  before_action :set_raven_context
+  env = ENV.fetch('RAILS_ENV') { 'development' }
+  before_action :set_raven_context if env == 'production'
 
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
@@ -40,9 +41,11 @@ class ApplicationController < ActionController::Base
 
   private
 
-  def set_raven_context
-    Raven.user_context(id: session[:user_hash])
-    Raven.extra_context(params: params.to_unsafe_h, url: request.url)
+  if env == 'production'
+    def set_raven_context
+      Raven.user_context(id: session[:user_hash])
+      Raven.extra_context(params: params.to_unsafe_h, url: request.url)
+    end
   end
 
   def user_signed_in?

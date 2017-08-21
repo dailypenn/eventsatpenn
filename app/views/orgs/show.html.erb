@@ -1,4 +1,6 @@
-<h1 class="pill"><%= @org.name %></h1><br>
+<div class="page-title">
+  <h1 class="pill"><%= @org.name %></h1>
+</div>
 
 <div class="row">
   <div class="col-md-6">
@@ -15,7 +17,7 @@
         <% unless @org.photo_url.empty? %>
           <img class="img img-responsive" src="<%= @org.photo_url %>" alt="<%= @org.name%> photo">
         <% end %>
-        
+
         <% unless @org.bio.empty? %>
           <h3 class="org-headers">Description:</h3>
           <p><%= @org.bio %></p>
