@@ -11,6 +11,7 @@
         <% fb_page = FbGraph2::Page.new(page.id).authenticate(access_token) %>
         <% fb_page = fb_page.fetch(fields: 'name,about,category,link,website,picture') %>
         <% page = fb_page.raw_attributes %>
+        <% page['image_large'] = fb_page.picture(:large).url %>
         <div class="row">
           <%= link_to page[:name], orgs_new_fb_path(fb_page: page), method: :post %> <br>
         </div>
