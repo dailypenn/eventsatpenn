@@ -37,7 +37,7 @@
     a {
       display: inline-block;
 
-      &.week-prev-next {
+      &.week-prev-next, &.week {
         display: none;
       }
     }

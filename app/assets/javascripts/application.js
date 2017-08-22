@@ -134,8 +134,8 @@ document.addEventListener('turbolinks:load', function() {
   // Create previous and next links for week view on mobile
   $('.calendar-heading a:contains("Previous")').addClass('month');
   $('.calendar-heading a:contains("Next")').addClass('month');
-  $('.calendar-heading').prepend('<a class="week-prev-next prev">Previous</a>');
-  $('.calendar-heading').append('<a class="week-prev-next next">Next</a>');
+  $('.calendar-heading').prepend('<a class="week week-prev-next prev">Previous</a>');
+  $('.calendar-heading').append('<a class="week week-prev-next next">Next</a>');
 
   // Previous links
   $('.week-prev-next.prev').on('click', function(e) {
