@@ -125,6 +125,22 @@ document.addEventListener('turbolinks:load', function() {
 
   $('tr:has(td.today)').addClass('current-week');
 
+  // Create previous and next links for week view on mobile
+  $('.calendar-heading').prepend('<a class="week-prev-next prev">Previous</a>');
+  $('.calendar-heading').append('<a class="week-prev-next next">Next</a>');
+  $('.week-prev-next.prev').on('click', function(e) {
+    $('.current-week').addClass('remove');
+    $('.current-week').prev().addClass('current-week');
+    $('.remove').removeClass('current-week');
+    $('.remove').removeClass('remove');
+  });
+  $('.week-prev-next.next').on('click', function(e) {
+    $('.current-week').addClass('remove');
+    $('.current-week').next().addClass('current-week');
+    $('.remove').removeClass('current-week');
+    $('.remove').removeClass('remove');
+  });
+
   if (window.location.pathname == '/events/new') {
     $('.calendar-sidebar').addClass('new-event');
   }
