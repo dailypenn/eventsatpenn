@@ -44,23 +44,45 @@
   </div>
 
   <div class="col-md-6 right-hand-panel">
+    <%# Upcoming Events %>
+    <% upcoming = @org.events.where('end_date >= ?', Time.new) %>
     <div class="panel panel-default">
       <div class="panel-heading">
         <h3 class="panel-title">Upcoming Events</h3>
       </div>
       <div class="panel-body list-all show">
-        <% if @org.events.empty? %>
+        <% if upcoming.empty? %>
         <div class="row">
           <%= @org.name %> has no upcoming events.
         </div>
         <% end %>
-        <% @org.events.each do |event| %>
+        <% upcoming.each do |event| %>
           <div class="row">
             <%= link_to event.title, event %> on <%= event.start_date.strftime("%A, %B %d, %Y") %>
           </div>
         <% end %>
       </div>
     </div>
-  </div>
 
+    <%# Past Events %>
+    <% past = @org.events.where('end_date < ?', Time.new) %>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Past Events</h3>
+      </div>
+      <div class="panel-body list-all show">
+        <% if past.empty? %>
+        <div class="row">
+          <%= @org.name %> has no past events.
+        </div>
+        <% end %>
+        <% past.each do |event| %>
+          <div class="row">
+            <%= link_to event.title, event %> on <%= event.start_date.strftime("%A, %B %d, %Y") %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+  </div>
 </div>
