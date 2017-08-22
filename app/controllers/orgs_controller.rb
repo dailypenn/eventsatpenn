@@ -20,6 +20,13 @@ class OrgsController < ApplicationController
   # GET /orgs/1
   # GET /orgs/1.json
   def show
+    @org = Org.find(params[:id])
+    set_meta_tags og: {
+      title: "#{@org.name} on Events@Penn",
+      type:  'website',
+      description: @org.bio,
+      image: @org.photo_url
+    }
     ScrapeNewEventsJob.perform_later(@org, access_token) if @org.fb? && user_signed_in?
   end
 

@@ -8,6 +8,11 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    set_meta_tags og: {
+      title: "#{@user.full_name}'s Profile on Events@Penn",
+      type:  'website',
+      image: @user.image_url
+    }
   end
 
   def fb_pages

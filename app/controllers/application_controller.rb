@@ -14,6 +14,12 @@ class ApplicationController < ActionController::Base
     @meta_description = %(
       Your guide to all the events Penn and Philly have to offer.
     )
+    set_meta_tags og: {
+      title: 'Events@Penn',
+      url:   'http://www.eventsatpenn.com/',
+      type:  'website',
+      image: ''
+    }
     render :'welcome/index.html.erb', layout: 'calendar'
   end
 
