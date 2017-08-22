@@ -30,7 +30,7 @@ class OrgsController < ApplicationController
       title: "#{@org.name} on Events@Penn",
       type:  'website',
       description: @org.bio,
-      image: @org.photo_url
+      image: @org.photo_url.nil? ? og_fallback : @org.photo_url
     }
     ScrapeNewEventsJob.perform_later(@org, access_token) if @org.fb? && user_signed_in?
   end

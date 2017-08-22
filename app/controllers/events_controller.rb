@@ -39,7 +39,7 @@ class EventsController < ApplicationController
     set_meta_tags og: {
       title: "#{@event.title} on Events@Penn",
       type:  'website',
-      image: @event.org.photo_url
+      image: @event.org.photo_url.nil? ? og_fallback : @event.org.photo_url
     }
   end
 
