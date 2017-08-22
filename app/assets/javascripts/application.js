@@ -63,7 +63,7 @@ document.addEventListener("turbolinks:load", function() {
         '<h3 class="text-center">' + formatDate(date) + '</h3>'
       );
 
-      $('.calendar-sidebar')[0].className += ' display-events';
+      $('.calendar-sidebar').addClass('display-events');
 
       if (data.length === 0) {
         $('.calendar-sidebar .panel-body').html('<center class="text-center">There are no events today.</center>');
@@ -105,13 +105,12 @@ document.addEventListener("turbolinks:load", function() {
       htmlStr += '  <div class="col-xs-12 day-view event">'
       htmlStr += '    <strong>' + event.title + '</strong><br>'
       htmlStr +=      event.location
-      htmlStr += '    <a href="' + event.url + '" class="pull-right more"><em>more&nbsp</em>&#10140</a>'
+      htmlStr += '    <a href="/events/' + event.id + '" class="pull-right more"><em>more&nbsp</em>&#10140</a>'
       htmlStr += '  </div>'
     } else {
       var date = new Date(event.start_date);
       var suffix = (date.getHours() >= 12)? 'pm' : 'am';
       var h = ((date.getHours() + 11) % 12 + 1);
-      var m = date.getMinutes();
       htmlStr += '  <div class="col-xs-3 day-view time">'
       htmlStr += h + '<sup>&nbsp;' + suffix + '</sup>'
       htmlStr += '  </div>'
@@ -123,5 +122,11 @@ document.addEventListener("turbolinks:load", function() {
     }
     htmlStr += '</div>'
     return htmlStr;
+  }
+
+  $('tr:has(td.today)').addClass('current-week');
+
+  if (window.location.pathname == '/events/new') {
+    $('.calendar-sidebar').addClass('new-event');
   }
 });
