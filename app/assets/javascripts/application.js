@@ -37,14 +37,15 @@ function formatDate(date) {
   return weekday + ', ' + month + ' ' + day + ', ' + year;
 }
 
-document.addEventListener('turbolinks:load', function() {
+document.addEventListener("gtm.load", function() {
   var url = event.data.url;
-
   dataLayer.push({
     'event':'pageView',
     'virtualUrl': url
   });
+})
 
+document.addEventListener("turbolinks:load", function() {
   $('td.day').on('click', function(e) {
     $('td.day').removeClass('active')
     $(e.currentTarget).addClass('active')
