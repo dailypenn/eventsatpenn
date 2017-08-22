@@ -5,10 +5,13 @@ class Org < ApplicationRecord
 
   has_and_belongs_to_many :users
   has_many :events
+
   validates :name, presence: true, uniqueness: true
   validates :category, presence: true
   validate :valid_website?
   validate :valid_photo?
+
+  before_validation :format_url
 
   scope :search_query, (lambda { |query|
     return nil if query.blank?
@@ -55,5 +58,11 @@ class Org < ApplicationRecord
   # NB: these may need to be updated
   def self.categories
     ['College & University', 'Community Organization', 'Community Services', 'Education',  'Political Organization', 'Religious Organization', 'Science', 'Technology & Engineering', 'Camera/Photo', 'Website', 'Magazine', 'Newspaper', 'Radio Station', 'Sports Team', 'Theatrical Productions']
+  end
+
+  private
+
+  def format_url
+    self.website = "http://#{self.website}" unless self.website[/^https?/]
   end
 end
