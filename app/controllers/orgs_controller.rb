@@ -32,7 +32,7 @@ class OrgsController < ApplicationController
     org_params = params['fb_page']
     @org = Org.new(name: org_params['name'], category: org_params['category'],
                    fbID: org_params['id'], bio: org_params['about'],
-                   website: "#{org_params['website']}",
+                   website: org_params['website'],
                    photo_url: org_params['image_large'])
   end
 

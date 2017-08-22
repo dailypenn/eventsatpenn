@@ -43,7 +43,7 @@
   </div>
 
   <div class="col-md-6 right-hand-panel">
-    <%# Upcoming Events #%>
+    <%# Upcoming Events %>
     <% upcoming = @org.events.where('end_date >= ?', Time.new) %>
     <div class="panel panel-default">
       <div class="panel-heading">
@@ -63,7 +63,7 @@
       </div>
     </div>
 
-    <%# Past Events #%>
+    <%# Past Events %>
     <% past = @org.events.where('end_date < ?', Time.new) %>
     <div class="panel panel-default">
       <div class="panel-heading">
