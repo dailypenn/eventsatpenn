@@ -3,6 +3,11 @@ class UsersController < ApplicationController
   before_action :correct_user?, except: [:index]
 
   def index
+    set_meta_tags og: {
+      title: 'Users | Events@Penn',
+      type:  'website',
+      image: og_fallback
+    }
     @users = User.all
   end
 

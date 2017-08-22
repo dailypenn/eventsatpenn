@@ -7,7 +7,7 @@ class EventsController < ApplicationController
     set_meta_tags og: {
       title: 'Events | Events@Penn',
       type:  'website',
-      image: ''
+      image: og_fallback
     }
     if params['start_date']
       min = Date.parse(params['start_date'])
