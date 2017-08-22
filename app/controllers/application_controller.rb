@@ -11,6 +11,15 @@ class ApplicationController < ActionController::Base
   ###########################
 
   def index
+    @meta_description = %(
+      Your guide to all the events Penn and Philly have to offer.
+    )
+    set_meta_tags og: {
+      title: 'Events@Penn',
+      url:   'http://www.eventsatpenn.com/',
+      type:  'website',
+      image: og_fallback
+    }
     render :'welcome/index.html.erb', layout: 'calendar'
   end
 
@@ -24,11 +33,16 @@ class ApplicationController < ActionController::Base
   helper_method :user_signed_in?
   helper_method :correct_user?
   helper_method :mobile_device?
+  helper_method :og_fallback
 
   def current_user
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
   rescue
     nil
+  end
+
+  def og_fallback
+    ActionController::Base.helpers.image_path("og-fallback.png")
   end
 
   def user_fb_pages

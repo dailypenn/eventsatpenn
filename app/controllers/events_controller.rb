@@ -4,6 +4,11 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
+    set_meta_tags og: {
+      title: 'Events | Events@Penn',
+      type:  'website',
+      image: og_fallback
+    }
     if params['start_date']
       min = Date.parse(params['start_date'])
       max = Date.parse(params['start_date']) + 1.day
@@ -29,7 +34,14 @@ class EventsController < ApplicationController
 
   # GET /events/1
   # GET /events/1.json
-  def show; end
+  def show
+    @event = Event.find(params[:id])
+    set_meta_tags og: {
+      title: "#{@event.title} on Events@Penn",
+      type:  'website',
+      image: @event.org.photo_url.nil? ? og_fallback : @event.org.photo_url
+    }
+  end
 
   # GET /events/new
   def new

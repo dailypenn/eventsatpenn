@@ -1,7 +1,10 @@
 <%# Shared <HEAD> element tags %>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title><%= content_for?(:title) ? yield(:title) : "Events@Penn" %></title>
-<meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Events@Penn" %>">
+<title><%= @title.nil? ? "Events@Penn" : "#{@title} | Events@Penn" %></title>
+<% if @meta_description.present? %>
+  <meta name="description" content="<%= @meta_description %>">
+<% end %>
+<%= display_meta_tags site: 'Events@Penn' %>
 <link href="https://fonts.googleapis.com/css?family=Nunito:300,400,400i,900" rel="stylesheet">
 <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => 'reload' %>
 <%= javascript_include_tag 'application', 'data-turbolinks-track' => 'reload' %>
