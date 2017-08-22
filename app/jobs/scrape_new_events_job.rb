@@ -5,7 +5,7 @@ class ScrapeNewEventsJob < ApplicationJob
     group = FbGraph2::Page.new(org.fbID).authenticate(access_token)
     added_events = 0
     group.events.each do |event|
-      evt = event.fetch(fields: 'name, category, description, place, start_time, end_time, id')
+      evt = event.fetch(fields: 'name,category,description,place,start_time,end_time,id')
       if Event.find_by(fbID: evt.id).nil?
         create_event_for_org(org, evt)
         added_events += 1
@@ -14,16 +14,33 @@ class ScrapeNewEventsJob < ApplicationJob
   end
 
   def create_event_for_org(org, event)
+    return if event.nil?
     place = event.raw_attributes['place']
+    if place['location'].nil?
+      lat = 0;
+      lon = 0;
+    else
+      lat = place['location']['latitude']
+      lon = place['location']['latitude']
+    end
     new_event = Event.new(
       title: event.name, start_date: event.start_time,
       category: event.raw_attributes['category'],
       end_date: event.end_time, description: event.description,
       all_day: false, recurring: false,
-      location: "#{place['name']}, #{place['location']['street']}",
-      location_lat: place['location']['latitude'],
-      location_lon: place['location']['longitude'], fbID: event.id
+      location: location_str(place),
+      location_lat: lat,
+      location_lon: lon, fbID: event.id
     )
     org.events << new_event
+  end
+
+  def location_str(place)
+    return '' if place.nil?
+    if place['location'].nil?
+      place['name'] unless place['name'].nil?
+    else
+      "#{place['name']}, #{place['location']['street']}"
+    end
   end
 end

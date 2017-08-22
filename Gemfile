@@ -28,6 +28,7 @@ gem 'bootstrap3-datetimepicker-rails', '~> 4.17.47'
 gem 'activeadmin', github: 'activeadmin'
 gem 'active_bootstrap_skin'
 gem 'google-tag-manager-rails', '~> 0.1.3'
+gem 'meta-tags'
 
 group :production do
   gem 'sentry-raven'

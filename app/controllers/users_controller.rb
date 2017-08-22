@@ -2,12 +2,13 @@ class UsersController < ApplicationController
   before_action :authenticate_user!
   before_action :correct_user?, except: [:index]
 
-  def index
-    @users = User.all
-  end
-
   def show
     @user = User.find(params[:id])
+    set_meta_tags og: {
+      title: "#{@user.full_name}'s Profile on Events@Penn",
+      type:  'website',
+      image: @user.image_url.nil? ? og_fallback : @user.image_url
+    }
   end
 
   def fb_pages

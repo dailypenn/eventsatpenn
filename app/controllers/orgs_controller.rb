@@ -4,6 +4,11 @@ class OrgsController < ApplicationController
   # GET /orgs
   # GET /orgs.json
   def index
+    set_meta_tags og: {
+      title: 'Organizations | Events@Penn',
+      type:  'website',
+      image: og_fallback
+    }
     @filterrific = initialize_filterrific(
       Org,
       params[:filterrific],
@@ -20,6 +25,13 @@ class OrgsController < ApplicationController
   # GET /orgs/1
   # GET /orgs/1.json
   def show
+    @org = Org.find(params[:id])
+    set_meta_tags og: {
+      title: "#{@org.name} on Events@Penn",
+      type:  'website',
+      description: @org.bio,
+      image: @org.photo_url.nil? ? og_fallback : @org.photo_url
+    }
     ScrapeNewEventsJob.perform_later(@org, access_token) if @org.fb? && user_signed_in?
   end
 
