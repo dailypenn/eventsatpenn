@@ -76,7 +76,7 @@ main {
   max-width: 100%;
   padding-left: 15px;
   padding-right: 15px;
-  padding-top: 75px;
+  padding-top: 65px;
   min-height: calc(100vh - 50px);
 }
 
@@ -450,5 +450,14 @@ label {
 @media screen and (max-width: 700px) {
   .logo-bottom {
     padding-right: 15px;
+  }
+}
+
+.ad {
+  background-color: #f8f8f8;
+  position: relative;
+
+  &.rectangle {
+    margin-bottom: 10px;
   }
 }
