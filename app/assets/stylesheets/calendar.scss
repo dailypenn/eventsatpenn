@@ -176,7 +176,7 @@
       a {
         display: none;
 
-        &.week-prev-next {
+        &.week-prev-next, &.month-prev-next {
           display: inline-block;
           cursor: pointer;
         }
