@@ -11,6 +11,9 @@ class ApplicationController < ActionController::Base
   ###########################
 
   def index
+    @meta_description = %(
+      Your guide to all the events Penn and Philly have to offer.
+    )
     render :'welcome/index.html.erb', layout: 'calendar'
   end
 
