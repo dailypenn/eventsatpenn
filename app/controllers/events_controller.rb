@@ -1,5 +1,6 @@
 class EventsController < ApplicationController
-  before_action :set_event, only: [:show, :edit, :update, :destroy]
+  before_action :logged_in?, only: %i[new create edit update destroy]
+  before_action :set_event, only: %i[show edit update destroy]
 
   # GET /events
   # GET /events.json
@@ -104,11 +105,19 @@ class EventsController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_event
-    @event = Event.find(params[:id])
+    if Event.exists?(params[:id])
+      @event = Event.find(params[:id])
+    else
+      render file: 'public/404.html', status: :not_found, layout: false
+    end
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def event_params
     params.require(:event).permit(:title, :fbID, :start_date, :end_date, :event_date, :description, :location, :category, :twentyone, :recurring, :recurrence_freq, :recurrence_amt, :all_day, :org)
+  end
+
+  def logged_in?
+    render file: 'public/403.html', status: :forbidden, layout: false unless user_signed_in?
   end
 end

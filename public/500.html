@@ -1,66 +1,87 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>We're sorry, but something went wrong (500)</title>
+  <title>500 Internal Server Error | Events@Penn</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://eventsatpenn.com/favicons/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://eventsatpenn.com/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://eventsatpenn.com/favicons/favicon-16x16.png">
+  <link rel="manifest" href="https://eventsatpenn.com/favicons/manifest.json">
+  <link rel="mask-icon" href="https://eventsatpenn.com/favicons/safari-pinned-tab.svg" color="#aa1e22">
+  <link rel="shortcut icon" href="https://eventsatpenn.com/favicons/favicon.ico">
+  <meta name="msapplication-config" content="https://eventsatpenn.com/favicons/browserconfig.xml">
+  <meta name="apple-mobile-web-app-title" content="Events@Penn">
+  <meta name="application-name" content="Events@Penn">
+  <meta name="theme-color" content="#aa1e22">
   <style>
-  .rails-default-error-page {
-    background-color: #EFEFEF;
-    color: #2E2F30;
+  .error-page {
+    background-color: #FFF;
+    color: #333;
     text-align: center;
-    font-family: arial, sans-serif;
+    font-family: 'Nunito', arial, sans-serif;
     margin: 0;
   }
 
-  .rails-default-error-page div.dialog {
-    width: 95%;
+  .error-page div.header {
+    padding: 10px;
+    background-color: #F5F5F5;
+    border-bottom: 1px solid #DDD;
+  }
+
+  .error-page img {
+    height: 28px;
+  }
+
+  .error-page div.dialog {
+    text-align: center;
+    width: 90%;
     max-width: 33em;
-    margin: 4em auto 0;
+    margin: 8em auto 20px;
   }
 
-  .rails-default-error-page div.dialog > div {
-    border: 1px solid #CCC;
-    border-right-color: #999;
-    border-left-color: #999;
-    border-bottom-color: #BBB;
-    border-top: #B00100 solid 4px;
-    border-top-left-radius: 9px;
-    border-top-right-radius: 9px;
-    background-color: white;
-    padding: 7px 12% 0;
-    box-shadow: 0 3px 8px rgba(50, 50, 50, 0.17);
+  .error-page div.dialog > div {
+    border: 1px solid #AA1E22;
+    background-color: #F5F5F5;
+    border-radius: 4px;
+    padding: 15px;
   }
 
-  .rails-default-error-page h1 {
-    font-size: 100%;
-    color: #730E15;
+  .error-page h1 {
+    font-size: 1.25em;
+    color: #AA1E22;
     line-height: 1.5em;
   }
 
-  .rails-default-error-page div.dialog > p {
-    margin: 0 0 1em;
-    padding: 1em;
-    background-color: #F7F7F7;
-    border: 1px solid #CCC;
-    border-right-color: #999;
-    border-left-color: #999;
-    border-bottom-color: #999;
-    border-bottom-left-radius: 4px;
-    border-bottom-right-radius: 4px;
-    border-top-color: #DADADA;
-    color: #666;
-    box-shadow: 0 3px 8px rgba(50, 50, 50, 0.17);
+  .error-page .btn {
+    display: block;
+    margin: auto;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    width: 10em;
+    text-decoration: none;
+    color: #AA1E22;
+    border: 1px solid #AA1E22;
+    background-color: #FFF;
+    border-radius: 3px;
+    padding: 5px;
+  }
+
+  .error-page .btn:hover, .error-page .btn:active {
+    background-color: #F4E3E3;
   }
   </style>
 </head>
 
-<body class="rails-default-error-page">
-  <!-- This file lives in public/500.html -->
+<body class="error-page">
+  <div class="header">
+    <a href="https://eventsatpenn.com"><img src="https://eventsatpenn.com/logotype.svg" alt="Events@Penn"></a>
+  </div>
   <div class="dialog">
     <div>
-      <h1>We're sorry, but something went wrong.</h1>
+      <h1>Something went wrong ¯\_(ツ)_/¯</h1>
+      <p>We're working on a fix!</p>
+      <a href="mailto:eventsatpenn@thedp.com" class="btn">Report this as a bug</a>
     </div>
-    <p>If you are the application owner check the logs for more information.</p>
   </div>
 </body>
 </html>
