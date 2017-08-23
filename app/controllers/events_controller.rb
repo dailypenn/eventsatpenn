@@ -32,10 +32,16 @@ class EventsController < ApplicationController
   # GET /events/1.json
   def show
     @event = Event.find(params[:id])
+    meta_img = @event.org.photo_url.nil? ? og_fallback : @event.org.photo_url
     set_meta_tags og: {
       title: "#{@event.title} on Events@Penn",
       type:  'website',
-      image: @event.org.photo_url.nil? ? og_fallback : @event.org.photo_url
+      image: meta_img
+    }
+    set_meta_tags twitter: {
+      card: 'summary',
+      title: "#{@event.title} on Events@Penn",
+      image: meta_img
     }
   end
 

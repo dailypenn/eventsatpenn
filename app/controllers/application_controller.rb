@@ -58,7 +58,7 @@ class ApplicationController < ActionController::Base
     title = pretitle.nil? ? 'Events@Penn' : "#{pretitle} | Events@Penn"
     set_meta_tags og: {
       title: title,
-      url:   'http://www.eventsatpenn.com/',
+      url:   'https://www.eventsatpenn.com/',
       type:  'website',
       image:    [{
         _: og_fallback,
@@ -67,7 +67,7 @@ class ApplicationController < ActionController::Base
       }]
     }
     set_meta_tags twitter: {
-      card: "summary_large_image",
+      card: 'summary_large_image',
       title: title,
       image: og_fallback
     }
