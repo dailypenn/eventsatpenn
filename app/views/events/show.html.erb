@@ -37,6 +37,10 @@
         <p><%= @event.description %></p>
       <% end %>
 
+      <% if @event.fb? %>
+        <a href="https://facebook.com/events/<%= @event.fbID %>" target="_blank"><%= @event.title %> on Facebook &#10140;</a>
+      <% end %>
+
       <div class="row">
         <% if @event.org.users.include? current_user %>
           <%= link_to 'Edit this event', edit_event_path(@event) %>
