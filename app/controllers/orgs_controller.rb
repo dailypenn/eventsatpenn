@@ -4,11 +4,7 @@ class OrgsController < ApplicationController
   # GET /orgs
   # GET /orgs.json
   def index
-    set_meta_tags og: {
-      title: 'Organizations | Events@Penn',
-      type:  'website',
-      image: og_fallback
-    }
+    default_og_params('Organizations')
     @filterrific = initialize_filterrific(
       Org,
       params[:filterrific],
