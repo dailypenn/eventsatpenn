@@ -54,6 +54,9 @@ document.addEventListener("turbolinks:load", function() {
     var dateStr = $(e.currentTarget).find('.date')[0].dataset.date;
     var date = new Date(dateStr);
     date.setUTCHours(4);
+    var nextDate = new Date(dateStr);
+    nextDate.setUTCHours(4);
+    nextDate.setDate(nextDate.getDate()+1);
     // Get and parse json
     $.getJSON("/events.json?start_date=" + dateStr, function(data) {
       // clear sidebar
@@ -76,10 +79,10 @@ document.addEventListener("turbolinks:load", function() {
 
       $.each(data, function(i) {
         var event = data[i];
-        if (event.all_day || Date.parse(event.event_date) < date) {
-          allDayEvents.push(htmlStrFromEvent(event, date))
+        if (event.all_day || (Date.parse(event.start_date) < date && Date.parse(event.end_date) >= nextDate)) {
+          allDayEvents.push(htmlStrFromEvent(event, date, nextDate))
         } else {
-          standardEvents.push(htmlStrFromEvent(event, date))
+          standardEvents.push(htmlStrFromEvent(event, date, nextDate))
         }
       });
 
@@ -99,10 +102,10 @@ document.addEventListener("turbolinks:load", function() {
     });
   });
 
-  function htmlStrFromEvent(event, currdate) {
+  function htmlStrFromEvent(event, currdate, nextDate) {
     htmlStr = "";
     htmlStr += '<div class="row event-item-row">'
-    if (event.all_day || Date.parse(event.event_date) < currdate) {
+    if (event.all_day || (Date.parse(event.start_date) < currdate && Date.parse(event.end_date) >= nextDate)) {
       htmlStr += '  <div class="col-xs-12 day-view event">'
       htmlStr += '    <strong>' + event.title + '</strong><br>'
       htmlStr +=      event.location
@@ -112,8 +115,13 @@ document.addEventListener("turbolinks:load", function() {
       var date = new Date(event.start_date);
       var suffix = (date.getHours() >= 12)? 'pm' : 'am';
       var h = ((date.getHours() + 11) % 12 + 1);
+      var dateOnly = new Date(date.setHours(0,0,0,0));
       htmlStr += '  <div class="col-xs-3 day-view time">'
-      htmlStr += h + '<sup>&nbsp;' + suffix + '</sup>'
+      if (Date.parse(dateOnly) != Date.parse(currdate)) {
+        htmlStr += 'cont.'
+      } else {
+        htmlStr += h + '<sup>&nbsp;' + suffix + '</sup>'
+      }
       htmlStr += '  </div>'
       htmlStr += '  <div class="col-xs-9 day-view event">'
       htmlStr += '    <strong>' + event.title + '</strong><br>'
