@@ -1,3 +1,8 @@
+<% content_for :head do %>
+  <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCI47lLK3V7idUtknKKO8YTIUFyCsPtWv4&libraries=places"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/geocomplete/1.7.0/jquery.geocomplete.min.js"></script>
+<% end %>
+
 <%= form_with(model: event, local: true, class: 'form-group') do |form| %>
   <% if event.errors.any? %>
     <div id="error_explanation">
@@ -26,7 +31,9 @@
   </div>
 
   <%= form.label :location %>
-  <%= form.text_field :location, id: :event_location, class: 'form-control' %>
+  <%= form.text_field :location, id: :event_location, class: 'form-control', 'data-geo': 'formatted_address' %>
+  <input name="lat" type="text" style="display:none;">
+  <input name="lng" type="text" style="display:none;">
 
   <div class="checkbox">
     <label>
@@ -76,7 +83,7 @@
         date.style['display'] = 'none';
         date_time.style['display'] = 'block';
       }
-      
+
       all_day.onchange = function() {
         if(this.checked) {
          date.style['display'] = 'block';
@@ -94,6 +101,8 @@
         };
       });
     });
+
+    $("#event_location").geocomplete({ details: "form" });
   </script>
 
   <%= form.label :description %>
