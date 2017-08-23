@@ -45,7 +45,8 @@
               <h4 class="org-name"><%= link_to org.name, org %></h4>
             </div>
             <% end %>
-            <% org.events.each do |event| %>
+            <% upcoming = org.events.where('end_date >= ?', Time.new).sort_by(&:start_date) %>
+            <% upcoming.each do |event| %>
               <div class="row event">
                 <%= link_to event.title, event %> on <%= event.start_date.strftime("%A, %B %d, %Y") %>
               </div>
