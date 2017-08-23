@@ -60,7 +60,6 @@ class EventsController < ApplicationController
     new_event_params['location_lat'] = params['lat']
     new_event_params['location_lon'] = params['lng']
 
-    p new_event_params
     @event = Event.new(new_event_params)
 
     respond_to do |format|
