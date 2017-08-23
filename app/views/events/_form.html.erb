@@ -101,8 +101,9 @@
         };
       });
     });
-
-    $("#event_location").geocomplete({ details: "form" });
+    setTimeout(function () {
+      $("#event_location").geocomplete({ details: "form" });
+    }, 500);
   </script>
 
   <%= form.label :description %>
