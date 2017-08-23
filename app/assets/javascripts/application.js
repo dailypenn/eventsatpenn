@@ -75,10 +75,10 @@ document.addEventListener("turbolinks:load", function() {
 
       $.each(data, function(i) {
         var event = data[i];
-        if (event.all_day) {
-          allDayEvents.push(htmlStrFromEvent(event))
+        if (event.all_day || Date.parse(event.event_date) < date) {
+          allDayEvents.push(htmlStrFromEvent(event, date))
         } else {
-          standardEvents.push(htmlStrFromEvent(event))
+          standardEvents.push(htmlStrFromEvent(event, date))
         }
       });
 
@@ -98,10 +98,10 @@ document.addEventListener("turbolinks:load", function() {
     });
   });
 
-  function htmlStrFromEvent(event) {
+  function htmlStrFromEvent(event, currdate) {
     htmlStr = "";
-    htmlStr += '<div class="row">'
-    if (event.all_day) {
+    htmlStr += '<div class="row event-item-row">'
+    if (event.all_day || Date.parse(event.event_date) < currdate) {
       htmlStr += '  <div class="col-xs-12 day-view event">'
       htmlStr += '    <strong>' + event.title + '</strong><br>'
       htmlStr +=      event.location
