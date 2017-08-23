@@ -26,5 +26,7 @@ production:
   host: 127.0.0.1
   port: 3306
   database: <%= ENV.fetch("DB_NAME") {"foo"} %>
-  username: <%= ENV.fetch("DB_USERNAME") {"foo"}%>
-  password: <%= ENV.fetch("DB_PASSWORD") {"foo"}%>
+  username: <%= ENV.fetch("DB_USERNAME") {"foo"} %>
+  password: <%= ENV.fetch("DB_PASSWORD") {"foo"} %>
+  encoding: utf8mb4
+  collation: utf8mb4_bin
