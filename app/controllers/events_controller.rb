@@ -105,7 +105,11 @@ class EventsController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_event
-    @event = Event.find(params[:id])
+    if Event.exists?(params[:id])
+      @event = Event.find(params[:id])
+    else
+      render file: 'public/404.html', status: :not_found, layout: false
+    end
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
@@ -114,6 +118,6 @@ class EventsController < ApplicationController
   end
 
   def logged_in?
-    redirect_to '/403' unless user_signed_in?
+    render file: 'public/403.html', status: :forbidden, layout: false unless user_signed_in?
   end
 end

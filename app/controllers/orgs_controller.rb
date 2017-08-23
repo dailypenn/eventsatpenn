@@ -50,8 +50,7 @@ class OrgsController < ApplicationController
   end
 
   # GET /orgs/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /orgs
   # POST /orgs.json
@@ -88,7 +87,11 @@ class OrgsController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_org
-    @org = Org.find(params[:id])
+    if Org.exists?(params[:id])
+      @org = Org.find(params[:id])
+    else
+      render file: 'public/404.html', status: :not_found, layout: false
+    end
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
@@ -97,6 +100,6 @@ class OrgsController < ApplicationController
   end
 
   def logged_in?
-    redirect_to '/403' unless user_signed_in?
+    render file: 'public/403.html', status: :forbidden, layout: false unless user_signed_in?
   end
 end
