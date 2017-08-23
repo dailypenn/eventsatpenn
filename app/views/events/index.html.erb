@@ -12,27 +12,34 @@
   </div>
   <div class="row">
     <%= form_for_filterrific @filterrific do |f| %>
-      <% if user_signed_in? && current_user.orgs.any? %><div class="col-sm-4 list-search">
-      <% else %><div class="col-sm-6 list-search">
-      <% end %>
+      <% #if user_signed_in? && current_user.orgs.any? %>
+        <!-- <div class="col-sm-4 list-search"> -->
+      <% #else %>
+        <!-- <div class="col-sm-6 list-search"> -->
+      <% #end %>
+      <div class="col-sm-6 list-search" style="padding-right:0;">
         <%= f.text_field(
           :search_query,
           class: 'form-control filterrific-periodically-observed',
           placeholder: 'Search events…'
         ) %>
       </div>
-      <% if user_signed_in? && current_user.orgs.any? %><div class="col-sm-4 list-categories">
-      <% else %><div class="col-sm-6 list-categories">
-      <% end %>
-        <%= f.select(
-          :with_category,
-          @filterrific.select_options[:with_category],
-          { include_blank: 'Any category' },
-          { class: 'form-control filter' }
-        ) %>
-      </div>
+      <% # if user_signed_in? && current_user.orgs.any? %>
+        <!-- <div class="col-sm-4 list-categories"> -->
+      <% # else %>
+        <!-- <div class="col-sm-6 list-categories"> -->
+      <% # end %>
+        <%= # f.select(
+          # :with_category,
+          # @filterrific.select_options[:with_category],
+          # { include_blank: 'Any category' },
+          # { class: 'form-control filter' }
+        # )
+        %>
+      <!-- </div> -->
       <% if user_signed_in? && current_user.orgs.any? %>
-        <div class="col-sm-4 list-add">
+        <!-- <div class="col-sm-4 list-add"> -->
+        <div class="col-sm-6 list-add">
           <a class="btn btn-info list-add-btn" href="/events/new">Add an Event</a>
         </div>
       <% end %>
