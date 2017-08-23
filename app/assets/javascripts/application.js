@@ -76,7 +76,9 @@ document.addEventListener("turbolinks:load", function() {
 
       standardEvents = []
       allDayEvents = []
-      data.sort(function(a, b){return a.start_date > b.start_date});
+      data.sort(function(a, b){
+        return Date.parse(a.start_date) - Date.parse(b.start_date);
+      });
 
       $.each(data, function(i) {
         var event = data[i];
