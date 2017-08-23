@@ -62,7 +62,9 @@ class Event < ApplicationRecord
       self.category = 'Athletic'
     when 'NETWORKING'
       self.category = 'Career and Professional'
-    when 'EVENT_CAUSE', 'FUNDRAISER', 'VOLUNTEERING'
+    when 'EVENT_CAUSE', 'CAUSES'
+      self.category = 'Cause'
+    when 'FUNDRAISER', 'VOLUNTEERING'
       self.category = 'Charity and Community Service'
     when 'FESTIVAL_EVENT', 'MUSIC', 'MUSIC_EVENT'
       self.category = 'Concerts and Festivals'
@@ -78,7 +80,7 @@ class Event < ApplicationRecord
       self.category = 'Lectures and Speakers'
     when 'MEETUP'
       self.category = 'Meetings'
-    when 'RELIGIOUS_EVENT'
+    when 'RELIGION', 'RELIGIOUS_EVENT'
       self.category = 'Religious and Spiritual'
     when 'NIGHTLIFE', 'PARTIES_NIGHTLIFE'
       self.category = 'Social'
@@ -96,7 +98,7 @@ class Event < ApplicationRecord
   end
 
   def self.categories
-    ['Academic', 'Arts', 'Athletic', 'Career and Professional',
+    ['Academic', 'Arts', 'Athletic', 'Career and Professional', 'Causes',
      'Charity and Community Service', 'Concerts and Festivals', 'Conferences',
      'Ethnic and Cultural', 'Food', 'Greek', 'Health and Wellness',
      'Lectures and Speakers', 'Meetings', 'Political',
