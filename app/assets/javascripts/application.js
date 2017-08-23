@@ -143,6 +143,9 @@ document.addEventListener("turbolinks:load", function() {
     if ($('.current-week').prev().is('tr:first-child')) {
       $('.week-prev-next.prev').removeClass('week-prev-next');
       $('.calendar-heading a.month:contains("Previous")').addClass('month-prev-next prev');
+    } else {
+      $('.week.next').addClass('week-prev-next');
+      $('.month-prev-next.next').removeClass('month-prev-next');
     }
     var prev = $('.current-week').prev();
     $('.current-week').removeClass('current-week');
@@ -166,6 +169,9 @@ document.addEventListener("turbolinks:load", function() {
     if ($('.current-week').next().is('tr:last-child')) {
       $('.week-prev-next.next').removeClass('week-prev-next');
       $('.calendar-heading a.month:contains("Next")').addClass('month-prev-next next');
+    } else {
+      $('.week.prev').addClass('week-prev-next');
+      $('.month-prev-next.prev').removeClass('month-prev-next');
     }
     var next = $('.current-week').next();
     $('.current-week').removeClass('current-week');
