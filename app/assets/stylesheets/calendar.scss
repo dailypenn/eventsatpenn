@@ -3,23 +3,20 @@
   display: inline;
 }
 
-.hour-events, .all-day-events {
-  .row {
-    margin-bottom: 10px;
-
-    &:last-of-type {
-      margin-bottom: 0;
-    }
+.event-item-row {
+  padding-right: 15px;
+  &:not(:last-of-type) {
+    padding-bottom: 10px;
   }
 }
 
 .day-view {
   &.event {
-  background-color: #aa1e22;
-  color: #ffffff;
-  border-radius: 4px;
-  padding: 10px;
-}
+    background-color: #aa1e22;
+    color: #ffffff;
+    border-radius: 4px;
+    padding: 10px;
+  }
 
   a {
     color: #fff;

@@ -53,6 +53,7 @@ document.addEventListener("turbolinks:load", function() {
     // Get data-date of inner date element
     var dateStr = $(e.currentTarget).find('.date')[0].dataset.date;
     var date = new Date(dateStr);
+    date.setUTCHours(4);
     // Get and parse json
     $.getJSON("/events.json?start_date=" + dateStr, function(data) {
       // clear sidebar
@@ -75,10 +76,10 @@ document.addEventListener("turbolinks:load", function() {
 
       $.each(data, function(i) {
         var event = data[i];
-        if (event.all_day) {
-          allDayEvents.push(htmlStrFromEvent(event))
+        if (event.all_day || Date.parse(event.event_date) < date) {
+          allDayEvents.push(htmlStrFromEvent(event, date))
         } else {
-          standardEvents.push(htmlStrFromEvent(event))
+          standardEvents.push(htmlStrFromEvent(event, date))
         }
       });
 
@@ -98,10 +99,10 @@ document.addEventListener("turbolinks:load", function() {
     });
   });
 
-  function htmlStrFromEvent(event) {
+  function htmlStrFromEvent(event, currdate) {
     htmlStr = "";
-    htmlStr += '<div class="row">'
-    if (event.all_day) {
+    htmlStr += '<div class="row event-item-row">'
+    if (event.all_day || Date.parse(event.event_date) < currdate) {
       htmlStr += '  <div class="col-xs-12 day-view event">'
       htmlStr += '    <strong>' + event.title + '</strong><br>'
       htmlStr +=      event.location
@@ -143,6 +144,9 @@ document.addEventListener("turbolinks:load", function() {
     if ($('.current-week').prev().is('tr:first-child')) {
       $('.week-prev-next.prev').removeClass('week-prev-next');
       $('.calendar-heading a.month:contains("Previous")').addClass('month-prev-next prev');
+    } else {
+      $('.week.next').addClass('week-prev-next');
+      $('.month-prev-next.next').removeClass('month-prev-next');
     }
     var prev = $('.current-week').prev();
     $('.current-week').removeClass('current-week');
@@ -166,6 +170,9 @@ document.addEventListener("turbolinks:load", function() {
     if ($('.current-week').next().is('tr:last-child')) {
       $('.week-prev-next.next').removeClass('week-prev-next');
       $('.calendar-heading a.month:contains("Next")').addClass('month-prev-next next');
+    } else {
+      $('.week.prev').addClass('week-prev-next');
+      $('.month-prev-next.prev').removeClass('month-prev-next');
     }
     var next = $('.current-week').next();
     $('.current-week').removeClass('current-week');
