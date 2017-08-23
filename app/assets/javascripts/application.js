@@ -53,6 +53,7 @@ document.addEventListener("turbolinks:load", function() {
     // Get data-date of inner date element
     var dateStr = $(e.currentTarget).find('.date')[0].dataset.date;
     var date = new Date(dateStr);
+    date.setUTCHours(4);
     // Get and parse json
     $.getJSON("/events.json?start_date=" + dateStr, function(data) {
       // clear sidebar
