@@ -23,7 +23,10 @@
 
       <p class="p-large mb5"><strong>Hosted by:</strong> <%= link_to @event.org.name, @event.org %></p>
 
-      <!-- <p class="p-large mb5"><strong>Category:</strong> <%= @event.category %></p> -->
+      <% # no categories for release 1.0.0 %>
+      <% if false %>
+        <p class="p-large mb5"><strong>Category:</strong> <%= @event.category %></p>
+      <% end %>
 
       <% if @event.twentyone %>
         <p class="p-large mb5">This is a 21+ event!</p>
