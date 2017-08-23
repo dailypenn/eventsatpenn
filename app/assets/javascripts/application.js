@@ -100,7 +100,7 @@ document.addEventListener("turbolinks:load", function() {
 
   function htmlStrFromEvent(event) {
     htmlStr = "";
-    htmlStr += '<div class="row">'
+    htmlStr += '<div class="row event-item-row">'
     if (event.all_day) {
       htmlStr += '  <div class="col-xs-12 day-view event">'
       htmlStr += '    <strong>' + event.title + '</strong><br>'
