@@ -5,7 +5,9 @@ class Event < ApplicationRecord
   validates :title, :location, :category, presence: true
   validate :dates_present?
   validate :valid_dates?
-  validate :set_category
+  validate :category?
+
+  before_validation :set_category
 
   scope :search_query, (lambda { |query|
     return nil if query.blank?
@@ -43,6 +45,10 @@ class Event < ApplicationRecord
     else
       errors.add(title, 'must end after start time.') unless start_date < end_date
     end
+  end
+
+  def category?
+    self.category = 'Other' unless Event.categories.include?(category)
   end
 
   def set_category
