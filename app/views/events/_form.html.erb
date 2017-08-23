@@ -20,7 +20,7 @@
   <%= form.label :event_title, "Event Name" %>
   <%= form.text_field :title, id: :event_title, class: 'form-control' %>
   <%= form.label :org, "Host Organization" %>
-  <%= form.select 'org', options_from_collection_for_select(current_user.orgs, :id, :name), {}, { class: 'form-control' } %>
+  <%= form.select 'org', options_from_collection_for_select(current_user.orgs, :id, :name), {}, { class: 'form-control' } unless current_user.orgs.empty? %>
   <%= form.label :category %>
   <%= form.select :category, Event.categories, {}, { class: 'form-control' } %>
 
