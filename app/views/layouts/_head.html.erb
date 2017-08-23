@@ -4,7 +4,10 @@
 <% if @meta_description.present? %>
   <meta name="description" content="<%= @meta_description %>">
 <% end %>
+
 <%= display_meta_tags site: 'Events@Penn' %>
+<meta name="fb:app_id" content="<%= Rails.application.secrets.fb_app_id %>">
+
 <link href="https://fonts.googleapis.com/css?family=Nunito:300,400,400i,900" rel="stylesheet">
 <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => 'reload' %>
 <%= javascript_include_tag 'application', 'data-turbolinks-track' => 'reload' %>
