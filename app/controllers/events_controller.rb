@@ -12,7 +12,7 @@ class EventsController < ApplicationController
     if params['start_date']
       min = Date.parse(params['start_date'])
       max = Date.parse(params['start_date']) + 1.day
-      @events = Event.where('start_date >= ? AND end_date < ?', min, max)
+      @events = Event.where('(start_date BETWEEN ? AND ?) OR (end_date BETWEEN ? AND ?) OR (start_date < ? AND end_date >= ?)', min, max, min, max, min, max)
     else
       @events = Event.where('end_date >= ?', Time.new) # only future events
 
