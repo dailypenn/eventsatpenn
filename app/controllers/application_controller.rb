@@ -46,7 +46,11 @@ class ApplicationController < ActionController::Base
   end
 
   def user_fb_pages
-    session[:user_hash]['extra']['raw_info']['accounts']['data'] if user_signed_in?
+    session[:user_hash]['extra']['raw_info']['accounts']['data'] if (
+    user_signed_in? &&
+    !session[:user_hash].nil? &&
+    !session[:user_hash]['extra']['raw_info']['accounts'].nil? &&
+    !session[:user_hash]['extra']['raw_info']['accounts']['data'].nil?)
   end
 
   def access_token
