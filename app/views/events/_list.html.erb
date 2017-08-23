@@ -2,7 +2,8 @@
   <div class="row">
     <%# Upcoming Events %>
     <div class="panel panel-default filled list-all">
-      <% @events.sort_by(&:start_date).each do |event| %>
+      <% upcoming = @events.sort_by(&:start_date).select { |e| e.end_date >= Time.new } %>
+      <% upcoming.each do |event| %>
         <div class="row">
           <%= link_to event.title, event %> by
           <em><%= link_to event.org.name, event.org %></em> on
