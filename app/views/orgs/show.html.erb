@@ -27,7 +27,7 @@
         <% unless @org.website.empty? %>
           <a href="<%= @org.website %>" target="_blank"><%= @org.name %> website &#10140;</a> <br>
         <% end %>
-        <% unless @org.fbID.nil? %>
+        <% if @org.fb? %>
           <a href="https://facebook.com/<%= @org.fbID %>" target="_blank"><%= @org.name %> on Facebook &#10140;</a>
         <% end %>
 

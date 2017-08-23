@@ -5,6 +5,7 @@ class Event < ApplicationRecord
   validates :title, :location, :category, presence: true
   validate :dates_present?
   validate :valid_dates?
+  validate :set_category
 
   scope :search_query, (lambda { |query|
     return nil if query.blank?
@@ -44,15 +45,56 @@ class Event < ApplicationRecord
     end
   end
 
+  def set_category
+    return if Event.categories.include?(category)
+    case category
+    when 'CLASS_EVENT'
+      self.category = 'Academic'
+    when 'ART_EVENT', 'ART_FILM', 'BOOK_EVENT', 'EVENT_ART', 'EVENT_LITERATURE', 'MOVIE_EVENT'
+      self.category = 'Arts'
+    when 'SPORTS_EVENT', 'FITNESS'
+      self.category = 'Athletic'
+    when 'NETWORKING'
+      self.category = 'Career and Professional'
+    when 'EVENT_CAUSE', 'FUNDRAISER', 'VOLUNTEERING'
+      self.category = 'Charity and Community Service'
+    when 'FESTIVAL_EVENT', 'MUSIC', 'MUSIC_EVENT'
+      self.category = 'Concerts and Festivals'
+    when 'CONFERENCE_EVENT'
+      self.category = 'Conferences'
+    when 'COMMUNITY'
+      self.category = 'Ethnic and Cultural'
+    when 'EVENT_FOOD', 'FOOD_DRINK', 'FOOD_TASTING', 'DINING_EVENT'
+      self.category = 'Food'
+    when 'HEALTH_WELLNESS'
+      self.category = 'Health and Wellness'
+    when 'LECTURE'
+      self.category = 'Lectures and Speakers'
+    when 'MEETUP'
+      self.category = 'Meetings'
+    when 'RELIGIOUS_EVENT'
+      self.category = 'Religious and Spiritual'
+    when 'NIGHTLIFE', 'PARTIES_NIGHTLIFE'
+      self.category = 'Social'
+    when 'COMEDY_EVENT', 'DANCE_EVENT', 'THEATER_EVENT', 'THEATER_DANCE'
+      self.category = 'Theater and Performances'
+    when 'WORKSHOP'
+      self.category = 'Workshops'
+    else
+      self.category = 'Other'
+    end
+  end
+
   def fb?
-    fbID?
+    !fbID.empty?
   end
 
   def self.categories
     ['Academic', 'Arts', 'Athletic', 'Career and Professional',
-     'Charity and Community Service', 'Concerts and Festival', 'Conferences',
-     'Ethnic and Cultural', 'Greek', 'Lectures and Speakers', 'Meetings',
-     'Political', 'Recreation', 'Religious and Spiritual', 'Social',
-     'Student Government', 'Workshops', 'Other']
+     'Charity and Community Service', 'Concerts and Festivals', 'Conferences',
+     'Ethnic and Cultural', 'Food', 'Greek', 'Health and Wellness',
+     'Lectures and Speakers', 'Meetings', 'Political',
+     'Religious and Spiritual', 'Social', 'Student Government',
+     'Theater and Performances', 'Workshops', 'Other']
   end
 end
