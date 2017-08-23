@@ -1,4 +1,5 @@
 class OrgsController < ApplicationController
+  before_action :logged_in?, only: %i[new create edit update destroy]
   before_action :set_org, only: %i[show edit update destroy]
 
   # GET /orgs
@@ -93,5 +94,9 @@ class OrgsController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def org_params
     params.require(:org).permit(:name, :bio, :fbID, :category, :website, :photo_url)
+  end
+
+  def logged_in?
+    redirect_to '/403' unless user_signed_in?
   end
 end

@@ -13,6 +13,9 @@ Rails.application.routes.draw do
   get '/auth/:provider/callback' => 'sessions#create'
   get '/auth/failure' => 'sessions#failure'
 
+  # Error pages
+  get '/403', to: redirect('/403.html')
+
   # Orgs
   post '/orgs/new/fb' => 'orgs#new_from_fb'
 
