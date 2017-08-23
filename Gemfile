@@ -28,7 +28,8 @@ gem 'bootstrap3-datetimepicker-rails', '~> 4.17.47'
 gem 'activeadmin', github: 'activeadmin'
 gem 'active_bootstrap_skin'
 gem 'meta-tags'
-gem 'rack-cors', :require => 'rack/cors'
+gem 'rack-cors',   require: 'rack/cors'
+gem 'whenever',    require: false
 
 group :production do
   gem 'sentry-raven'
