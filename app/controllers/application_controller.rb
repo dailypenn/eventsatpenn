@@ -42,7 +42,7 @@ class ApplicationController < ActionController::Base
   end
 
   def og_fallback
-    ActionController::Base.helpers.image_path("og-fallback.png")
+    "https://www.eventsatpenn.com#{ActionController::Base.helpers.image_path('og-fallback.png')}"
   end
 
   def user_fb_pages
