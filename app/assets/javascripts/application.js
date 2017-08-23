@@ -76,13 +76,14 @@ document.addEventListener("turbolinks:load", function() {
 
       standardEvents = []
       allDayEvents = []
+      data.sort(function(a, b){return a.start_date > b.start_date});
 
       $.each(data, function(i) {
         var event = data[i];
         if (event.all_day || (Date.parse(event.start_date) < date && Date.parse(event.end_date) >= nextDate)) {
           allDayEvents.push(htmlStrFromEvent(event, date, nextDate))
         } else {
-          standardEvents.push(htmlStrFromEvent(event, date, nextDate))
+          standardEvents.push(htmlStrFromEvent(event, date, nextDate));
         }
       });
 
