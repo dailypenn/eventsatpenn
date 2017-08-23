@@ -48,8 +48,11 @@ class Event < ApplicationRecord
     fbID?
   end
 
-  # TODO: dummy categories
   def self.categories
-    %w(EVENT_CAUSE)
+    ['Academic', 'Arts', 'Athletic', 'Career and Professional',
+     'Charity and Community Service', 'Concerts and Festival', 'Conferences',
+     'Ethnic and Cultural', 'Greek', 'Lectures and Speakers', 'Meetings',
+     'Political', 'Recreation', 'Religious and Spiritual', 'Social',
+     'Student Government', 'Workshops', 'Other']
   end
 end
