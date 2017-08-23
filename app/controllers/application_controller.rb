@@ -14,12 +14,7 @@ class ApplicationController < ActionController::Base
     @meta_description = %(
       Your guide to all the events Penn and Philly have to offer.
     )
-    set_meta_tags og: {
-      title: 'Events@Penn',
-      url:   'http://www.eventsatpenn.com/',
-      type:  'website',
-      image: og_fallback
-    }
+    default_og_params
     render :'welcome/index.html.erb', layout: 'calendar'
   end
 
@@ -34,6 +29,7 @@ class ApplicationController < ActionController::Base
   helper_method :correct_user?
   helper_method :mobile_device?
   helper_method :og_fallback
+  helper_method :default_og_params
 
   def current_user
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
@@ -42,7 +38,8 @@ class ApplicationController < ActionController::Base
   end
 
   def og_fallback
-    "https://www.eventsatpenn.com#{ActionController::Base.helpers.image_path('og-fallback.png')}"
+    img_path = ActionController::Base.helpers.image_path('og-fallback.png')
+    "https://www.eventsatpenn.com#{img_path}"
   end
 
   def user_fb_pages
@@ -55,6 +52,25 @@ class ApplicationController < ActionController::Base
 
   def access_token
     session[:user_hash]['credentials']['token']
+  end
+
+  def default_og_params(pretitle = nil)
+    title = pretitle.nil? ? 'Events@Penn' : "#{pretitle} | Events@Penn"
+    set_meta_tags og: {
+      title: title,
+      url:   'https://www.eventsatpenn.com/',
+      type:  'website',
+      image:    [{
+        _: og_fallback,
+        width: 1600,
+        height: 840,
+      }]
+    }
+    set_meta_tags twitter: {
+      card: 'summary_large_image',
+      title: title,
+      image: og_fallback
+    }
   end
 
   private
@@ -84,6 +100,7 @@ class ApplicationController < ActionController::Base
   end
 
   def mobile_device?
+    return false if request.user_agent.nil?
     # The "98%" Solution for mobile user_agents https://git.io/v5fTp
     ua_regex = %(
       /Mobile|iP(hone|od|ad)|Android|BlackBerry|IEMobile|Kindle|NetFront|
