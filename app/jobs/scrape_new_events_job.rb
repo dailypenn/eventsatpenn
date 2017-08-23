@@ -21,7 +21,7 @@ class ScrapeNewEventsJob < ApplicationJob
       lon = 0
     else
       lat = place['location']['latitude']
-      lon = place['location']['latitude']
+      lon = place['location']['longitude']
     end
     new_event = Event.new(
       title: event.name, start_date: event.start_time,
