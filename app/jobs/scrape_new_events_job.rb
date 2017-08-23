@@ -16,9 +16,9 @@ class ScrapeNewEventsJob < ApplicationJob
   def create_event_for_org(org, event)
     return if event.nil?
     place = event.raw_attributes['place']
-    if place['location'].nil?
-      lat = 0;
-      lon = 0;
+    if place.nil?
+      lat = 0
+      lon = 0
     else
       lat = place['location']['latitude']
       lon = place['location']['latitude']
