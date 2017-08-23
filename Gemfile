@@ -1,3 +1,4 @@
+
 # Gem Sources
 source 'https://rubygems.org'
 
@@ -29,6 +30,7 @@ gem 'activeadmin', github: 'activeadmin'
 gem 'active_bootstrap_skin'
 gem 'google-tag-manager-rails', '~> 0.1.3'
 gem 'meta-tags'
+gem 'rack-cors', :require => 'rack/cors'
 
 group :production do
   gem 'sentry-raven'
