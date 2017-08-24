@@ -4,7 +4,7 @@ class Org < ApplicationRecord
   filterrific(available_filters: %i[search_query with_category])
 
   has_and_belongs_to_many :users
-  has_many :events
+  has_many :events, dependent: :destroy
 
   validates :name, presence: true, uniqueness: true
   validates :category, presence: true
@@ -52,10 +52,10 @@ class Org < ApplicationRecord
   end
 
   def fb?
-    fbID?
+    !fbID.empty?
   end
 
-  # NB: these may need to be updated
+  # NOTE: these may need to be updated
   def self.categories
     ['College & University', 'Community Organization', 'Community Services', 'Education',  'Political Organization', 'Religious Organization', 'Science', 'Technology & Engineering', 'Camera/Photo', 'Website', 'Magazine', 'Newspaper', 'Radio Station', 'Sports Team', 'Theatrical Productions']
   end
@@ -63,6 +63,6 @@ class Org < ApplicationRecord
   private
 
   def format_url
-    website = "http://#{self.website}" unless website.nil? || website[/^https?/]
+    self.website = "http://#{website}" unless website.blank? || website[/^https?/]
   end
 end
