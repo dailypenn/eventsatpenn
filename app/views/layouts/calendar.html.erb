@@ -12,9 +12,12 @@
         <%= render 'layouts/messages' %>
         <div class="row">
           <div class="col-md-8">
+            <%# calendar sorting no categories for now %>
+            <% if false %>
             <select class="form-control pull-left calendar-filter" disabled>
               <option>Filter Events by Category</option disabled>
             </select>
+            <% end %>
             <% if user_signed_in? && !current_user.orgs.empty? %>
               <a class="btn btn-info pull-right calendar-create" href="/events/new">Add an Event</a>
             <% end %>
