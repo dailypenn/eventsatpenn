@@ -2,7 +2,7 @@ require 'test_helper'
 
 class OrgsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @org = orgs(:one)
+    @org = orgs(:cat_club)
   end
 
   test "should get index" do

@@ -1,0 +1,14 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+cat_adoption:
+  title: 'Cat Adoption'
+  description: 'Come to adopt a kitty!'
+  start_date: 1503565200
+  end_date: 1503572400
+  event_date: 1503565200
+  all_day: false
+  location: '4015 Walnut Street'
+  location_lat: nil
+  location_lon: nil
+  org: 'cat_club'
+  category: 'Publications'
