@@ -88,7 +88,7 @@
   .day {
     width: 14.285%; // 1/7th
     max-width: 14.285%; // 1/7th
-    height: 115px;
+    height: 120px;
     border: 1px solid #ddd;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -120,6 +120,10 @@
   .date {
     font-weight: 300;
     pointer-events: none;
+
+    .date-num {
+      line-height: 1.8;
+    }
   }
 
   .today {
