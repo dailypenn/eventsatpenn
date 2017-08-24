@@ -35,7 +35,7 @@ class OrgsController < ApplicationController
       title: "#{@org.name} on Events@Penn",
       image: meta_img
     }
-    ScrapeNewEventsJob.perform_later(@org, access_token) if @org.fb? && user_signed_in?
+    ScrapeNewEventsJob.perform_later(@org) if @org.fb? && user_signed_in?
   end
 
   # GET /orgs/new

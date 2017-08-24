@@ -13,18 +13,18 @@
 ActiveRecord::Schema.define(version: 20170824010210) do
 
   create_table "events", force: :cascade do |t|
-    t.string "title", null: false
-    t.datetime "start_date", null: false
-    t.datetime "end_date", null: false
-    t.datetime "event_date", null: false
-    t.boolean "all_day", default: false, null: false
+    t.string "title"
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.datetime "event_date"
+    t.boolean "all_day"
     t.string "description"
-    t.string "location", null: false
+    t.string "location"
     t.float "location_lat"
     t.float "location_lon"
-    t.string "category", null: false
+    t.string "category"
     t.string "fbID"
-    t.boolean "twentyone", default: false, null: false
+    t.boolean "twentyone"
     t.boolean "recurring"
     t.string "recurrence_freq"
     t.integer "recurrence_amt"
@@ -39,7 +39,7 @@ ActiveRecord::Schema.define(version: 20170824010210) do
     t.string "name", null: false
     t.string "bio"
     t.string "fbID"
-    t.string "category", null: false
+    t.string "category"
     t.string "website"
     t.string "photo_url"
     t.datetime "created_at", null: false
@@ -71,11 +71,11 @@ ActiveRecord::Schema.define(version: 20170824010210) do
 
   create_table "users", force: :cascade do |t|
     t.string "provider"
-    t.string "uid", null: false
-    t.string "full_name", null: false
-    t.string "first_name", null: false
-    t.string "last_name", null: false
-    t.string "email", null: false
+    t.string "uid"
+    t.string "full_name"
+    t.string "first_name"
+    t.string "last_name"
+    t.string "email"
     t.string "image_url"
     t.boolean "admin", default: false, null: false
     t.datetime "created_at", null: false

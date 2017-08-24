@@ -11,6 +11,7 @@ class ApplicationController < ActionController::Base
   ###########################
 
   def index
+    ScrapeEventsForAllOrgsJob.perform_later
     @meta_description = %(
       Your guide to all the events Penn and Philly have to offer.
     )
