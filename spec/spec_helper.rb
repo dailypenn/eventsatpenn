@@ -15,6 +15,16 @@
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
   require 'webmock/rspec'
+  WebMock.disable_net_connect!(allow_localhost: true)
+  WebMock.stub_request(
+    :post, "https://graph.facebook.com/v2.8/oauth/access_token"
+  ).to_return(status: 200, body: '
+    {
+      "access_token": "mock_access_token",
+      "token_type": "bearer",
+      "expires_in":  3600
+    }
+  ', headers: {})
 
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
