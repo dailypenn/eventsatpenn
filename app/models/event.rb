@@ -27,6 +27,7 @@ class Event < ApplicationRecord
   })
 
   def dates_present?
+    return unless start_date.nil? || end_date.nil? || event_date.nil?
     errors.add(title, 'must have dates and times.') if event_date.nil? && start_date.nil? && end_date.nil?
     if event_date.nil?
       errors.add(title, 'must have start time.') if start_date.nil?
