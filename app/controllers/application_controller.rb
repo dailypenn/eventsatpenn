@@ -15,7 +15,6 @@ class ApplicationController < ActionController::Base
       Your guide to all the events Penn and Philly have to offer.
     )
     default_og_params
-    p Event
 
     @filterrific = initialize_filterrific(
       Event,

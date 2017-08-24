@@ -2,3 +2,4 @@
   render(partial: 'layouts/month_cal', locals: { events: @events })
 ) %>
 $("#filterrific_results").html("<%= js %>");
+$(document).trigger('filtered');
