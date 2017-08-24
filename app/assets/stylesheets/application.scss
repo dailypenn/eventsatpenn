@@ -274,7 +274,7 @@ footer {
 }
 
 .list-all {
-  max-height: calc(100vh - 340px);
+  max-height: calc(100vh - 370px);
   padding: 15px;
   padding-top: 0px;
   margin-top: 10px;
@@ -452,6 +452,10 @@ label {
     .list-add-btn {
       margin-top: 0px;
     }
+  }
+
+  .list-all {
+    max-height: calc(100vh - 340px);
   }
 
   .page-title {
