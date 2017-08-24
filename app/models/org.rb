@@ -52,7 +52,8 @@ class Org < ApplicationRecord
   end
 
   def fb?
-    !fbID.nil? || !fbID.empty?
+    return false if fbID.nil?
+    !fbID.empty?
   end
 
   # NOTE: these may need to be updated

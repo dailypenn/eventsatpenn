@@ -89,7 +89,8 @@ class Event < ApplicationRecord
   end
 
   def fb?
-    fbID.nil? || !fbID.empty?
+    return false if fbID.nil?
+    !fbID.empty?
   end
 
   def self.categories
