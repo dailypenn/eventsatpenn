@@ -1,7 +1,7 @@
 class User < ApplicationRecord
   has_and_belongs_to_many :orgs
 
-  validates :uid, :full_name, :first_name, :last_name, :email, presence: true
+  validates :uid, :full_name, :first_name, :last_name, presence: true
   validates :uid, uniqueness: true
 
   def self.create_with_omniauth(auth)
