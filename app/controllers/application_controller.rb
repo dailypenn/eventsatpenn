@@ -15,6 +15,22 @@ class ApplicationController < ActionController::Base
       Your guide to all the events Penn and Philly have to offer.
     )
     default_og_params
+    p Event
+
+    @filterrific = initialize_filterrific(
+      Event,
+      params[:filterrific],
+      select_options: {
+        with_category: Event.categories
+      }
+    ) || return
+    @events = @filterrific.find.sort_by(&:start_date)
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
+
     render :'welcome/index.html.erb', layout: 'calendar'
   end
 

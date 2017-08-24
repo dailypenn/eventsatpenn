@@ -243,6 +243,10 @@ footer {
   @extend .btn-xs;
 }
 
+.calendar-create {
+  padding-right: 0px;
+}
+
 .calendar-sidebar {
   border-radius: 4px;
   margin-top: 50px;
@@ -282,6 +286,7 @@ footer {
 
   &.show-event {
     padding-top: 15px;
+    max-height: 100vh;
   }
 
   .row {
