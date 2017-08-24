@@ -32,6 +32,7 @@ class ScrapeNewEventsJob < ApplicationJob
       location_lat: lat,
       location_lon: lon, fbID: event.id
     )
+    new_event.save
     org.events << new_event
   end
 

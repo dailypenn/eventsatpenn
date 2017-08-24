@@ -63,6 +63,6 @@ class Org < ApplicationRecord
   private
 
   def format_url
-    self.website = "http://#{website}" unless website.nil? || website[/^https?/]
+    self.website = "http://#{website}" unless website.blank? || website[/^https?/]
   end
 end

@@ -1,8 +1,6 @@
 class Event < ApplicationRecord
   filterrific(available_filters: %i[search_query with_category])
 
-  attr_accessor :display_category
-
   belongs_to :org
   validates :title, :location, :category, presence: true
   validate :dates_present?
@@ -50,11 +48,12 @@ class Event < ApplicationRecord
   end
 
   def category?
-    self.display_category = 'Other' unless Event.categories.include?(category)
+    self.display_category = 'Other' unless Event.categories.include?(display_category)
   end
 
   def set_category
-    return if Event.categories.include?(category)
+    self.display_category = category if Event.categories.include?(category)
+    return if display_category
     case category
     when 'CLASS_EVENT'
       self.display_category = 'Academic'
