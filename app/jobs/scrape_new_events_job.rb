@@ -28,7 +28,13 @@ class ScrapeNewEventsJob < ApplicationJob
   def create_event_for_org(org, event)
     return if event.nil?
     place = event.raw_attributes['place']
-    if place.nil? || place['location'].nil?
+    if place.nil?
+      lat = 0
+      lon = 0
+    elsif place['location'].nil? && !place['name'].nil?
+      # TODO: this means that the place is an address, not like a landmark
+      # place['name'].getLatLng() # or whatever,
+      # we can do this with mapbox or google probs
       lat = 0
       lon = 0
     else
