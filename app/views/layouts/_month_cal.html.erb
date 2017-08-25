@@ -7,8 +7,8 @@
     </span>
   </div>
   <% meetings.take(3).each do |event| %>
-    <div class="calendar-event">
-      <%= link_to event.title, event, class: 'event-link' %>
+    <div class="calendar-event <%= event.display_category.split(', ').first.downcase %>">
+      <%= link_to event.title, event %>
     </div>
   <% end %>
   <% if meetings.length > 3 %>

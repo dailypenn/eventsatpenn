@@ -18,13 +18,13 @@
                 :with_category,
                 @filterrific.select_options[:with_category],
                 { include_blank: 'Any category' },
-                { class: 'form-control pull-left' }
+                { class: 'form-control pull-left calendar-categories' }
               ) %>
               </div>
             <% end %>
             <% if user_signed_in? && !current_user.orgs.empty? %>
             <div class="col-sm-3 pull-right calendar-create">
-              <a class="btn btn-info pull-right" href="/events/new">Add an Event</a>
+              <a class="btn btn-info pull-right add-event" href="/events/new">Add an Event</a>
             </div>
             <% end %>
             <div id="filterrific_results">
