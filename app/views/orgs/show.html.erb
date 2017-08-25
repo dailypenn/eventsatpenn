@@ -65,7 +65,7 @@
     </div>
 
     <%# Past Events %>
-    <% past = @org.events.where('end_date < ?', Time.new).sort_by(&:start_date) %>
+    <% past = @org.events.where('end_date < ?', Time.new).sort_by(&:start_date).reverse %>
     <div class="panel panel-default">
       <div class="panel-heading">
         <h3 class="panel-title">Past Events</h3>

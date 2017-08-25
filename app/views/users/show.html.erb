@@ -40,12 +40,12 @@
         </div>
         <div class="panel-body list-all show">
           <% @user.orgs.each do |org| %>
-            <% unless org.events.empty? %>
-            <div class="row org-name">
-              <h4 class="org-name"><%= link_to org.name, org %></h4>
-            </div>
-            <% end %>
             <% upcoming = org.events.where('end_date >= ?', Time.new).sort_by(&:start_date) %>
+            <% unless upcoming.empty? %>
+              <div class="row org-name">
+                <h4 class="org-name"><%= link_to org.name, org %></h4>
+              </div>
+            <% end %>
             <% upcoming.each do |event| %>
               <div class="row event">
                 <%= link_to event.title, event %> on <%= event.start_date.strftime("%A, %B %d, %Y") %>
