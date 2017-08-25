@@ -273,25 +273,28 @@ footer {
   }
 }
 
+.show-event {
+  padding: 15px;
+}
+
+a {
+  color: #AA1E22;
+  text-decoration: none;
+}
+
 .list-all {
   max-height: calc(100vh - 370px);
   padding: 15px;
-  padding-top: 0px;
-  margin-top: 10px;
+  padding-top: 0;
   overflow: scroll;
 
-  &.show-event {
-    padding-top: 15px;
-  }
+
 
   .row {
     padding: 15px;
     border-bottom: 1px solid #ddd;
 
-    a {
-      color: #AA1E22;
-      text-decoration: none;
-    }
+
   }
 
   .row:last-of-type {

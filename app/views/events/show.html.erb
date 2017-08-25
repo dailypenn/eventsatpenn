@@ -1,10 +1,43 @@
 <% @title = @event.title %>
+<% content_for :head do %>
+<script>
+function initMap() {
+  var loc = {lat: <%= @event.location_lat %>, lng: <%= @event.location_lon %>};
+  var map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 15,
+    center: loc,
+    mapTypeControl: false,
+    streetViewControl: false
+  });
+  var marker = new google.maps.Marker({
+    position: loc,
+    map: map
+  });
+  var infowindow = new google.maps.InfoWindow({
+    content: `
+      <b><%= @event.location %></b>
+      <p>
+        <%= @event.title %>
+      </p>
+    `
+  });
+  marker.addListener('click', function() {
+    infowindow.open(map, marker);
+  });
+}
+</script>
+  <script async defer
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCI47lLK3V7idUtknKKO8YTIUFyCsPtWv4&callback=initMap">
+  </script>
+<% end %>
 <div class="row">
-  <div class="col-lg-6">
-    <div class="page-title">
-      <h1 class="pill"><%= @event.title %></h1>
-    </div>
-    <div class="panel panel-default filled list-all show-event">
+  <div class="page-title col-xs-12">
+    <h1 class="pill"><%= @event.title %></h1>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-6">
+    <div class="panel panel-default filled show-event">
       <p class="p-large mb5"><strong>Location:</strong> <%= @event.location %></p>
 
       <p class="p-large mb5"><strong>Time:</strong>
@@ -16,7 +49,7 @@
           to <%= @event.end_date.strftime("%l:%M %P") %>
         <% end %>
       <% else %>
-        From <%= @event.start_date.strftime("%A, %B %d, %Y at %l:%M %P") %>
+        <%= @event.start_date.strftime("%A, %B %d, %Y at %l:%M %P") %>
         to <%= @event.end_date.strftime("%A, %B %d, %Y at %l:%M %P") %>
       <% end %>
       </p>
@@ -38,11 +71,17 @@
         <a href="https://facebook.com/events/<%= @event.fbID %>" target="_blank"><%= @event.title %> on Facebook &#10140;</a>
       <% end %>
 
-      <div class="row">
-        <% if @event.org.users.include? current_user %>
-          <%= link_to 'Edit this event', edit_event_path(@event) %>
-        <% end %>
-      </div>
+      <% if @event.org.users.include? current_user %>
+        <%= link_to 'Edit this event', edit_event_path(@event) %>
+      <% end %>
     </div>
   </div>
+
+<% unless @event.location_lat.nil? && @event.location_lon.nil? %>
+  <div class="col-sm-6">
+    <div class="panel panel-default filled">
+      <div id="map"></div>
+    </div>
+  </div>
+<% end %>
 </div>
