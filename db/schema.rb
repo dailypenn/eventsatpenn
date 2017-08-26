@@ -10,10 +10,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170826164949) do
+ActiveRecord::Schema.define(version: 20170826164950) do
 
-# Could not dump table "events" because of following StandardError
-#   Unknown type 'type' for column 'category'
+  create_table "events", force: :cascade do |t|
+    t.string "title"
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.datetime "event_date"
+    t.boolean "all_day"
+    t.string "description"
+    t.string "location"
+    t.float "location_lat"
+    t.float "location_lon"
+    t.string "category"
+    t.string "fbID"
+    t.boolean "twentyone"
+    t.boolean "recurring"
+    t.string "recurrence_freq"
+    t.integer "recurrence_amt"
+    t.integer "org_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "display_category"
+    t.index ["org_id"], name: "index_events_on_org_id"
+  end
 
   create_table "orgs", force: :cascade do |t|
     t.string "name", null: false
