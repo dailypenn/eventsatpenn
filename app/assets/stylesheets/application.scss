@@ -244,7 +244,13 @@ footer {
 }
 
 .calendar-create {
-  padding-right: 0px;
+  padding-right: 0;
+  padding-left: 0;
+  float: right;
+
+  .add-event-btn {
+    width: 100%;
+  }
 }
 
 .calendar-sidebar {
@@ -444,6 +450,10 @@ label {
 @media screen and (max-width: 768px) {
   main {
     min-height: auto;
+  }
+
+  .calendar-create {
+    float: none;
   }
 
   .calendar-sidebar {
