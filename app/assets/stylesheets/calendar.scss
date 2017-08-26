@@ -1,5 +1,6 @@
 .event-item-row {
   padding-right: 15px;
+
   &:not(:last-of-type) {
     padding-bottom: 10px;
   }
@@ -32,7 +33,7 @@
   }
 
   &.academic {
-    background-color: #FFFFFF;
+    background-color: #FFC0CB;
   }
 
   &.arts {
@@ -134,7 +135,7 @@
 
     &.academic {
       &::before {
-        color: #FFFFFF;
+        color: #FFC0CB;
       }
     }
 
