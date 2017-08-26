@@ -52,6 +52,7 @@ class ScrapeNewEventsJob < ApplicationJob
       location_lon: lon, fbID: event.id
     )
     new_event.save
+    Rails.logger.error(new_event.errors.inspect) if new_event.errors.any?
     org.events << new_event
   end
 
