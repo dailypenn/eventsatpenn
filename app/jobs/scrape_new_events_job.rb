@@ -49,11 +49,10 @@ class ScrapeNewEventsJob < ApplicationJob
       all_day: false, recurring: false,
       location: location_str(place),
       location_lat: lat,
-      location_lon: lon, fbID: event.id
+      location_lon: lon, fbID: event.id, org_id: org.id
     )
     new_event.save
     Rails.logger.error(new_event.errors.inspect) if new_event.errors.any?
-    org.events << new_event
   end
 
   def location_str(place)
