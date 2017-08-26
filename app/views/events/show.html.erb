@@ -32,10 +32,8 @@ function initMap() {
   src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCI47lLK3V7idUtknKKO8YTIUFyCsPtWv4&callback=initMap">
   </script>
 <% end %>
-<div class="row">
-  <div class="page-title col-xs-12">
-    <h1 class="pill"><%= @event.title %></h1>
-  </div>
+<div class="page-title">
+  <h1 class="pill"><%= @event.title %></h1>
 </div>
 <div class="row">
   <div class="col-sm-6">
@@ -79,7 +77,7 @@ function initMap() {
     </div>
   </div>
 
-<% unless @event.location_lat.nil? && @event.location_lon.nil? %>
+<% unless (@event.location_lat.nil? && @event.location_lon.nil?) || (@event.location_lat == 0 && @event.location_lon == 0) %>
   <div class="col-sm-6">
     <div class="panel panel-default filled">
       <div id="map"></div>
