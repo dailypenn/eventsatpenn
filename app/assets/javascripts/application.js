@@ -110,7 +110,7 @@ function updateCal() {
       htmlStr = "";
       htmlStr += '<div class="row event-item-row">'
       if (event.all_day || (Date.parse(event.start_date) < currdate && Date.parse(event.end_date) >= nextDate)) {
-        htmlStr += '  <div class="col-xs-12 day-view event">'
+        htmlStr += '  <div class="col-xs-12 day-view event ' + event.display_category.split(/[, ]+/)[0].toLowerCase() + '">'
         htmlStr += '    <strong>' + event.title + '</strong><br>'
         htmlStr +=      event.location
         htmlStr += '    <a href="/events/' + event.id + '" class="pull-right more"><em>more&nbsp</em>&#10140</a>'
@@ -127,7 +127,7 @@ function updateCal() {
           htmlStr += h + '<sup>&nbsp;' + suffix + '</sup>'
         }
         htmlStr += '  </div>'
-        htmlStr += '  <div class="col-xs-9 day-view event">'
+        htmlStr += '  <div class="col-xs-9 day-view event ' + event.display_category.split(/,\s*/)[0].toLowerCase() + '">'
         htmlStr += '    <strong>' + event.title + '</strong><br>'
         htmlStr +=      event.location
         htmlStr += '    <a href="/events/' + event.id + '" class="pull-right more"><em>more&nbsp</em>&#10140</a>'

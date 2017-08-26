@@ -8,13 +8,117 @@
 .day-view {
   &.event {
     background-color: #aa1e22;
-    color: #ffffff;
+    color: #333;
     border-radius: 4px;
     padding: 10px;
   }
 
   a {
-    color: #fff;
+    color: #DDD;
+  }
+
+  &.academic {
+    background-color: #FFFFFF;
+
+    a {
+      color: #555;
+    }
+  }
+
+  &.arts {
+    background-color: #AEA8D3;
+
+    a {
+      color: #555;
+    }
+  }
+
+  &.athletic {
+    background-color: #1F3A93;
+    color: #FFFFFF;
+  }
+
+  &.career {
+    background-color: #3498DB;
+    color: #FFFFFF;
+  }
+
+  &.causes {
+    background-color: #F5D76E;
+
+    a {
+      color: #555;
+    }
+  }
+
+  &.charity {
+    background-color: #87D37C;
+
+    a {
+      color: #555;
+    }
+  }
+
+  &.conferences {
+    background-color: #674172;
+    color: #FFFFFF;
+  }
+
+  &.ethnic {
+    background-color: #F22613;
+    color: #FFFFFF;
+  }
+
+  &.food {
+    background-color: #D2527F;
+    color: #FFFFFF;
+  }
+
+  &.health {
+    background-color: #1E824C;
+    color: #FFFFFF;
+  }
+
+  &.lectures {
+    background-color: #4ECDC4;
+
+    a {
+      color: #555;
+    }
+  }
+
+  &.music {
+    background-color: #8A12B3;
+    color: #FFFFFF;
+  }
+
+  &.political {
+    background-color: #DB0A5B;
+    color: #FFFFFF;
+  }
+
+  &.religious {
+    background-color: #F9690E;
+
+    a {
+      color: #555;
+    }
+  }
+
+  &.social {
+    background-color: #F5AB35;
+
+    a {
+      color: #555;
+    }
+  }
+
+  &.other {
+    background-color: #99A2A8;
+
+    a {
+      color: #555;
+    }
   }
 }
 

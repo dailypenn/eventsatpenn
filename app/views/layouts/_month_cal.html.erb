@@ -6,7 +6,7 @@
       <%= weekdays[d.wday] %>
     </span>
   </div>
-  <% meetings.take(3).each do |event| %>
+  <% meetings.sort_by(&:start_date).take(3).each do |event| %>
     <div class="calendar-event <%= event.display_category.split(', ').first.downcase %>">
       <%= link_to event.title, event %>
     </div>
