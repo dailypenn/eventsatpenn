@@ -2,7 +2,7 @@ class Event < ApplicationRecord
   filterrific(available_filters: %i[search_query with_category])
 
   belongs_to :org
-  validates :title, :location, :category, presence: true
+  validates :title, :location, presence: true
   validate :dates_present?
   validate :valid_dates?
   validate :category?
