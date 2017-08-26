@@ -15,9 +15,9 @@
  *= require_self
  */
 
-@import "bootstrap-sprockets";
-@import "bootstrap";
-@import "bootstrap-datetimepicker.css";
+@import 'bootstrap-sprockets';
+@import 'bootstrap';
+@import 'bootstrap-datetimepicker.css';
 
 body {
   min-height: 100vh;
@@ -288,13 +288,9 @@ a {
   padding-top: 0;
   overflow: scroll;
 
-
-
   .row {
     padding: 15px;
     border-bottom: 1px solid #ddd;
-
-
   }
 
   .row:last-of-type {
