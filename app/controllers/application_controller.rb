@@ -30,7 +30,15 @@ class ApplicationController < ActionController::Base
       format.js
     end
 
-    render :'welcome/index.html.erb', layout: 'calendar'
+    render :'pages/index.html.erb', layout: 'calendar'
+  end
+
+  def about
+    @meta_description = %(
+      Your guide to all the events Penn and Philly have to offer.
+    )
+    default_og_params
+    render :'pages/about.html.erb'
   end
 
   ###########################

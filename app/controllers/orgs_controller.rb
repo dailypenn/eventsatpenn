@@ -35,7 +35,7 @@ class OrgsController < ApplicationController
       title: "#{@org.name} on Events@Penn",
       image: meta_img
     }
-    ScrapeNewEventsJob.perform_later(@org, access_token) if @org.fb? && user_signed_in?
+    ScrapeNewEventsJob.perform_later(@org) if @org.fb? && user_signed_in?
   end
 
   # GET /orgs/new
@@ -61,7 +61,7 @@ class OrgsController < ApplicationController
 
     if @org.save
       current_user.orgs << @org
-      ScrapeNewEventsJob.perform_later(@org, access_token) if @org.fb? && user_signed_in?
+      ScrapeNewEventsJob.perform_later(@org) if @org.fb?
       redirect_to @org, notice: "#{@org.name} was successfully created."
     else
       render :new
