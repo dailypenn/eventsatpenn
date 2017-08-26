@@ -11,9 +11,9 @@ class ScrapeNewEventsJob < ApplicationJob
     "#{app_id}|#{app_sec}"
   end
 
-  def perform(org, access_token = application_token)
+  def perform(org)
     logger.debug "Scraping events for #{org.name}"
-    group = FbGraph2::Page.new(org.fbID).authenticate(access_token)
+    group = FbGraph2::Page.new(org.fbID).authenticate(application_token)
     added_events = 0
     group.events.each do |event|
       evt = event.fetch(fields: 'name,category,description,place,start_time,end_time,id')
