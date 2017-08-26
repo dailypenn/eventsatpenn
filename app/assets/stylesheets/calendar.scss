@@ -14,23 +14,29 @@
   }
 
   a {
-    color: #DDD;
+    color: #CCC;
+
+    &:hover, &:active {
+      color: #EEE;
+    }
+  }
+
+  &.academic, &.arts, &.causes, &.charity, &.lectures, &.religious, &.social, &.other {
+    a {
+      color: #555;
+
+      &:hover, &:active {
+        color: #777;
+      }
+    }
   }
 
   &.academic {
     background-color: #FFFFFF;
-
-    a {
-      color: #555;
-    }
   }
 
   &.arts {
     background-color: #AEA8D3;
-
-    a {
-      color: #555;
-    }
   }
 
   &.athletic {
@@ -45,18 +51,10 @@
 
   &.causes {
     background-color: #F5D76E;
-
-    a {
-      color: #555;
-    }
   }
 
   &.charity {
     background-color: #87D37C;
-
-    a {
-      color: #555;
-    }
   }
 
   &.conferences {
@@ -81,10 +79,6 @@
 
   &.lectures {
     background-color: #4ECDC4;
-
-    a {
-      color: #555;
-    }
   }
 
   &.music {
@@ -99,26 +93,14 @@
 
   &.religious {
     background-color: #F9690E;
-
-    a {
-      color: #555;
-    }
   }
 
   &.social {
     background-color: #F5AB35;
-
-    a {
-      color: #555;
-    }
   }
 
   &.other {
     background-color: #99A2A8;
-
-    a {
-      color: #555;
-    }
   }
 }
 
