@@ -1,6 +1,7 @@
 class EventsController < ApplicationController
   before_action :logged_in?, only: %i[new create edit update destroy]
   before_action :set_event, only: %i[show edit update destroy]
+  before_action :init_filter, only: %i[new create edit update]
 
   # GET /events
   # GET /events.json
@@ -12,20 +13,7 @@ class EventsController < ApplicationController
       @events = Event.where('(start_date BETWEEN ? AND ?) OR (end_date BETWEEN ? AND ?) OR (start_date < ? AND end_date >= ?)', min, max, min, max, min, max)
     else
       @events = Event.where('end_date >= ?', Time.new) # only future events
-
-      @filterrific = initialize_filterrific(
-        Event,
-        params[:filterrific],
-        select_options: {
-          with_category: Event.categories
-        }
-      ) || return
-      @events = @filterrific.find.sort_by(&:title)
-
-      respond_to do |format|
-        format.html
-        format.js
-      end
+      init_filter
     end
   end
 
@@ -104,6 +92,22 @@ class EventsController < ApplicationController
   end
 
   private
+
+  def init_filter
+    @filterrific = initialize_filterrific(
+      Event,
+      params[:filterrific],
+      select_options: {
+        with_category: Event.categories
+      }
+    ) || return
+    @events = @filterrific.find.sort_by(&:start_date)
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
 
   # Use callbacks to share common setup or constraints between actions.
   def set_event

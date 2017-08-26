@@ -218,6 +218,114 @@ footer {
   }
 }
 
+.event-color-list {
+  list-style-type: none;
+  padding-left: 15px;
+  margin-bottom: 0;
+}
+
+.event-colors {
+  &::before {
+    content: '\25CF';
+  }
+
+  &.academic {
+    &::before {
+      color: #FFC0CB;
+    }
+  }
+
+  &.arts {
+    &::before {
+      color: #AEA8D3;
+    }
+  }
+
+  &.athletic {
+    &::before {
+      color: #1F3A93;
+    }
+  }
+
+  &.career {
+    &::before {
+      color: #3498DB;
+    }
+  }
+
+  &.causes {
+    &::before {
+      color: #F5D76E;
+    }
+  }
+
+  &.charity {
+    &::before {
+      color: #87D37C;
+    }
+  }
+
+  &.conferences {
+    &::before {
+      color: #674172;
+    }
+  }
+
+  &.ethnic {
+    &::before {
+      color: #F22613;
+    }
+  }
+
+  &.food {
+    &::before {
+      color: #D2527F;
+    }
+  }
+
+  &.health {
+    &::before {
+      color: #1E824C;
+    }
+  }
+
+  &.lectures {
+    &::before {
+      color: #4ECDC4;
+    }
+  }
+
+  &.music {
+    &::before {
+      color: #8A12B3;
+    }
+  }
+
+  &.political {
+    &::before {
+      color: #DB0A5B;
+    }
+  }
+
+  &.religious {
+    &::before {
+      color: #F9690E;
+    }
+  }
+
+  &.social {
+    &::before {
+      color: #F5AB35;
+    }
+  }
+
+  &.other {
+    &::before {
+      color: #99A2A8;
+    }
+  }
+}
+
 .list-search {
   margin-top: 10px;
   padding-left: 0px;
@@ -243,6 +351,16 @@ footer {
   @extend .btn-xs;
 }
 
+.calendar-create {
+  padding-right: 0;
+  padding-left: 0;
+  float: right;
+
+  .add-event-btn {
+    width: 100%;
+  }
+}
+
 .calendar-sidebar {
   border-radius: 4px;
   margin-top: 50px;
@@ -256,12 +374,6 @@ footer {
     padding-left: 30px;
     padding-right: 0;
     border-left: 1px solid #ddd;
-  }
-
-  .more {
-    &:hover, &:active {
-      color: #ddd;
-    }
   }
 }
 
@@ -282,6 +394,7 @@ footer {
 
   &.show-event {
     padding-top: 15px;
+    max-height: 100vh;
   }
 
   .row {
@@ -441,6 +554,10 @@ label {
     min-height: auto;
   }
 
+  .calendar-create {
+    float: none;
+  }
+
   .calendar-sidebar {
     margin-top: 15px;
   }
@@ -474,10 +591,7 @@ label {
     background-color: #f8f8f8;
     position: relative;
     margin: auto;
-
-    &.rectangle {
-      margin-bottom: 10px;
-    }
+    margin-bottom: 10px;
   }
 }
 
@@ -491,6 +605,15 @@ label {
       height: 26px;
       padding-right: 10px;
       margin-top: 2px;
+    }
+  }
+
+  .ad {
+    margin-left: -15px;
+
+    &.rectangle {
+      margin: auto;
+      margin-bottom: 10px;
     }
   }
 }
