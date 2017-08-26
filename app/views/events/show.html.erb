@@ -1,3 +1,16 @@
+<% content_for :head do %>
+<script type="text/javascript">
+  FB.api(
+    "/{event-id}",
+    function (response) {
+      if (response && !response.error) {
+        /* handle the result */
+      }
+    }
+  );
+</script>
+<% end %>
+
 <% @title = @event.title %>
 <div class="row">
   <div class="col-lg-6">
@@ -36,6 +49,17 @@
 
       <% if @event.fb? %>
         <a href="https://facebook.com/events/<%= @event.fbID %>" target="_blank"><%= @event.title %> on Facebook &#10140;</a>
+      <% end %>
+
+      <% if @event.fb? %>
+      <a class="row" href="https://facebook.com/events/<%= @event.fbID %>" target="_blank">
+        <div class="col-xs-2">
+          <%= image_tag "social/facebook", class: 'social-bottom' %>
+        </div>
+        <div class="col-xs-10">
+          <p><%= @event.title %> on Facebook</p>
+        </div>
+      </a>
       <% end %>
 
       <div class="row">
