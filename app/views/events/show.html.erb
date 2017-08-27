@@ -1,7 +1,7 @@
 <% @title = @event.title %>
 <% content_for :head do %>
 <script>
-  function initMap() {
+  function renderMap() {
     var loc = {lat: <%= @event.location_lat %>, lng: <%= @event.location_lon %> };
     var cen = {lat: <%= @event.location_lat %> + .0025, lng: <%= @event.location_lon %> };
     var map = new google.maps.Map(document.getElementById('map'), {
@@ -26,6 +26,11 @@
     marker.addListener('click', function() {
       infowindow.open(map, marker);
     });
+  }
+
+  function initMap() {
+    $(document).ready(function() { renderMap() });
+    $(document).on('turbolinks:load', function(e) { renderMap() });
   }
 </script>
   <script async defer
