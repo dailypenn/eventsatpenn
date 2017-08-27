@@ -55,6 +55,7 @@ class Event < ApplicationRecord
   def set_category
     self.display_category = category if Event.categories.include?(category)
     return if display_category
+    self.category = 'OTHER' if category.nil?
     case category
     when 'CLASS_EVENT'
       self.display_category = 'Academic'
