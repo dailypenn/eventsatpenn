@@ -95,6 +95,17 @@ class Event < ApplicationRecord
     !fbID.empty?
   end
 
+  def self.get_date_events(events)
+    categories = events.group_by(&:display_category).to_a
+
+    display = []
+    categories.each do |set|
+      display << [set[0], set[1].length]
+    end
+
+    display.sort_by! { |cat| cat[1] }.reverse!
+  end
+
   def self.categories
     ['Academic', 'Arts', 'Athletic', 'Career and Professional', 'Causes',
      'Charity and Community Service', 'Conferences, Meetings and Workshops',
