@@ -25,5 +25,27 @@ ActiveAdmin.register Event do
   # just show everything
 
   # form
-  # just show everything
+  form do |f|
+    f.semantic_errors # shows errors on :base
+    f.inputs do
+      f.input :org
+      f.input :title
+      f.input :start_date, as: :datepicker
+      f.input :end_date, as: :datepicker
+      f.input :event_date, as: :datepicker
+      f.input :all_day
+      f.input :description
+      f.input :location
+      f.input :location_lat
+      f.input :location_lon
+      f.input :category
+      f.input :display_category, as: :select, collection: Event.categories
+      f.input :fbID
+      f.input :twentyone
+      f.input :recurring
+      f.input :recurrence_freq
+      f.input :recurrence_amt
+    end
+    f.actions
+  end
 end
