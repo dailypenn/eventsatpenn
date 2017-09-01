@@ -48,6 +48,9 @@ document.addEventListener("gtm.load", function() {
 function updateCal() {
   return function() {
     $('td.day').on('click', function(e) {
+      // Remove new event class
+      $('.calendar-sidebar').removeClass('new-event');
+      
       $('td.day').removeClass('active')
       $(e.currentTarget).addClass('active')
       e.preventDefault();
@@ -140,9 +143,6 @@ function updateCal() {
     if (window.location.pathname == '/events/new') {
       $('.calendar-sidebar').addClass('new-event');
     }
-
-    // Remove new event class
-    $('.calendar-sidebar').removeClass('new-event');
 
     // Clear current week and select correct week on first load
     $('.current-week').removeClass('current-week');
