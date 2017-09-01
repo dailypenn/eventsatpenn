@@ -48,9 +48,10 @@ document.addEventListener("gtm.load", function() {
 function updateCal() {
   return function() {
     $('td.day').on('click', function(e) {
-      // Remove new event class
+      // Remove new event class and path
       $('.calendar-sidebar').removeClass('new-event');
-      
+      window.history.pushState('', '', '/');
+
       $('td.day').removeClass('active')
       $(e.currentTarget).addClass('active')
       e.preventDefault();
