@@ -365,9 +365,15 @@ footer {
   border-radius: 4px;
   margin-top: 50px;
   margin-left: -15px;
+  max-height: 644px;
+  overflow: scroll;
 
   &.new-event, &.display-events {
     margin-top: 15px;
+  }
+
+  &.new-event {
+    overflow: visible;
   }
 
   .all-day-events {
@@ -542,7 +548,7 @@ label {
   }
 }
 
-@media screen and (max-width: 992px) {
+@media screen and (max-width: 991px) {
   .calendar-sidebar {
     margin-left: 0;
   }

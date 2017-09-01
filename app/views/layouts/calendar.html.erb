@@ -13,7 +13,7 @@
         <div class="row">
           <div class="col-md-8">
             <%= form_for_filterrific @filterrific do |f| %>
-              <div class="col-md-3 list-categories">
+              <div class="col-sm-3 list-categories">
               <%= f.select(
                 :with_category,
                 @filterrific.select_options[:with_category],
@@ -23,7 +23,7 @@
               </div>
             <% end %>
             <% if user_signed_in? && !current_user.orgs.empty? %>
-            <div class="col-md-3 center calendar-create">
+            <div class="col-sm-3 center calendar-create">
               <a class="btn btn-info pull-right add-event-btn" href="/events/new">Add an Event</a>
             </div>
             <% end %>
