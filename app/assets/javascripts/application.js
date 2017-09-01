@@ -141,6 +141,9 @@ function updateCal() {
       $('.calendar-sidebar').addClass('new-event');
     }
 
+    // Remove new event class
+    $('.calendar-sidebar').removeClass('new-event');
+
     // Clear current week and select correct week on first load
     $('.current-week').removeClass('current-week');
     $('tr:has(td.today)').addClass('current-week');
