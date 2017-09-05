@@ -33,6 +33,7 @@
   line-height: 1.36;
   background: #4267b2;
   border: 1px solid #4267b2;
+  letter-spacing: .04rem;
 }
 
 .fb-button:hover, .fb-button:active {
@@ -58,6 +59,7 @@
 
 #fb-cover-photo {
   img {
+    width: 100%;
     border-radius: 4px 4px 0 0;
   }
 }
