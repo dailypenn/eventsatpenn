@@ -1,0 +1,22 @@
+<%= month_calendar(attribute: :start_date, end_attribute: :end_date, events: @events) do |d, events| %>
+  <div class="date" data-date="<%= "#{d.strftime("%Y-%m-%d")}" %>">
+    <span class="date-num"><%= d.day %></span>
+    <span class="mobile-weekday">
+      <% weekdays = %w[Sunday Monday Tuesday Wednesday Thursday Friday Saturday] %>
+      <%= weekdays[d.wday] %>
+    </span>
+  </div>
+  <% date_events = Event.get_date_events(events) %>
+  <% see_all = date_events.length > 3 %>
+  <% date_events = date_events.take(3) if see_all %>
+  <% date_events.each do |event| %>
+    <div class="calendar-event <%= event[0].split(', ').first.downcase %>">
+      <%= pluralize(event[1], "#{event[0]} Event") %>
+    </div>
+  <% end %>
+  <% if see_all %>
+    <div class="more-events">
+      See all (<%= events.length %>)
+    </div>
+  <% end %>
+<% end %>

@@ -1,10 +1,6 @@
-.calendar-filter {
-  max-width: 200px;
-  display: inline;
-}
-
 .event-item-row {
   padding-right: 15px;
+
   &:not(:last-of-type) {
     padding-bottom: 10px;
   }
@@ -13,13 +9,99 @@
 .day-view {
   &.event {
     background-color: #aa1e22;
-    color: #ffffff;
+    color: #333;
     border-radius: 4px;
     padding: 10px;
   }
 
   a {
-    color: #fff;
+    color: #CCC;
+
+    &:hover, &:active {
+      color: #EEE;
+    }
+  }
+
+  &.academic, &.arts, &.causes, &.charity, &.lectures, &.religious, &.social, &.other {
+    a {
+      color: #555;
+
+      &:hover, &:active {
+        color: #777;
+      }
+    }
+  }
+
+  &.academic {
+    background-color: #FFC0CB;
+  }
+
+  &.arts {
+    background-color: #AEA8D3;
+  }
+
+  &.athletic {
+    background-color: #1F3A93;
+    color: #FFFFFF;
+  }
+
+  &.career {
+    background-color: #3498DB;
+    color: #FFFFFF;
+  }
+
+  &.causes {
+    background-color: #F5D76E;
+  }
+
+  &.charity {
+    background-color: #87D37C;
+  }
+
+  &.conferences {
+    background-color: #674172;
+    color: #FFFFFF;
+  }
+
+  &.ethnic {
+    background-color: #F22613;
+    color: #FFFFFF;
+  }
+
+  &.food {
+    background-color: #D2527F;
+    color: #FFFFFF;
+  }
+
+  &.health {
+    background-color: #1E824C;
+    color: #FFFFFF;
+  }
+
+  &.lectures {
+    background-color: #4ECDC4;
+  }
+
+  &.music {
+    background-color: #8A12B3;
+    color: #FFFFFF;
+  }
+
+  &.political {
+    background-color: #DB0A5B;
+    color: #FFFFFF;
+  }
+
+  &.religious {
+    background-color: #F9690E;
+  }
+
+  &.social {
+    background-color: #F5AB35;
+  }
+
+  &.other {
+    background-color: #99A2A8;
   }
 }
 
@@ -42,9 +124,114 @@
 
   .calendar-event {
     display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: #333;
+
+    &::before {
+      content: '\25CF';
+    }
+
+    &.academic {
+      &::before {
+        color: #FFC0CB;
+      }
+    }
+
+    &.arts {
+      &::before {
+        color: #AEA8D3;
+      }
+    }
+
+    &.athletic {
+      &::before {
+        color: #1F3A93;
+      }
+    }
+
+    &.career {
+      &::before {
+        color: #3498DB;
+      }
+    }
+
+    &.causes {
+      &::before {
+        color: #F5D76E;
+      }
+    }
+
+    &.charity {
+      &::before {
+        color: #87D37C;
+      }
+    }
+
+    &.conferences {
+      &::before {
+        color: #674172;
+      }
+    }
+
+    &.ethnic {
+      &::before {
+        color: #F22613;
+      }
+    }
+
+    &.food {
+      &::before {
+        color: #D2527F;
+      }
+    }
+
+    &.health {
+      &::before {
+        color: #1E824C;
+      }
+    }
+
+    &.lectures {
+      &::before {
+        color: #4ECDC4;
+      }
+    }
+
+    &.music {
+      &::before {
+        color: #8A12B3;
+      }
+    }
+
+    &.political {
+      &::before {
+        color: #DB0A5B;
+      }
+    }
+
+    &.religious {
+      &::before {
+        color: #F9690E;
+      }
+    }
+
+    &.social {
+      &::before {
+        color: #F5AB35;
+      }
+    }
+
+    &.other {
+      &::before {
+        color: #99A2A8;
+      }
+    }
 
     a {
       display: initial;
+      color: #333;
     }
   }
 
@@ -90,13 +277,6 @@
     max-width: 14.285%; // 1/7th
     height: 120px;
     border: 1px solid #ddd;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-
-  .calendar-event {
-    color: #aa1e22;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;

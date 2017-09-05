@@ -37,12 +37,50 @@
 <% end %>
 
 <% @title = @event.title %>
+<% content_for :head do %>
+<script>
+  function renderMap() {
+    var loc = {lat: <%= @event.location_lat %>, lng: <%= @event.location_lon %> };
+    var cen = {lat: <%= @event.location_lat %> + .0025, lng: <%= @event.location_lon %> };
+    var map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 15,
+      center: cen,
+      mapTypeControl: false,
+      streetViewControl: false
+    });
+    var marker = new google.maps.Marker({
+      position: loc,
+      map: map
+    });
+    var infowindow = new google.maps.InfoWindow({
+      content: `
+        <center>
+          <p><b><%= @event.location %></b></p>
+          <br />
+          <p><%= @event.title %> by <i><%= @event.org.name %></i></p>
+        </center>
+      `
+    }).open(map, marker);
+    marker.addListener('click', function() {
+      infowindow.open(map, marker);
+    });
+  }
+
+  function initMap() {
+    $(document).ready(function() { renderMap() });
+    $(document).on('turbolinks:load', function(e) { renderMap() });
+  }
+</script>
+  <script async defer
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCI47lLK3V7idUtknKKO8YTIUFyCsPtWv4&callback=initMap">
+  </script>
+<% end %>
+<div class="page-title">
+  <h1 class="pill"><%= @event.title %></h1>
+</div>
 <div class="row">
-  <div class="col-lg-6">
-    <div class="page-title">
-      <h1 class="pill"><%= @event.title %></h1>
-    </div>
-    <div class="panel panel-default filled list-all show-event">
+  <div class="col-sm-6">
+    <div class="panel panel-default filled show-event">
       <p class="p-large mb5"><strong>Location:</strong> <%= @event.location %></p>
 
       <p class="p-large mb5"><strong>Time:</strong>
@@ -54,7 +92,7 @@
           to <%= @event.end_date.strftime("%l:%M %P") %>
         <% end %>
       <% else %>
-        From <%= @event.start_date.strftime("%A, %B %d, %Y at %l:%M %P") %>
+        <%= @event.start_date.strftime("%A, %B %d, %Y at %l:%M %P") %>
         to <%= @event.end_date.strftime("%A, %B %d, %Y at %l:%M %P") %>
       <% end %>
       </p>
@@ -89,11 +127,17 @@
       </div>
       <% end %>
 
-      <div class="row">
-        <% if @event.org.users.include? current_user %>
-          <%= link_to 'Edit this event', edit_event_path(@event) %>
-        <% end %>
-      </div>
+      <% if @event.org.users.include? current_user %>
+        <%= link_to 'Edit this event', edit_event_path(@event) %>
+      <% end %>
     </div>
+  </div>
+
+  <div class="col-sm-6 right-hand-panel">
+    <% unless (@event.location_lat.nil? && @event.location_lon.nil?) || (@event.location_lat == 0 && @event.location_lon == 0) %>
+      <div class="panel panel-default filled">
+        <div id="map"></div>
+      </div>
+    <% end %>
   </div>
 </div>
