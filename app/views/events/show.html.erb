@@ -1,14 +1,38 @@
-<% content_for :head do %>
-<script type="text/javascript">
+<% if current_user %>
+<% content_for :fb_scripts do %>
+  console.log('woot');
   FB.api(
-    "/{event-id}",
+    "/<%= @event.fbID %>/attending?fields=id,rsvp_status,name,picture{url}&limit=15&access_token=<%= access_token%>",
     function (response) {
       if (response && !response.error) {
-        /* handle the result */
+        for (var i = 0; i < response.data.length; i++) {
+          var attendee = response.data[i];
+          console.log(attendee);
+          var url = 'http://www.facebook.com/' + attendee.id
+          var img = attendee.picture.data.url
+          $('#faces').append("<a class='face' alt='" + attendee.name + "' href='" + url + "'><img src=" + img + "></img></a>")
+        }
+      }
+      if (response.error) {
+        console.error(response);
       }
     }
   );
-</script>
+
+  FB.api(
+    "/<%= @event.fbID %>??fields=attending_count,interested_count,declined_count,noreply_count,can_guests_invite,ticket_uri,cover&access_token=<%= access_token%>",
+    function (response) {
+      if (response && !response.error) {
+        /* handle the result */
+        console.log(response);
+      }
+      if (response.error) {
+        console.error(response);
+      }
+    }
+  );
+
+<% end %>
 <% end %>
 
 <% @title = @event.title %>
@@ -58,6 +82,7 @@
         </div>
         <div class="col-xs-10">
           <p><%= @event.title %> on Facebook</p>
+          <div class="faces" id="faces"></div>
         </div>
       </a>
       <% end %>

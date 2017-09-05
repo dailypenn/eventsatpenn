@@ -2,10 +2,26 @@
 
 <%# FB API %>
 <div id="fb-root"></div>
-<script>(function(d, s, id) {
+<script>
+window.fbAsyncInit = function() {
+  FB.init({
+    appId   : '<%= Rails.application.secrets.fb_app_id %>',
+    status  : true,
+    cookie  : true,
+    xfbml   : true,
+    version : 'v2.9'
+  });
+  // Additional initialization code here
+  <% if content_for? :fb_scripts %>
+    <%= yield :fb_scripts %>
+  <% end %>
+  console.log('done');
+};
+(function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];
   if (d.getElementById(id)) return;
   js = d.createElement(s); js.id = id;
   js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.10&appId=<%= Rails.application.secrets.fb_app_id %>";
   fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
+}(document, 'script', 'facebook-jssdk'));
+</script>

@@ -25,27 +25,37 @@
         <% end %>
 
         <% unless @org.website.empty? %>
-        <a class="row" href="<%= @org.website %>" target="_blank">
+        <div class="row">
           <div class="col-xs-2">
-            <%= image_tag "social/website", class: 'social-bottom' %>
+            <a href="<%= @org.website %>" target="_blank">
+              <%= image_tag "social/website", class: 'social-bottom' %>
+            </a>
           </div>
           <div class="col-xs-10">
-            <p><%= @org.name %> Online</p>
-            <small><em><%= @org.website %></em></small>
+            <a href="<%= @org.website %>" target="_blank">
+              <p><%= @org.name %> Online</p>
+              <small><em><%= @org.website %></em></small>
+            </a>
           </div>
-        </a>
+        </div>
         <% end %>
-
+        <br>
         <% if @org.fb? %>
-        <a class="row" href="https://facebook.com/<%= @org.fbID %>" target="_blank">
+        <div class="row">
           <div class="col-xs-2">
-            <%= image_tag "social/facebook", class: 'social-bottom' %>
+            <a href="https://facebook.com/<%= @org.fbID %>" target="_blank">
+              <%= image_tag "social/facebook", class: 'social-bottom' %>
+            </a>
           </div>
           <div class="col-xs-10">
-            <p><%= @org.name %> on Facebook</p>
-            <div class="fb-like" data-href="https://facebook.com/<%= @org.fbID %>" data-layout="standard" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
+            <a href="https://facebook.com/<%= @org.fbID %>" target="_blank">
+              <p><%= @org.name %> on Facebook</p>
+            </a>
+            <div class="likebox-wrapper">
+              <div class="fb-like" data-href="https://facebook.com/<%= @org.fbID %>" data-layout="standard" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
+            </div>
           </div>
-        </a>
+        </div>
         <% end %>
 
         <% if @org.users.include? current_user %>
