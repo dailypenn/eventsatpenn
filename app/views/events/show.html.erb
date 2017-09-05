@@ -24,7 +24,12 @@
     function (response) {
       if (response && !response.error) {
         /* handle the result */
-        $('#rsvp').append("")
+        $('#rsvp').append(response.attending_count + " people are attending.")
+        $('#fb-cover-photo').append("<img src=" + response.cover.source + "></img>");
+        $('#fb-going').prepend(response.attending_count + "<em>Attending</em>")
+        $('#fb-interested').prepend(response.interested_count + "<em>Interested</em>")
+        $('#fb-invited').prepend(response.noreply_count + "<em>Invited</em>")
+
         console.log(response);
       }
       if (response.error) {
@@ -134,6 +139,19 @@
   </div>
 
   <div class="col-sm-6 right-hand-panel">
+    <% if @event.fb? %>
+    <div class="panel panel-default filled fb-info-panel">
+      <div id="fb-cover-photo"></div>
+      <div class="row text-center fb-attendee-count">
+        <div class="col-xs-4" id="fb-going">
+        </div>
+        <div class="col-xs-4" id="fb-interested">
+        </div>
+        <div class="col-xs-4" id="fb-invited">
+        </div>
+      </div>
+    </div>
+    <% end %>
     <% unless (@event.location_lat.nil? && @event.location_lon.nil?) || (@event.location_lat == 0 && @event.location_lon == 0) %>
       <div class="panel panel-default filled">
         <div id="map"></div>

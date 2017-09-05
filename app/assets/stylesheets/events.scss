@@ -41,6 +41,27 @@
   color: #fff;
 }
 
+.fb-info-panel {
+  min-height: 200px;
+}
+
+.fb-attendee-count {
+  font-size: 32px;
+
+  em {
+    font-size: 12px;
+    display: block;
+    padding-bottom: 5px;
+    font-style: normal;
+  }
+}
+
+#fb-cover-photo {
+  img {
+    border-radius: 4px 4px 0 0;
+  }
+}
+
 #map {
   height: 400px;
   width: 100%;
