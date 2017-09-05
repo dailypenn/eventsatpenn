@@ -7,7 +7,7 @@
       if (response && !response.error) {
         for (var i = 0; i < response.data.length; i++) {
           var attendee = response.data[i];
-          console.log(attendee);
+          <!-- console.log(attendee); -->
           var url = 'http://www.facebook.com/' + attendee.id
           var img = attendee.picture.data.url
           $('#faces').append("<a class='face' alt='" + attendee.name + "' href='" + url + "'><img src=" + img + "></img></a>")
@@ -20,10 +20,11 @@
   );
 
   FB.api(
-    "/<%= @event.fbID %>??fields=attending_count,interested_count,declined_count,noreply_count,can_guests_invite,ticket_uri,cover&access_token=<%= access_token%>",
+    "/<%= @event.fbID %>?fields=id,attending_count,interested_count,declined_count,noreply_count,can_guests_invite,ticket_uri,cover&access_token=<%= access_token%>",
     function (response) {
       if (response && !response.error) {
         /* handle the result */
+        $('#rsvp').append("")
         console.log(response);
       }
       if (response.error) {
@@ -72,19 +73,20 @@
       <% end %>
 
       <% if @event.fb? %>
-        <a href="https://facebook.com/events/<%= @event.fbID %>" target="_blank"><%= @event.title %> on Facebook &#10140;</a>
-      <% end %>
-
-      <% if @event.fb? %>
-      <a class="row" href="https://facebook.com/events/<%= @event.fbID %>" target="_blank">
+      <div class="row">
         <div class="col-xs-2">
-          <%= image_tag "social/facebook", class: 'social-bottom' %>
+          <a href="https://facebook.com/events/<%= @event.fbID %>" target="_blank">
+            <%= image_tag "social/facebook", class: 'social-bottom' %>
+          </a>
         </div>
         <div class="col-xs-10">
-          <p><%= @event.title %> on Facebook</p>
+          <a href="https://facebook.com/events/<%= @event.fbID %>" target="_blank"><%= @event.title %> on Facebook</a>
+          <div id="rsvp">
+            <a class='fb-button' href="https://facebook.com/events/<%= @event.fbID %>">RSVP</a>
+          </div>
           <div class="faces" id="faces"></div>
         </div>
-      </a>
+      </div>
       <% end %>
 
       <div class="row">
