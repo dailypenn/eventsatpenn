@@ -25,35 +25,27 @@
         <% end %>
 
         <% unless @org.website.empty? %>
-        <div class="row">
-          <div class="col-xs-2">
-            <a href="<%= @org.website %>" target="_blank">
-              <%= image_tag "social/website", class: 'social-bottom' %>
-            </a>
-          </div>
-          <div class="col-xs-10">
-            <a href="<%= @org.website %>" target="_blank">
-              <p><%= @org.name %> Online</p>
-              <small><em><%= @org.website %></em></small>
-            </a>
-          </div>
+        <div>
+          <a href="<%= @org.website %>" target="_blank">
+            <%= image_tag "social/website", class: 'social-icon' %>
+          </a>
+          <a href="<%= @org.website %>" target="_blank">
+            <p><%= @org.name %> Online</p>
+            <small><em><%= @org.website %></em></small>
+          </a>
         </div>
         <% end %>
         <br>
         <% if @org.fb? %>
-        <div class="row">
-          <div class="col-xs-2">
-            <a href="https://facebook.com/<%= @org.fbID %>" target="_blank">
-              <%= image_tag "social/facebook", class: 'social-bottom' %>
-            </a>
-          </div>
-          <div class="col-xs-10">
-            <a href="https://facebook.com/<%= @org.fbID %>" target="_blank">
-              <p><%= @org.name %> on Facebook</p>
-            </a>
-            <div class="likebox-wrapper">
-              <div class="fb-like" data-href="https://facebook.com/<%= @org.fbID %>" data-layout="standard" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
-            </div>
+        <div>
+          <a href="https://facebook.com/<%= @org.fbID %>" target="_blank">
+            <%= image_tag "social/facebook", class: 'social-icon' %>
+          </a>
+          <a href="https://facebook.com/<%= @org.fbID %>" target="_blank">
+            <p><%= @org.name %> on Facebook</p>
+          </a>
+          <div class="likebox-wrapper">
+            <div class="fb-like" data-href="https://facebook.com/<%= @org.fbID %>" data-layout="standard" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
           </div>
         </div>
         <% end %>

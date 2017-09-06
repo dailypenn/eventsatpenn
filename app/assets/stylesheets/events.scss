@@ -6,6 +6,9 @@
   height: 32px;
   width: 100%;
   overflow: hidden;
+  display: inline-block;
+  width: calc(100% - 65px);
+  float: right;
 }
 
 .face {
@@ -48,11 +51,12 @@
 
 .fb-attendee-count {
   font-size: 32px;
+  line-height: 1;
+  padding: 15px 0;
 
   em {
     font-size: 12px;
     display: block;
-    padding-bottom: 5px;
     font-style: normal;
   }
 }
