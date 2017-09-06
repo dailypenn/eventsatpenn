@@ -73,20 +73,85 @@
       <% end %>
 
       <% if @event.fb? %>
-        <a href="https://facebook.com/events/<%= @event.fbID %>" target="_blank"><%= @event.title %> on Facebook &#10140;</a>
+      <div>
+        <a href="https://facebook.com/events/<%= @event.fbID %>" target="_blank">
+          <%= image_tag "social/facebook", class: 'social-icon' %>
+        </a>
+        <a href="https://facebook.com/events/<%= @event.fbID %>" target="_blank"><%= @event.title %> on Facebook</a>
+        <div id="rsvp">
+          <a class='fb-button' href="https://facebook.com/events/<%= @event.fbID %>">RSVP</a>
+        </div>
+        <div class="faces" id="faces"></div>
+      </div>
       <% end %>
 
       <% if @event.org.users.include? current_user %>
+        <hr>
         <%= link_to 'Edit this event', edit_event_path(@event) %>
       <% end %>
     </div>
   </div>
 
-<% unless (@event.location_lat.nil? && @event.location_lon.nil?) || (@event.location_lat == 0 && @event.location_lon == 0) %>
   <div class="col-sm-6 right-hand-panel">
-    <div class="panel panel-default filled">
-      <div id="map"></div>
+    <% if @event.fb? %>
+    <div class="panel panel-default filled fb-info-panel">
+      <div id="fb-cover-photo"></div>
+      <div class="row text-center fb-attendee-count">
+        <div class="col-xs-4" id="fb-going">
+        </div>
+        <div class="col-xs-4" id="fb-interested">
+        </div>
+        <div class="col-xs-4" id="fb-invited">
+        </div>
+      </div>
     </div>
+    <% end %>
+    <% unless (@event.location_lat.nil? && @event.location_lon.nil?) || (@event.location_lat == 0 && @event.location_lon == 0) %>
+      <div class="panel panel-default filled">
+        <div id="map"></div>
+      </div>
+    <% end %>
   </div>
-<% end %>
 </div>
+
+<% if @event.fb? %>
+<script type="text/javascript">
+function getFBEventInfo() {
+  FB.api(
+    "/<%= @event.fbID %>/attending?fields=id,rsvp_status,name,picture{url}&limit=15&access_token=<%= access_token%>",
+    function (response) {
+      if (response && !response.error) {
+        for (var i = 0; i < response.data.length; i++) {
+          var attendee = response.data[i];
+          var url = 'http://www.facebook.com/' + attendee.id
+          var img = attendee.picture.data.url
+          $('#faces').append("<a class='face' alt='" + attendee.name + "' href='" + url + "'><img src=" + img + "></img></a>")
+        }
+      }
+      if (response.error) {
+        console.error(response);
+      }
+    }
+  );
+
+  FB.api(
+    "/<%= @event.fbID %>?fields=id,attending_count,interested_count,declined_count,noreply_count,can_guests_invite,ticket_uri,cover&access_token=<%= access_token%>",
+    function (response) {
+      if (response && !response.error) {
+        if (response.ticket_uri != null && response.ticket_uri != "") {
+          $('#rsvp').append("<a class='fb-button' href='" + response.ticket_uri +"' target='_blank'>Tickets</a>")
+        }
+        $('#rsvp').append("&nbsp;" + response.attending_count + " people are attending.")
+        $('#fb-cover-photo').append("<img src=" + response.cover.source + "></img>");
+        $('#fb-going').prepend(response.attending_count + "<em>Attending</em>")
+        $('#fb-interested').prepend(response.interested_count + "<em>Interested</em>")
+        $('#fb-invited').prepend(response.noreply_count + "<em>Invited</em>")
+      }
+      if (response.error) {
+        console.error(response);
+      }
+    }
+  );
+};
+</script>
+<% end %>

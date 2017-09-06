@@ -1,0 +1,57 @@
+<%# scripts to go right after opening of body tag %>
+
+<%# FB API %>
+<div id="fb-root"></div>
+<script>
+window.fbAsyncInit = function() {
+  FB.init({
+    appId   : '<%= Rails.application.secrets.fb_app_id %>',
+    status  : true,
+    cookie  : true,
+    xfbml   : true,
+    version : 'v2.9'
+  });
+
+  if (typeof(getFBEventInfo) != "undefined") {
+    getFBEventInfo();
+  }
+};
+(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.10&appId=<%= Rails.application.secrets.fb_app_id %>";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+
+// Compatibility with Turbolinks 5
+(function($) {
+  var fbRoot;
+
+  function saveFacebookRoot() {
+    if ($('#fb-root').length) {
+      fbRoot = $('#fb-root').detach();
+    }
+  };
+
+  function restoreFacebookRoot() {
+    if (fbRoot != null) {
+      if ($('#fb-root').length) {
+        $('#fb-root').replaceWith(fbRoot);
+        if (typeof(getFBEventInfo) != "undefined") {
+          getFBEventInfo();
+        }
+      } else {
+        $('body').append(fbRoot);
+      }
+    }
+
+    if (typeof FB !== "undefined" && FB !== null) { // Instance of FacebookSDK
+      FB.XFBML.parse();
+    }
+  };
+
+  document.addEventListener('turbolinks:request-start', saveFacebookRoot)
+  document.addEventListener('turbolinks:load', restoreFacebookRoot)
+}(jQuery));
+</script>

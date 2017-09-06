@@ -105,6 +105,12 @@ input {
   margin-top: 20px;
 }
 
+.social-icon {
+  height: 50px;
+  float: left;
+  margin-right: 15px;
+}
+
 // make all images responsive by default
 img {
   @extend .img-responsive;

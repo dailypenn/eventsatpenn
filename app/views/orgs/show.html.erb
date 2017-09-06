@@ -25,10 +25,29 @@
         <% end %>
 
         <% unless @org.website.empty? %>
-          <a href="<%= @org.website %>" target="_blank"><%= @org.name %> website &#10140;</a> <br>
+        <div>
+          <a href="<%= @org.website %>" target="_blank">
+            <%= image_tag "social/website", class: 'social-icon' %>
+          </a>
+          <a href="<%= @org.website %>" target="_blank">
+            <p><%= @org.name %> Online</p>
+            <small><em><%= @org.website %></em></small>
+          </a>
+        </div>
         <% end %>
+        <br>
         <% if @org.fb? %>
-          <a href="https://facebook.com/<%= @org.fbID %>" target="_blank"><%= @org.name %> on Facebook &#10140;</a>
+        <div>
+          <a href="https://facebook.com/<%= @org.fbID %>" target="_blank">
+            <%= image_tag "social/facebook", class: 'social-icon' %>
+          </a>
+          <a href="https://facebook.com/<%= @org.fbID %>" target="_blank">
+            <p><%= @org.name %> on Facebook</p>
+          </a>
+          <div class="likebox-wrapper">
+            <div class="fb-like" data-href="https://facebook.com/<%= @org.fbID %>" data-layout="standard" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
+          </div>
+        </div>
         <% end %>
 
         <% if @org.users.include? current_user %>
