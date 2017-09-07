@@ -20,5 +20,4 @@ RSpec.describe ApplicationController, type: :controller do
       end
     end
   end
-  pending "Finish #{__FILE__}"
 end
