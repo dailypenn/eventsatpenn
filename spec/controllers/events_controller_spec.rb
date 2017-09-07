@@ -50,11 +50,11 @@ RSpec.describe EventsController, type: :controller do
     context 'when user attempts creates a new event' do
       it 'responds with 201 CREATED' do
 
-        pending 'responds with 201 CREATED'
 
       end
     end
   end
+  pending 'responds with 201 CREATED'
 
   pending 'PATCH /events/:id'
 
