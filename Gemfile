@@ -16,7 +16,6 @@ gem 'rails', '~> 5.1.1'
 gem 'puma', '~> 3.7'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
-gem 'coffee-rails', '~> 4.2'
 gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 gem 'activerecord-session_store'
@@ -28,9 +27,9 @@ gem 'momentjs-rails', '>= 2.9.0'
 gem 'bootstrap3-datetimepicker-rails', '~> 4.17.47'
 gem 'activeadmin', github: 'activeadmin'
 gem 'active_bootstrap_skin'
-gem 'google-tag-manager-rails', '~> 0.1.3'
 gem 'meta-tags'
-gem 'rack-cors', :require => 'rack/cors'
+gem 'rack-cors',   require: 'rack/cors'
+gem 'whenever',    require: false
 
 group :production do
   gem 'sentry-raven'
@@ -54,7 +53,6 @@ group :development do
 end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'bootstrap-sass'
-gem 'high_voltage'
 gem 'jquery-rails'
 gem 'omniauth'
 gem 'omniauth-facebook'

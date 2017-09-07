@@ -1,7 +1,7 @@
 Events@Penn
 ================
 
-Events@Penn is a events aggregation website built by the web team at [The Daily Pennsylvanian](https://thedp.com).
+[Events@Penn](https://eventsatpenn.com) is a events aggregation website built by the web team at [The Daily Pennsylvanian](https://thedp.com).
 
 Ruby on Rails
 -------------

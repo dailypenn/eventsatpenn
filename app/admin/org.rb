@@ -19,5 +19,16 @@ ActiveAdmin.register Org do
   # just show everything
 
   # form
-  # just show everything
+  form do |f|
+    f.semantic_errors # shows errors on :base
+    f.inputs do
+      f.input :name
+      f.input :bio
+      f.input :fbID
+      f.input :category, as: :select, collection: Org.categories
+      f.input :website
+      f.input :photo_url
+    end
+    f.actions
+  end
 end

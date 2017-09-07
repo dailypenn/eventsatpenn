@@ -1,3 +1,74 @@
 // Place all the styles related to the events controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.faces {
+  height: 32px;
+  width: 100%;
+  overflow: hidden;
+  display: inline-block;
+  width: calc(100% - 65px);
+  float: right;
+}
+
+.face {
+  display: inline-block;
+  height: 32px;
+  margin-right: 1px;
+  width: 32px;
+}
+
+
+.fb-button, .fb-button:visited {
+  border-radius: 3px;
+  font-size: 11px;
+  height: 20px;
+  padding: 3px 4px;
+  cursor: pointer;
+  text-decoration: none;
+  font-family: Helvetica, Arial, sans-serif;
+  color: #ffffff !important;
+  font-weight: 600;
+  display: inline-block;
+  vertical-align: top;
+  text-align: center;
+  margin-bottom: 3px;
+  line-height: 1.36;
+  background: #4267b2;
+  border: 1px solid #4267b2;
+  letter-spacing: .04rem;
+}
+
+.fb-button:hover, .fb-button:active {
+  background: #365899;
+  border: 1px solid #365899;
+  color: #fff;
+}
+
+.fb-info-panel {
+  min-height: 200px;
+}
+
+.fb-attendee-count {
+  font-size: 32px;
+  line-height: 1;
+  padding: 15px 0;
+
+  em {
+    font-size: 12px;
+    display: block;
+    font-style: normal;
+  }
+}
+
+#fb-cover-photo {
+  img {
+    width: 100%;
+    border-radius: 4px 4px 0 0;
+  }
+}
+
+#map {
+  height: 400px;
+  width: 100%;
+}

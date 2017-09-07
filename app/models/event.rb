@@ -2,7 +2,7 @@ class Event < ApplicationRecord
   filterrific(available_filters: %i[search_query with_category])
 
   belongs_to :org
-  validates :title, :location, :category, presence: true
+  validates :title, :location, presence: true
   validate :dates_present?
   validate :valid_dates?
   validate :category?
@@ -55,6 +55,7 @@ class Event < ApplicationRecord
   def set_category
     self.display_category = category if Event.categories.include?(category)
     return if display_category
+    self.category = 'OTHER' if category.nil?
     case category
     when 'CLASS_EVENT'
       self.display_category = 'Academic'
@@ -92,6 +93,17 @@ class Event < ApplicationRecord
   def fb?
     return false if fbID.nil?
     !fbID.empty?
+  end
+
+  def self.get_date_events(events)
+    categories = events.group_by(&:display_category).to_a
+
+    display = []
+    categories.each do |set|
+      display << [set[0], set[1].length]
+    end
+
+    display.sort_by! { |cat| cat[1] }.reverse!
   end
 
   def self.categories

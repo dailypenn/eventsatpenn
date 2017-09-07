@@ -12,35 +12,27 @@
         <%= render 'layouts/messages' %>
         <div class="row">
           <div class="col-md-8">
-            <%# calendar sorting no categories for now %>
-            <% if false %>
-            <select class="form-control pull-left calendar-filter" disabled>
-              <option>Filter Events by Category</option disabled>
-            </select>
+            <%= form_for_filterrific @filterrific do |f| %>
+              <div class="col-sm-3 list-categories">
+              <%= f.select(
+                :with_category,
+                @filterrific.select_options[:with_category],
+                { include_blank: 'Any category' },
+                { class: 'form-control pull-left calendar-categories' }
+              ) %>
+              </div>
             <% end %>
             <% if user_signed_in? && !current_user.orgs.empty? %>
-              <a class="btn btn-info pull-right calendar-create" href="/events/new">Add an Event</a>
+            <div class="col-sm-3 center calendar-create">
+              <a class="btn btn-info pull-right add-event-btn" href="/events/new">Add an Event</a>
+            </div>
             <% end %>
-            <% @events = Event.all %>
-            <%= month_calendar(attribute: :start_date, end_attribute: :end_date, events: @events) do |d, meetings| %>
-              <div class="date" data-date="<%= "#{d.strftime("%Y-%m-%d")}" %>">
-                <span class="date-num"><%= d.day %></span>
-                <span class="mobile-weekday">
-                  <% weekdays = %w[Sunday Monday Tuesday Wednesday Thursday Friday Saturday] %>
-                  <%= weekdays[d.wday] %>
-                </span>
-              </div>
-              <% meetings.take(3).each do |event| %>
-                <div class="calendar-event">
-                  <%= link_to event.title, event, class: 'event-link' %>
-                </div>
-              <% end %>
-              <% if meetings.length > 3 %>
-                <div class="more-events">
-                  More (<%= meetings.length - 3 %>)
-                </div>
-              <% end %>
-            <% end %>
+            <div id="filterrific_results">
+              <%= render(
+                partial: 'layouts/month_cal',
+                locals: { events: @events }
+              ) %>
+            </div>
           </div>
           <div class="col-md-4">
               <div class="panel-date">

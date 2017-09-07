@@ -7,6 +7,9 @@ Rails.application.routes.draw do
   resources :users
   root to: 'application#index'
 
+  # Pages
+  get '/about' => 'application#about'
+
   # Auth & Sessions
   get '/signin' => 'sessions#new', :as => :signin
   get '/signout' => 'sessions#destroy', :as => :signout
