@@ -11,6 +11,7 @@
     <h1 class="pill">Upcoming Events</h1>
   </div>
   <div class="row">
+    <% if ENV['RAILS_ENV'] != 'test' %>
     <%= form_for_filterrific @filterrific do |f| %>
       <% if user_signed_in? && current_user.orgs.any? %>
         <div class="col-sm-4 list-search">
@@ -40,6 +41,7 @@
           <a class="btn btn-info list-add-btn" href="/events/new">Add an Event</a>
         </div>
       <% end %>
+    <% end %>
     <% end %>
   </div>
 

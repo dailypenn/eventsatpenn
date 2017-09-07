@@ -15,6 +15,8 @@
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
   require 'webmock/rspec'
+  require 'capybara/rspec'
+
   WebMock.disable_net_connect!(allow_localhost: true)
   # Mock the facebook signin auth flow, as almost every page requires this.
   WebMock.stub_request(
