@@ -1,0 +1,9 @@
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Organization",
+  "url" : "<%= @org.website.empty? ? "https://eventsatpenn.com/orgs/#{@org.id}" : @org.website %>",
+  "logo": "<%= @org.photo_url %>",
+  "name": "<%= @org.name %>"
+}
+</script>
