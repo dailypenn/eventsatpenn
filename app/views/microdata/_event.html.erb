@@ -1,0 +1,26 @@
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Event",
+  "name": "<%= @event.title %>",
+  "description": "<%= @event.description %>",
+  <% unless @event.location.nil? %>
+  "location": {
+    "@type": "Place"<% unless (@event.location_lat.nil? && @event.location_lon.nil?) || (@event.location_lat == 0 && @event.location_lon == 0) %>,
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": "<%= @event.location_lat %>",
+      "longitude": "<%= @event.location_lon %>"
+    },
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "<%= @event.location %>"
+    },
+    <% end %>
+    "name": "<%= @event.location %>"
+  },
+  <% end %>
+  "startDate": "<%= @event.start_date %>",
+  "endDate": "<%= @event.end_date %>"
+}
+</script>
