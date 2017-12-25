@@ -9,7 +9,7 @@ git_source(:github) do |repo_name|
 end
 
 # Ruby version
-ruby '2.4.0'
+ruby '2.4.1'
 
 # Gems
 gem 'rails', '~> 5.1.1'

@@ -8,6 +8,5 @@
 set :output, 'log/cron.log'
 
 every 30.minutes do
-  command '. /etc/default/unicorn' # get env variables
   runner 'ScrapeEventsForAllOrgsJob.perform_now'
 end
