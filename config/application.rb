@@ -1,4 +1,4 @@
-require_relative 'provision'
+require_relative 'provision' if ENV.fetch('RAILS_ENV') == 'production'
 require_relative 'boot'
 require "rails"
 require "active_model/railtie"

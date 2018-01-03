@@ -58,9 +58,9 @@ function updateCal() {
       // Get data-date of inner date element
       var dateStr = $(e.currentTarget).find('.date')[0].dataset.date;
       var date = new Date(dateStr);
-      date.setUTCHours(4);
+      date.setUTCHours(5);
       var nextDate = new Date(dateStr);
-      nextDate.setUTCHours(4);
+      nextDate.setUTCHours(5);
       nextDate.setDate(nextDate.getDate()+1);
       // Get and parse json
       $.getJSON("/events.json?start_date=" + dateStr, function(data) {
