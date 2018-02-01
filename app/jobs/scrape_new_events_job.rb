@@ -6,7 +6,7 @@ class ScrapeNewEventsJob < ApplicationJob
   # facebook server-side when this is substituted for an access token. See
   # https://developers.facebook.com/docs/facebook-login/access-tokens#apptokens
   def application_token
-    app_id  = Rails.application.secrets.fb_app_id
+    app_id = Rails.application.secrets.fb_app_id
     app_sec = Rails.application.secrets.fb_app_secret
     "#{app_id}|#{app_sec}"
   end
@@ -16,7 +16,7 @@ class ScrapeNewEventsJob < ApplicationJob
     group = FbGraph2::Page.new(org.fbID).authenticate(application_token)
     added_events = 0
     group.events.each do |event|
-      evt = event.fetch(fields: 'name,category,description,place,start_time,end_time,id')
+      evt = event.fetch(fields: 'name,category,description,place,start_time,end_time,id,event_times')
       if Event.find_by(fbID: evt.id).nil?
         create_event_for_org(org, evt)
         added_events += 1
@@ -27,6 +27,13 @@ class ScrapeNewEventsJob < ApplicationJob
 
   def create_event_for_org(org, event)
     return if event.nil?
+
+    # https://developers.facebook.com/docs/graph-api/reference/event/
+    # event_times: Array of times of a multi-instance event
+    # it looks as if it is NOT present if it is not a multi-instance event
+    event_times = event.raw_attributes['event_times']
+    event_is_recurring = event_times and event_times.length > 1
+
     place = event.raw_attributes['place']
     if place.nil?
       lat = 0
@@ -42,17 +49,22 @@ class ScrapeNewEventsJob < ApplicationJob
       lon = place['location']['longitude']
     end
     logger.debug "Creating event #{event.name} for #{org.name}"
+    new_event = create_and_save_event(event, lat, lon, org, place, event_is_recurring)
+    Rails.logger.error(new_event.errors.inspect) if new_event.errors.any?
+  end
+
+  def create_and_save_event(event, lat, lon, org, place, rec=false)
     new_event = Event.new(
-      title: event.name, start_date: event.start_time,
-      category: event.raw_attributes['category'],
-      end_date: event.end_time, description: event.description,
-      all_day: false, recurring: false,
-      location: location_str(place),
-      location_lat: lat,
-      location_lon: lon, fbID: event.id, org_id: org.id
+        title: event.name, start_date: event.start_time,
+        category: event.raw_attributes['category'],
+        end_date: event.end_time, description: event.description,
+        all_day: false, recurring: rec,
+        location: location_str(place),
+        location_lat: lat,
+        location_lon: lon, fbID: event.id, org_id: org.id
     )
     new_event.save
-    Rails.logger.error(new_event.errors.inspect) if new_event.errors.any?
+    new_event
   end
 
   def location_str(place)
