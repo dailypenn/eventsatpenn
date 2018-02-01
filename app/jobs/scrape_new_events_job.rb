@@ -49,15 +49,25 @@ class ScrapeNewEventsJob < ApplicationJob
       lon = place['location']['longitude']
     end
     logger.debug "Creating event #{event.name} for #{org.name}"
-    new_event = create_and_save_event(event, lat, lon, org, place, event_is_recurring)
-    Rails.logger.error(new_event.errors.inspect) if new_event.errors.any?
+
+    if event_is_recurring
+      event_times.each do |event_time|
+        new_event = create_and_save_event(event, lat, lon, org, place, event_time['start_time'],
+                                          event_time['end_time'], event_is_recurring)
+        Rails.logger.error(new_event.errors.inspect) if new_event.errors.any?
+      end
+    else
+      new_event = create_and_save_event(event, lat, lon, org, place, event.start_time, event.end_time,
+                                        event_is_recurring)
+      Rails.logger.error(new_event.errors.inspect) if new_event.errors.any?
+    end
   end
 
-  def create_and_save_event(event, lat, lon, org, place, rec=false)
+  def create_and_save_event(event, lat, lon, org, place, start_time, end_time, rec=false)
     new_event = Event.new(
-        title: event.name, start_date: event.start_time,
+        title: event.name, start_date: start_time,
         category: event.raw_attributes['category'],
-        end_date: event.end_time, description: event.description,
+        end_date: end_time, description: event.description,
         all_day: false, recurring: rec,
         location: location_str(place),
         location_lat: lat,
