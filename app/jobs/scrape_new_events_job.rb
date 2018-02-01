@@ -32,7 +32,7 @@ class ScrapeNewEventsJob < ApplicationJob
     # event_times: Array of times of a multi-instance event
     # it looks as if it is NOT present if it is not a multi-instance event
     event_times = event.raw_attributes['event_times']
-    event_is_recurring = event_times and event_times.length > 1
+    event_is_recurring = (event_times and event_times.length > 1)
 
     place = event.raw_attributes['place']
     if place.nil?
@@ -52,14 +52,12 @@ class ScrapeNewEventsJob < ApplicationJob
 
     if event_is_recurring
       event_times.each do |event_time|
-        new_event = create_and_save_event(event, lat, lon, org, place, event_time['start_time'],
-                                          event_time['end_time'], event_is_recurring)
-        Rails.logger.error(new_event.errors.inspect) if new_event.errors.any?
+        create_and_save_event(event, lat, lon, org, place, event_time['start_time'],
+                              event_time['end_time'], event_is_recurring)
       end
     else
-      new_event = create_and_save_event(event, lat, lon, org, place, event.start_time, event.end_time,
-                                        event_is_recurring)
-      Rails.logger.error(new_event.errors.inspect) if new_event.errors.any?
+      create_and_save_event(event, lat, lon, org, place, event.start_time, event.end_time,
+                            event_is_recurring)
     end
   end
 
@@ -74,6 +72,8 @@ class ScrapeNewEventsJob < ApplicationJob
         location_lon: lon, fbID: event.id, org_id: org.id
     )
     new_event.save
+    Rails.logger.error(new_event.errors.inspect) if new_event.errors.any?
+    # return new_event in case we want to reference it later
     new_event
   end
 
