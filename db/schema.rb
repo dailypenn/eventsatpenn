@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170826164950) do
+ActiveRecord::Schema.define(version: 20180206000719) do
 
   create_table "events", force: :cascade do |t|
     t.string "title", null: false
@@ -32,6 +32,8 @@ ActiveRecord::Schema.define(version: 20170826164950) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "display_category"
+    t.boolean "featured", default: false
+    t.string "featured_snippet", limit: 200
     t.index ["org_id"], name: "index_events_on_org_id"
   end
 
