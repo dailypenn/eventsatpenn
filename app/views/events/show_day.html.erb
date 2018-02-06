@@ -1,1 +1,11 @@
-<h2>Ya Boy</h2>
+<h2><%= @current_date %></h2>
+<% @events_today.each do |event| %>
+  <div class="col-xs-3 day-view time">
+    <%= event.start_date.strftime("%l %p") %>
+  </div>
+  <div class="col-xs-9 day-view event  <%= event.display_category.split(/,\s*/)[0].downcase %>">
+    <strong><%= event.title %></strong><br>
+    <%= event.location %>
+    <a href="/events/<%= event.id %>" class="pull-right more"><em>more&nbsp</em>&#10140;</a>
+  </div>
+<% end %>

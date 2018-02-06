@@ -9,6 +9,10 @@ class Event < ApplicationRecord
 
   before_validation :set_category
 
+  scope :on_date, lambda { |date| where(
+    'start_date > ? AND start_date < ?', date.beginning_of_day, date.end_of_day
+  )}
+
   scope :search_query, (lambda { |query|
     return nil if query.blank?
     # condition query, parse into individual keywords

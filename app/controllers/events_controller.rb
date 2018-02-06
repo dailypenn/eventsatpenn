@@ -34,7 +34,7 @@ class EventsController < ApplicationController
     }
   end
 
-  # GET /events/date/:date
+  # GET /events/day/:date
   def show_day
     default_og_params('Events')
     @filterrific = initialize_filterrific(
@@ -45,6 +45,8 @@ class EventsController < ApplicationController
       }
     ) || return
     @events = @filterrific.find.sort_by(&:start_date)
+    @current_date = Date.strptime(params[:date], "%Y-%m-%d")
+    @events_today = Event.on_date(@current_date).all
 
     render :'events/show_day.html.erb', layout: 'calendar'
   end
