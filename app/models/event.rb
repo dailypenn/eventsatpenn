@@ -114,4 +114,9 @@ class Event < ApplicationRecord
      'Lectures and Speakers', 'Music, Theater and Performances', 'Political',
      'Religious and Spiritual', 'Social', 'Other']
   end
+
+  def self.editors_picks(limit)
+    Event.where(featured: true).limit(limit)
+  end
+
 end
