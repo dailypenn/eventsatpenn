@@ -1,0 +1,3 @@
+<% Event.editors_picks(4).each do |event| %>
+    <p><strong><%= link_to event.title, event_path(event) %></strong>&nbsp;<%= event.featured_snippet %></p>
+<% end %>
