@@ -19,6 +19,9 @@ Rails.application.routes.draw do
   # Orgs
   post '/orgs/new/fb' => 'orgs#new_from_fb'
 
+  # Day View
+  get '/events/day/:date' => 'events#show_day'
+
   # Sentry endpoint for testing
   # get '/sentry' => 'sentry#exception'
 end

@@ -34,6 +34,21 @@ class EventsController < ApplicationController
     }
   end
 
+  # GET /events/date/:date
+  def show_day
+    default_og_params('Events')
+    @filterrific = initialize_filterrific(
+      Event,
+      params[:filterrific],
+      select_options: {
+        with_category: Event.categories
+      }
+    ) || return
+    @events = @filterrific.find.sort_by(&:start_date)
+
+    render :'events/show_day.html.erb', layout: 'calendar'
+  end
+
   # GET /events/new
   def new
     @event = Event.new
