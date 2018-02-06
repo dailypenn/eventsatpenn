@@ -8,6 +8,7 @@ ActiveAdmin.register Event do
     column :title
     column :start_date
     column :org
+    column :featured
     column :created_at
     actions
   end
@@ -45,6 +46,8 @@ ActiveAdmin.register Event do
       f.input :recurring
       f.input :recurrence_freq
       f.input :recurrence_amt
+      f.input :featured
+      f.input :featured_snippet
     end
     f.actions
   end
