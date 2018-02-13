@@ -1,6 +1,8 @@
 ActiveAdmin.register Event do
   permit_params Event.attribute_names.map(&:to_sym) # All attributes
 
+  active_admin_import validate: false
+
   # Index Page
   index do
     selectable_column
