@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180206000719) do
+ActiveRecord::Schema.define(version: 20180328231722) do
 
   create_table "events", force: :cascade do |t|
     t.string "title", null: false
@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(version: 20180206000719) do
     t.string "display_category"
     t.boolean "featured", default: false
     t.string "featured_snippet", limit: 200
+    t.boolean "sponsored"
     t.index ["org_id"], name: "index_events_on_org_id"
   end
 
