@@ -10,6 +10,7 @@ ActiveAdmin.register Event do
     column :org
     column :featured
     column :created_at
+    column :sponsored, :toggle
     actions
   end
 
@@ -48,6 +49,7 @@ ActiveAdmin.register Event do
       f.input :recurrence_amt
       f.input :featured
       f.input :featured_snippet
+      f.input :sponsored, :toggle
     end
     f.actions
   end
