@@ -16,12 +16,19 @@ Getting Started
 
 Make sure you have Ruby installed by running `ruby -v` on the command line. This project requires v2.4.0, so make sure you have at least that version. If the command returns `"ruby: command not found"`, run `brew install ruby` (see [here](https://github.com/dailypenn/onboarding) if you're using anything other than MacOS).
 
-Clone the repo into whichever folder you keep your DP work in. Make sure to use SSH.
+Clone the repo into whichever folder you keep your DP work in.
 ```shell
 git clone git@github.com:dailypenn/eventsatpenn.git
 ```
 
 Move to the `eventsatpenn` root folder and run `bundle install` to install all of the gem dependencies for this project. This may take a minute.
+
+You'll have to specify that you're working in the development environment.
+To do this, run the following command:
+```shell
+export RAILS_ENV="development"
+```
+This will specify to the database to use SQLite, which we use for development, rather than MySQL, which we use for production.
 
 Run `rake db:drop`, `rake db:create`, and `rake db:migrate` to clear and set up the database tables. Run `rails s`, and go to `localhost:3000` in your browser of choice to see the app!
 
