@@ -1,2 +1,12 @@
 <% @title = "Create an Event" %>
-<%= render 'form', event: @event %>
+<h1 class="pill">Add Event</h1>
+
+<div class="row">
+  <div class="col-md-6">
+    <div class="panel-new-event">
+      <div class="row">
+		<%= render 'form', event: @event %>
+	  </div>
+    </div>
+  </div>
+</div>
