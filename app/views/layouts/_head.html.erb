@@ -12,13 +12,20 @@
 <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => 'reload' %>
 <%= javascript_include_tag 'application', 'data-turbolinks-track' => 'reload' %>
 
-<%# Google tag manager, analytics %>
-<script type="text/javascript">
-  (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-  })(window,document,'script','dataLayer','<%= Rails.application.secrets.gtm_id %>');
+<%# Google DFP ads, analytics %>
+<script async="async" src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+<script>
+  var googletag = googletag || {};
+  googletag.cmd = googletag.cmd || [];
+</script>
+<script>
+  googletag.cmd.push(() => {
+    googletag.defineSlot('/12234093/DP.com-Leaderboard', [728, 90], 'div-gpt-ad-1529280717739-0').addService(googletag.pubads());
+    googletag.defineSlot('/12234093/DP.com-mobile-leaderboard', [320, 50], 'div-gpt-ad-1529280717739-1').addService(googletag.pubads());
+    googletag.defineSlot('/12234093/DP.com-Top-Rectangle', [300, 250], 'div-gpt-ad-1529280717739-2').addService(googletag.pubads());
+    googletag.pubads().enableSingleRequest();
+    googletag.enableServices();
+  });
 </script>
 <% if Rails.env.production? %>
 <script type="text/javascript">
