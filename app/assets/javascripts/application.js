@@ -53,37 +53,6 @@ function updateCal() {
       Turbolinks.visit(`/events/day/${date}`)
     })
 
-    function htmlStrFromEvent(event, currdate, nextDate) {
-      htmlStr = "";
-      htmlStr += '<div class="row event-item-row">'
-      if (event.all_day || (Date.parse(event.start_date) < currdate && Date.parse(event.end_date) >= nextDate)) {
-        htmlStr += '  <div class="col-xs-12 day-view event ' + event.display_category.split(/[, ]+/)[0].toLowerCase() + '">'
-        htmlStr += '    <strong>' + event.title + '</strong><br>'
-        htmlStr +=      event.location
-        htmlStr += '    <a href="/events/' + event.id + '" class="pull-right more"><em>more&nbsp</em>&#10140</a>'
-        htmlStr += '  </div>'
-      } else {
-        var date = new Date(event.start_date);
-        var suffix = (date.getHours() >= 12)? 'pm' : 'am';
-        var h = ((date.getHours() + 11) % 12 + 1);
-        var dateOnly = new Date(date.setHours(0,0,0,0));
-        htmlStr += '  <div class="col-xs-3 day-view time">'
-        if (Date.parse(dateOnly) != Date.parse(currdate)) {
-          htmlStr += 'cont.'
-        } else {
-          htmlStr += h + '<sup>&nbsp;' + suffix + '</sup>'
-        }
-        htmlStr += '  </div>'
-        htmlStr += '  <div class="col-xs-9 day-view event ' + event.display_category.split(/,\s*/)[0].toLowerCase() + '">'
-        htmlStr += '    <strong>' + event.title + '</strong><br>'
-        htmlStr +=      event.location
-        htmlStr += '    <a href="/events/' + event.id + '" class="pull-right more"><em>more&nbsp</em>&#10140</a>'
-        htmlStr += '  </div>'
-      }
-      htmlStr += '</div>'
-      return htmlStr;
-    }
-
     if (window.location.pathname == '/events/new') {
       $('.calendar-sidebar').addClass('new-event');
     }

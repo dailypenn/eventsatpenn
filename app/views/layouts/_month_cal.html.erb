@@ -6,17 +6,19 @@
       <%= weekdays[d.wday] %>
     </span>
   </div>
-  <% date_events = Event.get_date_events(events) %>
-  <% see_all = date_events.length > 3 %>
-  <% date_events = date_events.take(3) if see_all %>
-  <% date_events.each do |event| %>
-    <div class="calendar-event <%= event[0].split(', ').first.downcase %>">
-      <%= pluralize(event[1], "#{event[0]} Event") %>
-    </div>
-  <% end %>
-  <% if see_all %>
-    <div class="more-events">
-      See all (<%= events.length %>)
-    </div>
-  <% end %>
+  <a href=<%="/events/day/#{d.strftime("%Y-%m-%d")}"%>>
+    <% date_events = Event.get_date_events(events) %>
+    <% see_all = date_events.length > 3 %>
+    <% date_events = date_events.take(3) if see_all %>
+    <% date_events.each do |event| %>
+      <div class="calendar-event <%= event[0].split(', ').first.downcase %>">
+        <%= pluralize(event[1], "#{event[0]} Event") %>
+      </div>
+    <% end %>
+    <% if see_all %>
+      <div class="more-events">
+        See all (<%= events.length %>)
+      </div>
+    <% end %>
+  </a>
 <% end %>
