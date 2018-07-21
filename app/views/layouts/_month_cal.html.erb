@@ -1,5 +1,4 @@
 <%= month_calendar(attribute: :start_date, end_attribute: :end_date, events: @events) do |d, events| %>
-  <%= d %>
   <div class="date" data-date="<%= "#{d.strftime("%Y-%m-%d")}" %>">
     <span class="date-num"><%= d.day %></span>
     <span class="mobile-weekday">

@@ -48,67 +48,10 @@ document.addEventListener("gtm.load", function() {
 function updateCal() {
   return function() {
     $('td.day').on('click', function(e) {
-      // Remove new event class and path
-      $('.calendar-sidebar').removeClass('new-event');
-      window.history.pushState('', '', '/');
-
-      $('td.day').removeClass('active')
-      $(e.currentTarget).addClass('active')
-      e.preventDefault();
-      // Get data-date of inner date element
-      var dateStr = $(e.currentTarget).find('.date')[0].dataset.date;
-      var date = new Date(dateStr);
-      date.setUTCHours(5);
-      var nextDate = new Date(dateStr);
-      nextDate.setUTCHours(5);
-      nextDate.setDate(nextDate.getDate()+1);
-      // Get and parse json
-      $.getJSON("/events.json?start_date=" + dateStr, function(data) {
-        // clear sidebar
-        $('.panel-date').html('');
-        $('.calendar-sidebar .panel-body').html('');
-        // add date
-        $('.panel-date').html(
-          '<h3 class="text-center">' + formatDate(date) + '</h3>'
-        );
-
-        $('.calendar-sidebar').addClass('display-events');
-
-        if (data.length === 0) {
-          $('.calendar-sidebar .panel-body').html('<center class="text-center">There are no events today.</center>');
-          return;
-        };
-
-        standardEvents = []
-        allDayEvents = []
-        data.sort(function(a, b){
-          return Date.parse(a.start_date) - Date.parse(b.start_date);
-        });
-
-        $.each(data, function(i) {
-          var event = data[i];
-          if (event.all_day || (Date.parse(event.start_date) < date && Date.parse(event.end_date) >= nextDate)) {
-            allDayEvents.push(htmlStrFromEvent(event, date, nextDate))
-          } else {
-            standardEvents.push(htmlStrFromEvent(event, date, nextDate));
-          }
-        });
-
-        if (allDayEvents.length === 0) { // no all eay events
-          $('.calendar-sidebar .panel-body').html(
-            standardEvents.join(' ')
-          );
-        } else {
-          $('.calendar-sidebar .panel-body').html(
-            '<div class="col-xs-7 hour-events">' + standardEvents.join(' ') + '</div>' +
-            '<div class="col-xs-5 all-day-events">' +
-            '<h5 class="text-center">All Day Events</h5>' +
-            allDayEvents.join(' ') +
-            '</div>'
-          );
-        }
-      });
-    });
+      var date = e.target.children[0].dataset.date
+      console.log(date);
+      Turbolinks.visit(`/events/day/${date}`)
+    })
 
     function htmlStrFromEvent(event, currdate, nextDate) {
       htmlStr = "";
