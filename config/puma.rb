@@ -1,32 +1,27 @@
+#!/usr/bin/env puma
 if ENV.fetch('RAILS_ENV') == 'production'
-  # Change to match your CPU core count
-  workers 1
 
-  # Min and Max threads per worker
-  threads 1, 6
+  directory '/home/rails/html/current'
+  rackup "/home/rails/html/current/config.ru"
+  environment 'production'
 
-  app_dir = File.expand_path("../..", __FILE__)
-  shared_dir = "#{app_dir}/shared"
+  tag ''
 
-  # Default to production
-  rails_env = ENV['RAILS_ENV'] || "production"
-  environment rails_env
+  pidfile "/home/rails/html/shared/tmp/pids/puma.pid"
+  state_path "/home/rails/html/shared/tmp/pids/puma.state"
+  stdout_redirect '/home/rails/html/shared/log/puma_access.log', '/home/rails/html/shared/log/puma_error.log', true
 
-  # Set up socket location
-  bind "unix://#{shared_dir}/sockets/puma.sock"
+  threads 0,16
 
-  # Logging
-  stdout_redirect "#{app_dir}/log/production.log", "#{app_dir}/log/production.log", true
+  bind 'unix:///home/rails/html/shared/tmp/sockets/puma.sock'
 
-  # Set master PID and state locations
-  pidfile "#{shared_dir}/pids/puma.pid"
-  state_path "#{shared_dir}/pids/puma.state"
-  activate_control_app
+  workers 0
 
-  on_worker_boot do
-    require "active_record"
-    ActiveRecord::Base.connection.disconnect! rescue ActiveRecord::ConnectionNotEstablished
-    ActiveRecord::Base.establish_connection(YAML.load_file("#{app_dir}/config/database.yml")[rails_env])
+  prune_bundler
+
+  on_restart do
+    puts 'Refreshing Gemfile'
+    ENV["BUNDLE_GEMFILE"] = "/home/rails/html/current/Gemfile"
   end
 else
   threads_count = ENV.fetch("RAILS_MAX_THREADS") { 5 }
