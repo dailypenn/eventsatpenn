@@ -33,8 +33,6 @@ require 'capistrano/puma'
 require 'capistrano/scm/git'
 require 'capistrano/rails/console'
 
-set :rvm_type, :user
-set :rvm_ruby_version, '2.4.1'
 install_plugin Capistrano::Puma
 install_plugin Capistrano::SCM::Git
 Dir.glob('lib/capistrano/tasks/*.rake').each { |r| import r }

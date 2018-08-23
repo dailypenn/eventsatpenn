@@ -1,7 +1,9 @@
 # config valid for current version and patch releases of Capistrano
 lock "~> 3.11.0"
 
-set :forward_agent, true
+set :rvm_type, :user
+set :rvm_ruby_version, '2.4.1'
+
 set :bundle_flags, '--deployment' # verbose bundler output
 set :application, "eventsatpenn"
 set :repo_url, "git@github.com:dailypenn/eventsatpenn.git"
