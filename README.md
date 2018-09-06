@@ -32,10 +32,31 @@ This will specify to the database to use SQLite, which we use for development, r
 
 Run `rake db:drop`, `rake db:create`, and `rake db:migrate` to clear and set up the database tables. Run `rails s`, and go to `localhost:3000` in your browser of choice to see the app!
 
+Deploying
+---------
+
+Events@Penn uses Capistrano to deploy to a server on Google Cloud. You can
+[read more here](https://tosbourn.com/how-does-capistrano-work/) about how
+Capistrano works, but at a high level, it uses SSH to deploy files to a remote
+server and run commands as defined in the `Capfile` and `config/deploy` files.
+
+1. Download the `dp_master_rsa` public and private keys. They can be found on
+   Google Drive, or ask someone for them. Put them in your `~/.ssh` folder.
+2. Edit (or create, if you don't currently have one), a ~/.ssh/config file. Add
+   the following line:
+   ```
+   Host eventsatpenn.com
+     IdentityFile ~/.ssh/dp_master_rsa
+    ```
+3. Run `cap production deploy`. This will use the `production.rb` configuration
+   file to deploy the app to our production server.
+
+Capistrano deploys the app to a folder called `html` in the `rails` user's home
+folder. This folder is symlinked to `/var/www/html`, which nginx serves. Capistrano
+then restarts puma, the webserver, and nginx, the reverse proxy.
+
+
 Credits
 -------
 
 Built by the web development team at [The Daily Pennsylvanian](https://thedp.com).
-
-License
--------
