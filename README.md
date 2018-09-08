@@ -42,7 +42,7 @@ server and run commands as defined in the `Capfile` and `config/deploy` files.
 
 1. Download the `dp_master_rsa` public and private keys. They can be found on
    Google Drive, or ask someone for them. Put them in your `~/.ssh` folder.
-2. Edit (or create, if you don't currently have one), a ~/.ssh/config file. Add
+2. Edit (or create, if you don't currently have one), a `~/.ssh/config` file. Add
    the following line:
    ```
    Host eventsatpenn.com
