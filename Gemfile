@@ -1,4 +1,3 @@
-
 # Gem Sources
 source 'https://rubygems.org'
 
@@ -25,11 +24,12 @@ gem 'inline_svg'
 gem 'filterrific'
 gem 'momentjs-rails', '>= 2.9.0'
 gem 'bootstrap3-datetimepicker-rails', '~> 4.17.47'
-gem 'activeadmin', github: 'activeadmin'
+gem 'activeadmin', '1.0.0'
+gem "active_admin_import", github: "Fivell/active_admin_import"
 gem 'active_bootstrap_skin'
 gem 'meta-tags'
-gem 'rack-cors',   require: 'rack/cors'
-gem 'whenever',    require: false
+gem 'rack-cors', require: 'rack/cors'
+gem 'whenever', require: false
 
 group :production do
   gem 'sentry-raven'
