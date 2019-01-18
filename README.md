@@ -1,7 +1,7 @@
 Events@Penn
 ================
 
-[Events@Penn](https://eventsatpenn.com) is a events aggregation website built by the web team at [The Daily Pennsylvanian](https://thedp.com).
+Events@Penn is a events aggregation website built by the web team at [The Daily Pennsylvanian](https://thedp.com).
 
 Ruby on Rails
 -------------
@@ -29,6 +29,8 @@ To do this, run the following command:
 export RAILS_ENV="development"
 ```
 This will specify to the database to use SQLite, which we use for development, rather than MySQL, which we use for production.
+
+You'll also need to set the keys and Facebook secrets as environment variables. See [secrets.yml](config/secrets.yml) for which ones you need to set. These are in the Events@Penn Dev app on Facebook. Ask the Director of Web Development if you need to be added to the app!
 
 Run `rake db:drop`, `rake db:create`, and `rake db:migrate` to clear and set up the database tables. Run `rails s`, and go to `localhost:3000` in your browser of choice to see the app!
 
